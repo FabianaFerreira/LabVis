@@ -93,9 +93,11 @@
 
             function getParents (d) {
               if (d.parent)
+
                   {
-                    console.log ("entrei no if da funcao");
-                    parents.push (d.parent);
+                    //console.log ("entrei no if da funcao");
+                    if (d.parent.name != "Casamento")
+                      parents.push (d.parent);
                     getParents (d.parent);
                   }
               else return 0;
@@ -368,7 +370,7 @@
                   })
                   .attr ("cx", 0)
                   .attr("class", "parents")
-                  .attr ("cy", function (d,i) { return (- 100/parents.length)*(i+1)})
+                  .attr ("cy", function (d,i) { return (-100/(parents.length))*(i+1)})
                   .style("fill", function(d) {
                                                 if (!d.morte && d.sexo == "feminino") return "#ff66cc";
                                                 else if (!d.morte && d.sexo == "masculino") return "#3399ff";
@@ -380,7 +382,7 @@
                 parentsCircles
                   .transition ()
                     .duration(duration)
-                    .attr("transform", function (d,i) { return "translate(" + 0 + "," + (- 100/parents.length)*(i+1) +")"; });
+                    .attr("transform", function (d,i) { return "translate(" + 0 + "," + (- 100/(parents.length))*(i+1) +")"; });
                 
                 parentsCircles
                   .exit()
@@ -566,6 +568,7 @@
               parents = [];
               console.log (d.name);
               getParents (d);
+              console.log(parents);
               if (d.name == "Maria (Maine) Feldman") {
 
                 clickRootCounter += 1;
