@@ -1,0 +1,605 @@
+<html>
+    <meta charset="utf-8">
+    <style>
+
+    .node {
+      cursor: pointer;
+      }
+
+    .node circle {
+      fill: #fff;
+      }
+
+    .node text {
+      font: 10px sans-serif;
+      }
+
+    .link {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: 1.5px;
+      }
+
+    .parentsLink {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: 1.5px;
+    }
+
+    .parents {
+      cursor: pointer;
+    }
+
+    .tooltip {
+      font-size: 11pt;
+      font-family:sans-serif;
+      border: 0px;
+      border-radius: 8px;
+      pointer-events: none;
+      }
+
+    </style>
+  <body>
+    <script type="text/javascript" src="d3.min.js"></script>
+    <script type="text/javascript" src="FileSaver.js"></script>
+    <script type="text/javascript" src="SaveImage.js"></script>
+    <script>
+        var diameter = 1600;
+
+        var currentYear = new Date().getFullYear();
+        
+        var clickRootCounter = 0;
+
+        var margin = {top: 20, right: 120, bottom: 20, left: 120},
+            width = diameter,
+            height = diameter;
+            
+        var i = 0,
+            duration = 350,
+            root;
+
+        var tree = d3.layout.tree()
+            .size([360, diameter/20])
+            .separation(function(a, b) { return (a.parent == b.parent ? 7 : 10) / (a.depth*0.2); });
+
+        var diagonal = d3.svg.diagonal.radial()
+            .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
+
+         d3.select("body").append("button")
+          .text ("download as svg")
+          .on("click", saveSvg);
+    
+        var svg = d3.select("body").append("svg")
+            .attr("width", width )
+            .attr("margin-left", "auto")
+            .attr("margin-right", "auto")            
+            .attr("height", height )
+            .attr ("align", "center")
+          .append("g")
+            .attr("transform", "translate(" + diameter / 2 + "," + (diameter / 2 - 200) + ")")
+            .attr ("align", "center");
+
+        var tooltip = d3.select("body")
+        .append("div")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("visibility", "hidden")
+        .attr("class" , "tooltip");
+
+       
+      function saveSvg(){
+        try {
+            var isFileSaverSupported = !!new Blob();
+        } catch (e) {
+            alert("blob not supported");
+        }
+
+        var html = svgBuffer(d3.select("svg"));
+        var blob = new Blob([html], {type: "image/svg+xml"});
+        saveAs(blob, "treeLayout.svg");
+      };
+
+        function getRadiusFromAge (d) {
+          if (d.morte)
+            var age = (d.morte) - (d.nascimento);
+          else
+              var age = 2016 - d.nascimento;
+          if (age >= 0 && age <= 9)
+              return 4;
+          else if (age >= 10 && age <= 19)
+              return 6.2;
+          else if (age >= 20 && age <= 39)
+              return 10.5;
+          else if (age >= 40 && age <= 59)
+              return 13;
+          else if (age >= 60 && age <= 79)
+              return 16;
+          else if (age >= 80 && age <= 100)
+              return 20;  
+          else if (currentYear - d.nascimento == 116 && (d.children))
+            return 6.2;
+          else if (currentYear - d.nascimento == 116 && !(d.children))
+            return 4;
+        }
+
+        function getParents (d) {
+          if (d.parent)
+              {
+                if (d.parent.name != "Casamento")
+                  parents.push (d.parent);
+                getParents (d.parent);
+              }
+          else return 0;
+        }
+
+        d3.json("arvoreVersao2.json", function(error, pubs) {
+          if (error) throw error;
+            root = pubs;
+            root.x0 = height / 2;
+            root.y0 = 0;
+
+            root.children.forEach(expand); // start with all children collapsed
+            update(root);
+
+            d3.select(self.frameElement).style("height", "800px");
+
+            
+
+            function update(source) {
+
+              // Compute the new tree layout.
+              var nodes = tree.nodes(root),
+                  links = tree.links(nodes);
+
+              // Normalize for fixed-depth.
+              nodes.forEach(function(d) { d.y = d.depth * 80; });
+
+              // Update the nodes…
+              var node = svg.selectAll("svg")
+                  .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+              // Enter any new nodes at the parent's previous position.
+              var nodeEnter = node.enter().append("g")
+                  .attr("class", "node")
+                  .on("click", function (d) { return click (d)});
+
+              // Marriages: squares
+              nodeEnter.filter (function (d,i) {return d.name == "Casamento"})
+                .append ("path")
+                  .attr("d", d3.svg.symbol().type("square"))
+                  .attr("fill", "#ccc");
+
+              // Nodes: circles
+              nodeEnter.filter (function (d,i) {return d.name != "Casamento"})
+              .append("circle")
+                  .attr("r", function (d) {
+                    getRadiusFromAge(d);
+                  })
+                  .style("fill", function(d) {
+                      if (d.name == "Casamento") return "#000000";
+                      if (!d.morte && d.sexo == "feminino") return "#ff66cc";
+                      else if (!d.morte && d.sexo == "masculino") return "#3399ff";
+                      else if (d.morte && d.sexo == "feminino") return "#ffccff";
+                      else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
+                   });
+
+                // Transition nodes to their new position.
+                var nodeUpdate = node.transition()
+                .duration(duration)
+                .attr("transform", function (d) { 
+                    if (d.x == 1) {
+                        return ("rotate(" + (d.x - 200) + ")translate(" + d.y + ")");
+                    }
+                    return ("rotate(" + (d.x - 90) + ")translate(" + d.y + ")"); })
+
+              nodeUpdate.select("circle")
+                  .attr("r",  function (d) { 
+                      if (d.morte)
+                          var age = (d.morte) - (d.nascimento);
+                      else
+                          var age = 2016 - d.nascimento;
+                      if (age >= 0 && age <= 9)
+                          return 4;
+                      else if (age >= 10 && age <= 19)
+                          return 6.2;
+                      else if (age >= 20 && age <= 39)
+                          return 10.5;
+                      else if (age >= 40 && age <= 59)
+                          return 13;
+                      else if (age >= 60 && age <= 79)
+                          return 16;
+                      else if (age >= 80 && age <= 100)
+                          return 20;  
+                      else if (currentYear - d.nascimento == 116 && (d.children))
+                        return 6.2;
+                      else if (currentYear - d.nascimento == 116 && !(d.children))
+                        return 4;
+                      //getRadiusFromAge(d);
+
+                  })
+                  .style("fill", function(d) {
+                      if (d.name == "Casamento") return "#000000";
+                      if (!d.morte && d.sexo == "feminino") return "#ff66cc";
+                      else if (!d.morte && d.sexo == "masculino") return "#3399ff";
+                      else if (d.morte && d.sexo == "feminino") return "#ffccff";
+                      else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
+                   });
+
+              // TODO: appropriate transform
+              var nodeExit = node.exit().transition()
+                  .duration(duration)
+                  .remove();
+
+           /*  nodeUpdate.select("path")
+                .append ("path")
+                  .attr("d", d3.svg.symbol().type("square"))
+                  .attr("fill", "#ccc");*/
+
+              nodeExit.select("circle")
+                  .attr("r", function (d) {
+                    getRadiusFromAge(d);
+                  });
+
+              // Update the links…
+              var link = svg.selectAll("path.link")
+                  .data(links, function (d) { return d.target.id; });
+
+              // Enter any new links at the parent's previous position.
+              link.enter().insert("path", "g")
+                  .attr("class", "link")
+                  .attr("d", function(d) {
+                    var o = {x: source.x0, y: source.y0};
+                    if (d.name == "Maria (Maine) Feldman")
+                    {
+                      var diagonal = d3.svg.diagonal.radial()
+                        .projection(function (d) { return [d.x, d.y / 180 * Math.PI]; });
+                      return diagonal({source: o, target: o});
+                    }
+                    var diagonal = d3.svg.diagonal.radial()
+                      .projection(function (d) { return [d.y, d.x / 180 * Math.PI]; });
+                    return diagonal({source: o, target: o});
+                  });
+
+              // Transition links to their new position.
+              link.transition()
+                  .duration(duration)
+                  .attr("d", diagonal);
+
+              // Transition exiting nodes to the parent's new position.
+              link.exit().transition()
+                  .duration(duration)
+                  .attr("d", function(d) {
+                    var o = {x: source.x, y: source.y};
+                    return diagonal({source: o, target: o});
+                  })
+                  .remove();
+
+              // Stash the old positions for transition.
+              nodes.forEach(function(d) {
+                d.x0 = d.x;
+                d.y0 = d.y;
+              });
+
+              svg.selectAll("g").selectAll("circle")
+                .on("mouseover", function (d,i){
+                    //console.log (2016 - d.nascimento);
+                    tooltip.html(function () {
+                        var tooltip = d.name;
+                        return tooltip;});
+                    return tooltip.style("visibility", "visible")})
+
+                .on("mousemove", function (d,i){
+                    tooltip.html(function () {
+                        var tooltip = d.name;
+                        return tooltip;});
+                    return tooltip.style("top", (d3.event.pageY - 20)+"px").style("left",(d3.event.pageX  + 10)+"px");})
+                .on("mouseout", function (d,i) {
+                    return tooltip.style("visibility", "hidden");});
+            }
+
+//TESTE TESTE TESTE TESTE ----------------------------------------------------------------------------------------------------------- TESTE TESTE TESTE
+
+           
+            
+            function updateTeste2(source, parents) {
+
+              var subTree = d3.layout.tree()
+                .size([180, diameter / 2 - 80])
+                .separation(function(a, b) { return (a.parent == b.parent ? 5 : 7) / Math.max(1, a.depth); });
+
+              // Compute the new tree layout.
+              var nodes = subTree.nodes(source),
+                  links = subTree.links(nodes);
+
+              var parentsCircles = svg.selectAll("circles")
+                .data(parents);
+
+              parentsCircles
+                .enter()
+                  .append ("circle")
+                  .attr("r", function (d) {
+                    if (d.morte)
+                        var age = (d.morte) - (d.nascimento);
+                    else
+                        var age = currentYear - d.nascimento;
+                    if (age >= 0 && age <= 9)
+                        return 4;
+                    else if (age >= 10 && age <= 19)
+                        return 6.2;
+                    else if (age >= 20 && age <= 39)
+                        return 10.5;
+                    else if (age >= 40 && age <= 59)
+                        return 13;
+                    else if (age >= 60 && age <= 79)
+                        return 16;
+                    else if (age >= 80 && age <= 100)
+                        return 20;  
+                    else if (currentYear - d.nascimento == 116 && (d.children))
+                      return 6.2;
+                    else if (currentYear - d.nascimento == 116 && !(d.children))
+                      return 4;
+                  })
+                  .attr ("cx", 0)
+                  .attr("class", "parents")
+                  .attr ("cy", function (d,i) { return (-100/(parents.length))*(i+1)})
+                  .style("fill", function(d) {
+                      if (!d.morte && d.sexo == "feminino") return "#ff66cc";
+                      else if (!d.morte && d.sexo == "masculino") return "#3399ff";
+                      else if (d.morte && d.sexo == "feminino") return "#ffccff";
+                      else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
+                   })
+                  .on ("click", function (d) {return click (d)});
+                
+                parentsCircles
+                  .transition ()
+                    .duration(duration)
+                    .attr("transform", function (d,i) { return "translate(" + 0 + "," + (- 100/(parents.length))*(i+1) +")"; });
+                
+                parentsCircles
+                  .exit()
+                    .transition()
+                    .duration(duration)
+                    .remove();
+
+              // Normalize for fixed-depth.
+              nodes.forEach(function(d) { d.y = d.depth * 80; });
+
+              // Update the nodes…
+              var node = svg.selectAll("g")
+                  .data(nodes, function (d) { return d.id || (d.id = ++i); });
+
+              // Enter any new nodes at the parent's previous position.
+              var nodeEnter = node.enter().append("g")
+                  .attr("class", "node")
+                   .on("click", function (d) { return click (d)});
+
+              nodeEnter.filter (function (d,i) {return d.name == "Casamento"})
+                .append ("path")
+                  .attr("d", d3.svg.symbol().type("square"))
+                  .attr("fill", "#ccc");
+                    //.type("circle");
+
+              nodeEnter.filter (function (d,i) {return d.name != "Casamento"})
+              .append("circle")
+                  .attr("r", function (d) {
+                    if (d.morte)
+                        var age = (d.morte) - (d.nascimento);
+                    else
+                        var age = currentYear - d.nascimento;
+                    if (age >= 0 && age <= 9)
+                        return 4;
+                    else if (age >= 10 && age <= 19)
+                        return 6.2;
+                    else if (age >= 20 && age <= 39)
+                        return 10.5;
+                    else if (age >= 40 && age <= 59)
+                        return 13;
+                    else if (age >= 60 && age <= 79)
+                        return 16;
+                    else if (age >= 80 && age <= 100)
+                        return 20;  
+                    else if (currentYear - d.nascimento == 116 && (d.children))
+                      return 6.2;
+                    else if (currentYear - d.nascimento == 116 && !(d.children))
+                      return 4;
+                  })
+                  .style("fill", function(d) {
+                    if (d.name == "Casamento") return "#000000";
+                    if (!d.morte && d.sexo == "feminino") return "#ff66cc";
+                    else if (!d.morte && d.sexo == "masculino") return "#3399ff";
+                    else if (d.morte && d.sexo == "feminino") return "#ffccff";
+                    else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
+                 });
+
+              // Transition nodes to their new position.
+              var nodeUpdate = node.transition()
+                  .duration(duration)
+                  .attr("transform", function (d) { 
+                      if (d.x == 1) {
+                          return ("rotate(" + (d.x - 200) + ")translate(" + d.y + ")");
+                      }
+                      return ("rotate(" + (d.x - 360) + ")translate(" + d.y + ")"); })
+
+              nodeUpdate.select("circle")
+                  .attr("r",  function (d) {
+                     if (d.morte)
+                        var age = (d.morte) - (d.nascimento);
+                    else
+                        var age = currentYear - d.nascimento;
+                    if (age >= 0 && age <= 9)
+                        return 4;
+                    else if (age >= 10 && age <= 19)
+                        return 6.2;
+                    else if (age >= 20 && age <= 39)
+                        return 10.5;
+                    else if (age >= 40 && age <= 59)
+                        return 13;
+                    else if (age >= 60 && age <= 79)
+                        return 16;
+                    else if (age >= 80 && age <= 100)
+                        return 20;  
+                    else if (currentYear - d.nascimento == 116 && (d.children))
+                      return 6.2;
+                    else if (currentYear - d.nascimento == 116 && !(d.children))
+                      return 4;
+                  })
+                  .style("fill", function (d) {
+                      if (!d.morte && d.sexo == "feminino") return "#ff66cc";
+                      else if (!d.morte && d.sexo == "masculino") return "#3399ff";
+                      else if (d.morte && d.sexo == "feminino") return "#ffccff";
+                      else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
+                   });
+
+              // TODO: appropriate transform
+              var nodeExit = node.exit().transition()
+                  .duration(duration)
+                  .remove();
+
+              nodeExit.select("circle")
+                 .attr("r", function (d) {
+                    if (d.morte)
+                        var age = (d.morte) - (d.nascimento);
+                    else
+                        var age = currentYear - d.nascimento;
+                    if (age >= 0 && age <= 9)
+                        return 4;
+                    else if (age >= 10 && age <= 19)
+                        return 6.2;
+                    else if (age >= 20 && age <= 39)
+                        return 10.5;
+                    else if (age >= 40 && age <= 59)
+                        return 13;
+                    else if (age >= 60 && age <= 79)
+                        return 16;
+                    else if (age >= 80 && age <= 100)
+                        return 20;  
+                    else if (currentYear - d.nascimento == 116 && (d.children))
+                      return 6.2;
+                    else if (currentYear - d.nascimento == 116 && !(d.children))
+                      return 4;
+                 });
+
+              // Update the links…
+              var link = svg.selectAll("path.link")
+                  .data(links, function (d) { return d.target.id; });
+
+              // Enter any new links at the parent's previous position.
+              link.enter().insert("path", "g")
+                  .attr("class", "link")
+                  .attr("d", function(d) {
+                    var o = {x: source.x0, y: source.y0};
+                    return diagonal({source: o, target: o});
+                  });
+
+              // Transition links to their new position.
+              link.transition()
+                  .duration(duration)
+                  .attr ("transform", function (d) {return "rotate (90)"})
+                  .attr("d", diagonal);
+
+              // Transition exiting nodes to the parent's new position.
+              link.exit().transition()
+                  .duration(duration)
+                  .attr("d", function(d) {
+                    var o = {x: source.x, y: source.y};
+                    return diagonal({source: o, target: o});
+                  })
+                  .remove();
+
+              // Stash the old positions for transition.
+              nodes.forEach(function(d) {
+                d.x0 = d.x;
+                d.y0 = d.y;
+              });
+
+              svg.selectAll("g").selectAll("circle")
+                .on("mouseover", function (d,i){
+                    //console.log (2016 - d.nascimento);
+                    tooltip.html(function () {
+                        var tooltip = d.name;
+                        return tooltip;});
+                    return tooltip.style("visibility", "visible")})
+
+                .on("mousemove", function (d,i){
+                                  //console.log (2016 - d.nascimento);
+                    tooltip.html(function () {
+                        var tooltip = d.name;
+                        return tooltip;});
+                    return tooltip.style("top", (d3.event.pageY - 20)+"px").style("left",(d3.event.pageX  + 10)+"px");})
+                .on("mouseout", function (d,i) {
+                    return tooltip.style("visibility", "hidden");});
+           }
+
+
+            // Toggle children on click.
+            function click(d) {
+              nos = [];
+              parents = [];
+              getParents (d);
+              if (d.name == "Maria (Maine) Feldman") {
+                tree = d3.layout.tree()
+                  .size([360, diameter/20])
+                  .separation(function(a, b) { return (a.parent == b.parent ? 7 : 10) / (a.depth*0.2); });
+                clickRootCounter += 1;
+                if (clickRootCounter != 0) {
+                  console.log("entrei");
+                  d3.selectAll("circle")
+                    .filter (function () {return d3.select(this).attr ("class") == "parents"})
+                    .remove();
+
+                  d3.selectAll("g.node")
+                    .filter (function () {return d3.select(this).attr("class") == "node"})
+                    .attr("transform", "translate(1000,1000)");
+
+                  d3.selectAll("path.link").remove();
+                  d3.selectAll ("line").remove();
+                  clickRootCounter += 1;
+                  update(d);
+                }
+              }
+              else {
+
+                d3.selectAll("circle")
+                    .filter (function () {return d3.select(this).attr ("class") == "parents"})
+                    .remove();
+                var radius = getRadiusFromAge (d);
+                var line = svg.append("line")
+                    .attr("x1", 0)
+                    .attr("y1", function () { return (- radius)})
+                    .attr("x2", 0)
+                    .attr("y2", -204);
+                line
+                  .attr ("stroke-width", 1.5)
+                  .attr ("stroke", "#ccc");
+
+                d3.selectAll("path.link").remove();
+               // d3.selectAll ("g.nodes").remove();
+                updateTeste2 (d, parents);
+              }
+            }
+
+            // Collapse nodes
+            function collapse(d) {
+              if (d.children) {
+                  d._children = d.children;
+                  d._children.forEach(collapse);
+                  d.children = null;
+                }
+            }
+
+            function expand(d){   
+              var children = (d.children)?d.children:d._children;
+              if (d._children) {        
+                  d.children = d._children;
+                  d._children = null;       
+              }
+              if(children)
+                children.forEach(expand);
+            }         
+        });
+
+        
+        
+    </script>
+  </body>
+</html>
