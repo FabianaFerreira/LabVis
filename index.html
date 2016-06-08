@@ -41,6 +41,8 @@
     </style>
   <body>
     <script type="text/javascript" src="d3.min.js"></script>
+    <script type="text/javascript" src="FileSaver.js"></script>
+    <script type="text/javascript" src="SaveImage.js"></script>
     <script>
         var diameter = 1600;
 
@@ -63,6 +65,10 @@
         var diagonal = d3.svg.diagonal.radial()
             .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
 
+         d3.select("body").append("button")
+          .text ("download as svg")
+          .on("click", saveSvg);
+    
         var svg = d3.select("body").append("svg")
             .attr("width", width )
             .attr("margin-left", "auto")
@@ -79,6 +85,19 @@
         .style("z-index", "10")
         .style("visibility", "hidden")
         .attr("class" , "tooltip");
+
+       
+      function saveSvg(){
+        try {
+            var isFileSaverSupported = !!new Blob();
+        } catch (e) {
+            alert("blob not supported");
+        }
+
+        var html = svgBuffer(d3.select("svg"));
+        var blob = new Blob([html], {type: "image/svg+xml"});
+        saveAs(blob, "treeLayout.svg");
+      };
 
         function getRadiusFromAge (d) {
           if (d.morte)
