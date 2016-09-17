@@ -40,7 +40,7 @@
             .attr("height", height )
             .attr ("align", "center")
           .append("g")
-            .attr("transform", "translate(" + (diameter / 2 - 200) + "," + (diameter / 2 - 200) + ")")
+            .attr("transform", "translate(" + (diameter / 2 + 100) + "," + (diameter / 2 - 200) + ")")
             .attr ("align", "center");
 
         var tooltip = d3.select("body")
@@ -148,22 +148,23 @@
                       else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
                    });
 
+              jewishNodes = nodeEnter.filter (function (d) { return d.judeu == true;});
 
-               nodeEnter.append("svg:image")
+              jewishNodes.append("svg:image")
                 .attr("x", function (d) { return d3.select(this).attr("r") - 5}) //return d3.select(this).attr("cx")
                 .attr("y", function (d) { return d3.select(this).attr("r") - 5})
                 .attr("width", 10)
                 .attr("height", 10)
                 .attr("transform", function (d) { 
-                  theta = Math.atan2(d.y, d.x) != 0 ? Math.atan2(d.y, d.x) : 20
-                  if (theta > 0)
-                    return "rotate (" + theta + ")";
-                  theta = -theta;
-                  return "rotate (" + theta + ")";})
-                .attr("xlink:href", function (d) { 
-                  if(d.judeu == true)
-                    return "./starofdavid9.png";
-                });
+                  theta = d.x;
+                  if (d.name == "Maria (Maine) Feldman")
+                      return "rotate (20)"
+                  if ((theta > 180) && (theta < 270))
+                    return "rotate (" + (90 - (theta - 180)) + ")";
+                  if ((theta > 270) && (theta > 360))
+                    return "rotate (" + ((360 - theta) - 90) + ")";
+                  return "rotate (" + (90 - theta) + ")";})
+                .attr("xlink:href", "./starofdavid11.png");
 
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
@@ -258,9 +259,6 @@
                 d.y0 = d.y;
               });
 
-             
-
-
               svg.selectAll("g").selectAll("circle")
                 .on("mouseover", function (d,i){
                     tooltip.html(function () {
@@ -289,6 +287,9 @@
 
               var parentsCircles = svg.selectAll("circles")
                 .data(parents);
+
+              svg.selectAll("img")
+               .remove();
 
               parentsCircles
                 .enter()
@@ -386,21 +387,23 @@
                     else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
                  });
 
-                nodeEnter.append("svg:image")
-                  .attr("x", function (d) { return d3.select(this).attr("r") - 5}) //return d3.select(this).attr("cx")
-                  .attr("y", function (d) { return d3.select(this).attr("r") - 5})
-                  .attr("width", 10)
-                  .attr("height", 10)
-                  .attr("transform", function (d) { 
-                    theta = Math.atan2(d.y, d.x) != 0 ? Math.atan2(d.y, d.x) : 20
-                    if (theta > 0)
-                      return "rotate (" + theta + ")";
-                    theta = -theta;
-                    return "rotate (" + theta + ")";})
-                  .attr("xlink:href", function (d) { 
-                    if(d.judeu == true)
-                      return "./starofdavid9.png";
-                  });
+              jewishNodes = nodeEnter.filter (function (d) { return d.judeu == true;});
+
+              jewishNodes.append("svg:image")
+                .attr("x", function (d) { return d3.select(this).attr("r") - 5})
+                .attr("y", function (d) { return d3.select(this).attr("r") - 5})
+                .attr("width", 10)
+                .attr("height", 10)
+                .attr("transform", function (d) { 
+                  theta = d.x;
+                  if (d.depth == 1)
+                      return "rotate (20)";
+                  if ((theta > 180) && (theta < 270))
+                    return "rotate (" + (90 - (theta - 180)) + ")";
+                  if ((theta > 270) && (theta > 360))
+                    return "rotate (" + ((360 - theta) - 90) + ")";})
+                .attr("xlink:href", "./starofdavid11.png");
+
 
               // Transition nodes to their new position.
               var nodeUpdate = node.transition()
@@ -503,6 +506,9 @@
                 d.y0 = d.y;
               });
 
+              svg.selectAll("img")
+                .remove();
+
               svg.selectAll("g").selectAll("circle")
                 .on("mouseover", function (d,i){
                     tooltip.html(function () {
@@ -517,12 +523,13 @@
                     return tooltip.style("top", (d3.event.pageY - 20)+"px").style("left",(d3.event.pageX  + 10)+"px");})
                 .on("mouseout", function (d,i) {
                     return tooltip.style("visibility", "hidden");});
+
            }
 
 
             // Toggle children on click.
             function click(d) {
-              console.log(d.target);
+             // console.log(d.target);
               nos = [];
               parents = [];
               getParents (d);
