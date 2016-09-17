@@ -96,7 +96,6 @@
           else return 0;
         }
 
-
         d3.json("arvoreVersao2.json", function(error, pubs) {
           if (error) throw error;
             root = pubs;
@@ -167,8 +166,6 @@
                   return "rotate (" + (90 - theta) + ")";})
                 .attr("xlink:href", "./starofdavid11.png");
 
-              
-
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
                 .duration(duration)
@@ -211,20 +208,6 @@
                       else if (d.morte && d.sexo == "feminino") return "#ffccff";
                       else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
                    });
-
-              jewishNodesUpdate = nodeUpdate.filter (function (d) { return d.judeu == true;});
-
-              jewishNodesUpdate.select("image")
-                .transition()
-                .duration (0)
-                .attr("transform", function (d) { 
-                  if (d.name == "Maria (Maine) Feldman")
-                      return "rotate (20)"
-                  if ((theta > 180) && (theta < 270))
-                    return "rotate (" + (90 - (theta - 180)) + ")";
-                  if ((theta > 270) && (theta > 360))
-                    return "rotate (" + ((360 - theta) - 90) + ")";
-                  return "rotate (" + (90 - theta) + ")";});
 
               // TODO: appropriate transform
               var nodeExit = node.exit().transition()
@@ -450,7 +433,7 @@
                 .attr("transform", function (d) { 
                   theta = d.x;
                   if (d.depth == 0)
-                      return "rotate (30)";
+                      return "rotate (20)";
                   if ((theta > 0) && (theta < 90))
                     return "rotate (" + (-theta) + ")";
                   if ((theta >= 90) && (theta < 180))
@@ -548,16 +531,14 @@
                   .size([360, diameter/20])
                   .separation(function(a, b) { return (a.parent == b.parent ? 7 : 10) / (a.depth*0.2); });
                 clickRootCounter += 1;
-                //svg.selectAll("image").remove();
                 if (clickRootCounter != 0) {
                   d3.selectAll("circle")
                     .filter (function () {return d3.select(this).attr ("class") == "parents"})
                     .remove();
 
-                  d3.selectAll("g.node")
-                    .filter (function () {return d3.select(this).attr("class") == "node"})
+                  svg.selectAll(".node")
                     .transition()
-                    .duration (0)
+                    .duration(0)
                     .attr("transform", "translate(1000,1000)")
                     .remove();
 
