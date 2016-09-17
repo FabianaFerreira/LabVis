@@ -424,16 +424,14 @@
                       else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
                    });
               
+              //Rotating stars that need it to be in the correct position
               jewishNodes = nodeUpdate.filter (function (d) { return d.judeu == true;});
 
               jewishNodes.select("image")
                 .transition()
                 .duration (0)
                 .attr("transform", function (d) { 
-                  console.log("entrei");
                   theta = d.x;
-                  console.log(theta);
-                  console.log(d);
                   if (d.depth == 0)
                       return "rotate (20)";
                   if ((theta > 0) && (theta < 90))
@@ -525,7 +523,6 @@
 
             // Toggle children on click.
             function click(d) {
-             // console.log(d.target);
               nos = [];
               parents = [];
               getParents (d);
@@ -534,6 +531,7 @@
                   .size([360, diameter/20])
                   .separation(function(a, b) { return (a.parent == b.parent ? 7 : 10) / (a.depth*0.2); });
                 clickRootCounter += 1;
+                svg.selectAll("image").remove();
                 if (clickRootCounter != 0) {
                   d3.selectAll("circle")
                     .filter (function () {return d3.select(this).attr ("class") == "parents"})
