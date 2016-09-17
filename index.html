@@ -286,10 +286,7 @@
                   links = subTree.links(nodes);
 
               var parentsCircles = svg.selectAll("circles")
-                .data(parents);
-
-              svg.selectAll("img")
-               .remove();
+                .data(parents); 
 
               parentsCircles
                 .enter()
@@ -387,23 +384,6 @@
                     else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
                  });
 
-              jewishNodes = nodeEnter.filter (function (d) { return d.judeu == true;});
-
-              jewishNodes.append("svg:image")
-                .attr("x", function (d) { return d3.select(this).attr("r") - 5})
-                .attr("y", function (d) { return d3.select(this).attr("r") - 5})
-                .attr("width", 10)
-                .attr("height", 10)
-                .attr("transform", function (d) { 
-                  theta = d.x;
-                  if (d.depth == 1)
-                      return "rotate (20)";
-                  if ((theta > 180) && (theta < 270))
-                    return "rotate (" + (90 - (theta - 180)) + ")";
-                  if ((theta > 270) && (theta > 360))
-                    return "rotate (" + ((360 - theta) - 90) + ")";})
-                .attr("xlink:href", "./starofdavid11.png");
-
 
               // Transition nodes to their new position.
               var nodeUpdate = node.transition()
@@ -443,6 +423,23 @@
                       else if (d.morte && d.sexo == "feminino") return "#ffccff";
                       else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
                    });
+              
+              jewishNodes = nodeUpdate.filter (function (d) { return d.judeu == true;});
+
+              jewishNodes.select("image")
+                .transition()
+                .duration (0)
+                .attr("transform", function (d) { 
+                  console.log("entrei");
+                  theta = d.x;
+                  console.log(theta);
+                  console.log(d);
+                  if (d.depth == 0)
+                      return "rotate (20)";
+                  if ((theta > 0) && (theta < 90))
+                    return "rotate (" + (-theta) + ")";
+                  if ((theta >= 90) && (theta < 180))
+                    return "rotate (" + (180 - theta) + ")";});
 
               // TODO: appropriate transform
               var nodeExit = node.exit().transition()
@@ -506,8 +503,7 @@
                 d.y0 = d.y;
               });
 
-              svg.selectAll("img")
-                .remove();
+             
 
               svg.selectAll("g").selectAll("circle")
                 .on("mouseover", function (d,i){
@@ -539,7 +535,6 @@
                   .separation(function(a, b) { return (a.parent == b.parent ? 7 : 10) / (a.depth*0.2); });
                 clickRootCounter += 1;
                 if (clickRootCounter != 0) {
-                  console.log("entrei");
                   d3.selectAll("circle")
                     .filter (function () {return d3.select(this).attr ("class") == "parents"})
                     .remove();
@@ -570,7 +565,6 @@
                   .attr ("stroke", "#ccc");
 
                 d3.selectAll("path.link").remove();
-               // d3.selectAll ("g.nodes").remove();
                 updateSecondPart (d, parents);
               }
             }
