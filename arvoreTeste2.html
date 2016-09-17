@@ -1,56 +1,20 @@
 <html>
-    <meta charset="utf-8">
-    <style>
-
-    .node {
-      cursor: pointer;
-      }
-
-    .node circle {
-      fill: #fff;
-      }
-
-    .node text {
-      font: 10px sans-serif;
-      }
-
-    .link {
-      fill: none;
-      stroke: #ccc;
-      stroke-width: 1.5px;
-      }
-
-    .parentsLink {
-      fill: none;
-      stroke: #ccc;
-      stroke-width: 1.5px;
-    }
-
-    .parents {
-      cursor: pointer;
-    }
-
-    .tooltip {
-      font-size: 11pt;
-      font-family:sans-serif;
-      border: 0px;
-      border-radius: 8px;
-      pointer-events: none;
-      }
-
-    </style>
+  <meta charset="utf-8">  
+  <head>
+      <link rel="stylesheet" href="styles.css">
+  </head>
   <body>
     <script type="text/javascript" src="d3.min.js"></script>
     <script type="text/javascript" src="FileSaver.js"></script>
     <script type="text/javascript" src="SaveImage.js"></script>
     <script>
-        var diameter = 1600;
+        var diameter = 1500;
 
         var currentYear = new Date().getFullYear();
         
         var clickRootCounter = 0;
 
-        var margin = {top: 20, right: 120, bottom: 20, left: 120},
+        var margin = {top: 50, right: 120, bottom: 20, left: 120},
             width = diameter,
             height = diameter;
             
@@ -84,7 +48,7 @@
         .style("position", "absolute")
         .style("z-index", "10")
         .style("visibility", "hidden")
-        .attr("class" , "tooltip");
+        .attr("class" , ".tooltip");
 
        
       function saveSvg(){
@@ -105,21 +69,21 @@
           else
               var age = 2016 - d.nascimento;
           if (age >= 0 && age <= 9)
-              return 4;
+              return 5;
           else if (age >= 10 && age <= 19)
-              return 6.2;
+              return 7.2;
           else if (age >= 20 && age <= 39)
-              return 10.5;
+              return 11.5;
           else if (age >= 40 && age <= 59)
-              return 13;
+              return 14;
           else if (age >= 60 && age <= 79)
-              return 16;
+              return 17;
           else if (age >= 80 && age <= 100)
-              return 20;  
+              return 21;  
           else if (currentYear - d.nascimento == 116 && (d.children))
-            return 6.2;
+            return 7.2;
           else if (currentYear - d.nascimento == 116 && !(d.children))
-            return 4;
+            return 5;
         }
 
         function getParents (d) {
@@ -163,6 +127,7 @@
                   .attr("class", "node")
                   .on("click", function (d) { return click (d)});
 
+
               // Marriages: squares
               nodeEnter.filter (function (d,i) {return d.name == "Casamento"})
                 .append ("path")
@@ -177,20 +142,40 @@
                   })
                   .style("fill", function(d) {
                       if (d.name == "Casamento") return "#000000";
-                      if (!d.morte && d.sexo == "feminino") return "#ff66cc";
+                      if (!d.morte && d.sexo == "feminino") return "#ff16cc";//ff16cc
                       else if (!d.morte && d.sexo == "masculino") return "#3399ff";
                       else if (d.morte && d.sexo == "feminino") return "#ffccff";
                       else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
                    });
 
+
+               nodeEnter.append("svg:image")
+                .attr("x", function (d) { return d3.select(this).attr("r") - 5}) //return d3.select(this).attr("cx")
+                .attr("y", function (d) { return d3.select(this).attr("r") - 5})
+                .attr("width", 10)
+                .attr("height", 10)
+                .attr("transform", function (d) { 
+                  theta = Math.atan2(d.y, d.x) != 0 ? Math.atan2(d.y, d.x) : 20
+                  if (theta > 0)
+                    return "rotate (" + theta + ")";
+                  theta = -theta;
+                  return "rotate (" + theta + ")";})
+                .attr("xlink:href", function (d) { 
+                  if(d.judeu == true)
+                    return "./starofdavid9.png";
+                });
+
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
                 .duration(duration)
                 .attr("transform", function (d) { 
-                    if (d.x == 1) {
-                        return ("rotate(" + (d.x - 200) + ")translate(" + d.y + ")");
-                    }
-                    return ("rotate(" + (d.x - 90) + ")translate(" + d.y + ")"); })
+                  //Fixing root position
+                  if (d.name == "Maria (Maine) Feldman")
+                    return ("rotate(" + (d.x - 200) + ")translate(0," + 10 + ")");
+                  if (d.x == 1) {
+                      return ("rotate(" + (d.x - 200) + ")translate(" + d.y + ")");
+                  }
+                  return ("rotate(" + (d.x - 90) + ")translate(" + d.y + ")"); })
 
               nodeUpdate.select("circle")
                   .attr("r",  function (d) { 
@@ -199,23 +184,21 @@
                       else
                           var age = 2016 - d.nascimento;
                       if (age >= 0 && age <= 9)
-                          return 4;
+                          return 5;
                       else if (age >= 10 && age <= 19)
-                          return 6.2;
+                          return 7.2;
                       else if (age >= 20 && age <= 39)
-                          return 10.5;
+                          return 11.5;
                       else if (age >= 40 && age <= 59)
-                          return 13;
+                          return 14;
                       else if (age >= 60 && age <= 79)
-                          return 16;
+                          return 17;
                       else if (age >= 80 && age <= 100)
-                          return 20;  
+                          return 21;  
                       else if (currentYear - d.nascimento == 116 && (d.children))
-                        return 6.2;
+                        return 7.2;
                       else if (currentYear - d.nascimento == 116 && !(d.children))
-                        return 4;
-                      //getRadiusFromAge(d);
-
+                        return 5;
                   })
                   .style("fill", function(d) {
                       if (d.name == "Casamento") return "#000000";
@@ -230,11 +213,6 @@
                   .duration(duration)
                   .remove();
 
-           /*  nodeUpdate.select("path")
-                .append ("path")
-                  .attr("d", d3.svg.symbol().type("square"))
-                  .attr("fill", "#ccc");*/
-
               nodeExit.select("circle")
                   .attr("r", function (d) {
                     getRadiusFromAge(d);
@@ -247,7 +225,7 @@
               // Enter any new links at the parent's previous position.
               link.enter().insert("path", "g")
                   .attr("class", "link")
-                  .attr("d", function(d) {
+                  .attr("d", function (d) {
                     var o = {x: source.x0, y: source.y0};
                     if (d.name == "Maria (Maine) Feldman")
                     {
@@ -280,9 +258,11 @@
                 d.y0 = d.y;
               });
 
+             
+
+
               svg.selectAll("g").selectAll("circle")
                 .on("mouseover", function (d,i){
-                    //console.log (2016 - d.nascimento);
                     tooltip.html(function () {
                         var tooltip = d.name;
                         return tooltip;});
@@ -297,11 +277,7 @@
                     return tooltip.style("visibility", "hidden");});
             }
 
-//TESTE TESTE TESTE TESTE ----------------------------------------------------------------------------------------------------------- TESTE TESTE TESTE
-
-           
-            
-            function updateTeste2(source, parents) {
+            function updateSecondPart(source, parents) {
 
               var subTree = d3.layout.tree()
                 .size([180, diameter / 2 - 80])
@@ -377,7 +353,6 @@
                 .append ("path")
                   .attr("d", d3.svg.symbol().type("square"))
                   .attr("fill", "#ccc");
-                    //.type("circle");
 
               nodeEnter.filter (function (d,i) {return d.name != "Casamento"})
               .append("circle")
@@ -410,6 +385,22 @@
                     else if (d.morte && d.sexo == "feminino") return "#ffccff";
                     else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
                  });
+                  
+                nodeEnter.append("svg:image")
+                  .attr("x", function (d) { return d3.select(this).attr("r") - 5}) //return d3.select(this).attr("cx")
+                  .attr("y", function (d) { return d3.select(this).attr("r") - 5})
+                  .attr("width", 10)
+                  .attr("height", 10)
+                  .attr("transform", function (d) { 
+                    theta = Math.atan2(d.y, d.x) != 0 ? Math.atan2(d.y, d.x) : 20
+                    if (theta > 0)
+                      return "rotate (" + theta + ")";
+                    theta = -theta;
+                    return "rotate (" + theta + ")";})
+                  .attr("xlink:href", function (d) { 
+                    if(d.judeu == true)
+                      return "./starofdavid9.png";
+                  });
 
               // Transition nodes to their new position.
               var nodeUpdate = node.transition()
@@ -514,14 +505,12 @@
 
               svg.selectAll("g").selectAll("circle")
                 .on("mouseover", function (d,i){
-                    //console.log (2016 - d.nascimento);
                     tooltip.html(function () {
                         var tooltip = d.name;
                         return tooltip;});
                     return tooltip.style("visibility", "visible")})
 
                 .on("mousemove", function (d,i){
-                                  //console.log (2016 - d.nascimento);
                     tooltip.html(function () {
                         var tooltip = d.name;
                         return tooltip;});
@@ -533,6 +522,7 @@
 
             // Toggle children on click.
             function click(d) {
+              console.log(d.target);
               nos = [];
               parents = [];
               getParents (d);
@@ -574,7 +564,7 @@
 
                 d3.selectAll("path.link").remove();
                // d3.selectAll ("g.nodes").remove();
-                updateTeste2 (d, parents);
+                updateSecondPart (d, parents);
               }
             }
 
@@ -598,8 +588,6 @@
             }         
         });
 
-        
-        
     </script>
   </body>
 </html>

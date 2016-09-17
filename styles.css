@@ -1,0 +1,36 @@
+.node {
+      cursor: pointer;
+      }
+
+    .node circle {
+      fill: #fff;
+      }
+
+    .node text {
+      font: 10px sans-serif;
+      }
+
+    .link {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: 1.5px;
+      }
+
+    .parentsLink {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: 1.5px;
+    }
+
+    .parents {
+      cursor: pointer;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline;
+      font-size: 11pt;
+      font-family:sans-serif;
+      border: 0px;
+      border-radius: 8px;
+      }
