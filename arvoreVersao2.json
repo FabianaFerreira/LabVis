@@ -15,6 +15,7 @@
 	"children": 
 	
 			[
+				
 				{
 					"name": "Anita Volfzon Kosminsky",
 					"judeu": true,
@@ -183,7 +184,8 @@
 									{
 										"name": "Diana Isabel Shrewsbury",
 										"judeu": false,
-										"sexo": "feminino"
+										"sexo": "feminino",
+										"nascimento": 1900
 									},
 									"children":
 									[
@@ -200,12 +202,20 @@
 													"children": 
 													[
 														{
-															"name": "Bernardo",
-															"judeu": false,
-															"sexo": "masculino",
-															"nascimento": 1900
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Bernardo",
+																	"judeu": false,
+																	"sexo": "masculino",
+																	"nascimento": 1900
+																}
+															]
 														}
 													]
+														
+													
 												}
 											]
 										}
@@ -234,6 +244,7 @@
 						"judeu": false
 					}
 				},
+
 				{
 					"name": "Luiz Noya Volfzon",
 					"sexo": "masculino",
@@ -537,6 +548,7 @@
 						}
 					]
 				},
+
 				{
 					"name": "Eugênia Volfzon Vieira (Genita)",
 					"sexo": "feminino",
@@ -584,7 +596,7 @@
 													{
 														"name": "Márcio Oliveira",
 														"sexo": "masculino",
-														"nascimento": 1900,
+														"nascimento": 1983,
 														"judeu": false
 													},
 													"children":
@@ -695,7 +707,7 @@
 											]
 										}
 									]
-								},
+									},
 								{
 									"name": "Elza Regina Vieira Solon",
 									"sexo": "feminino",
@@ -735,6 +747,21 @@
 							]
 						}
 					]
+				},
+				{
+						"oi": 0,
+						"name": "Abrahão Kosminsky",
+						"nascimento": 1914,
+						"sexo": "masculino",
+						"morte": 1971,
+						"judeu": true,
+						"conjuge": {
+							"name": "Anita Volfzon Kosminsky",
+							"judeu": true,
+							"nascimento": 1918,
+							"morte": 2013,
+							"sexo": "feminino"
+						}
 				},
 				{
 					"name": "Rosita Ferman",
