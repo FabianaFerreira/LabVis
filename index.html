@@ -493,6 +493,24 @@
                     else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
                  });
 
+              jewishNodesEnter = nodeEnter.filter (function (d) { return d.judeu == true;});
+
+              jewishNodesEnter.append("svg:image")
+                .attr("x", function (d) { return d3.select(this).attr("r") - 5})
+                .attr("y", function (d) { return d3.select(this).attr("r") - 5})
+                .attr("width", 10)
+                .attr("height", 10)
+                .attr("transform", function (d) { 
+                  theta = d.x;
+                  if (d.name == "Maria (Maine) Feldman")
+                      return "rotate (20)"
+                  if ((theta > 180) && (theta < 270))
+                    return "rotate (" + (90 - (theta - 180)) + ")";
+                  if ((theta > 270) && (theta > 360))
+                    return "rotate (" + ((360 - theta) - 90) + ")";
+                  return "rotate (" + (90 - theta) + ")";})
+                .attr("xlink:href", "./starofdavid11.png");
+
 
               // Transition nodes to their new position.
               var nodeUpdate = node.transition()
@@ -552,9 +570,9 @@
                    });
               
               //Rotating stars that need it to be in the correct position
-              jewishNodes = nodeUpdate.filter (function (d) { return d.judeu == true;});
+              jewishNodesUpdate = nodeUpdate.filter (function (d) { return d.judeu == true;});
 
-              jewishNodes.select("image")
+              jewishNodesUpdate.select("image")
                 .transition()
                 .duration (0)
                 .attr("transform", function (d) { 
