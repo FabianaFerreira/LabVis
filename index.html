@@ -208,7 +208,7 @@
                         return mainRadius*0.5 - 4;
                         
                       else if (spouseRadius > mainRadius)
-                        return mainRadius - 7;
+                        return mainRadius - 8;
                     })
                     .attr ("cy", function (d) {
                       //RADIUS
@@ -221,7 +221,7 @@
                          return mainRadius*0.9 - 2;
 
                         else if (spouseRadius > mainRadius)
-                          return mainRadius*0.8;
+                          return mainRadius*0.8 + 5;
                     })
                     .attr ("r", function (d) {return getRadiusFromAge (d.conjuge)})
                     .style ("fill", function (d) {
