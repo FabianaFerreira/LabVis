@@ -8,7 +8,7 @@
     <script type="text/javascript" src="FileSaver.js"></script>
     <script type="text/javascript" src="SaveImage.js"></script>
     <script>
-        var diameter = 1500;
+        var diameter = 1600;
 
         var currentYear = new Date().getFullYear();
         
@@ -24,7 +24,7 @@
 
         var tree = d3.layout.tree()
             .size([360, diameter/20])
-            .separation(function(a, b) { return (a.parent == b.parent ? 7 : 10) / (a.depth*0.2); });
+            .separation(function(a, b) { return (a.parent == b.parent ? 12 : 13) / (a.depth*0.2); });
 
         var diagonal = d3.svg.diagonal.radial()
             .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
@@ -40,7 +40,7 @@
             .attr("height", height )
             .attr ("align", "center")
           .append("g")
-            .attr("transform", "translate(" + diameter / 2 + "," + (diameter / 2 - 200) + ")")
+            .attr("transform", "translate(" + (diameter / 2 ) + "," + (diameter / 2 - 200) + ")")
             .attr ("align", "center");
 
         var tooltip = d3.select("body")
@@ -63,38 +63,62 @@
         saveAs(blob, "treeLayout.svg");
       };
 
-        function getRadiusFromAge (d) {
-          if (d.morte)
-            var age = (d.morte) - (d.nascimento);
-          else
-              var age = 2016 - d.nascimento;
-          if (age >= 0 && age <= 9)
-              return 5;
-          else if (age >= 10 && age <= 19)
-              return 7.2;
-          else if (age >= 20 && age <= 39)
-              return 11.5;
-          else if (age >= 40 && age <= 59)
-              return 14;
-          else if (age >= 60 && age <= 79)
-              return 17;
-          else if (age >= 80 && age <= 100)
-              return 21;  
-          else if (currentYear - d.nascimento == 116 && (d.children))
-            return 7.2;
-          else if (currentYear - d.nascimento == 116 && !(d.children))
+      function getRadiusFromAge (d) {
+        if (d.morte)
+          var age = (d.morte) - (d.nascimento);
+        else
+            var age = 2016 - d.nascimento;
+        if (age >= 0 && age <= 9)
             return 5;
-        }
+        else if (age >= 10 && age <= 19)
+            return 7.2;
+        else if (age >= 20 && age <= 39)
+            return 11.5;
+        else if (age >= 40 && age <= 59)
+            return 14;
+        else if (age >= 60 && age <= 79)
+            return 17;
+        else if (age >= 80 && age <= 100)
+            return 21;  
+        else if (currentYear - d.nascimento == 116 && (d.children))
+          return 7.2;
+        else if (currentYear - d.nascimento == 116 && !(d.children))
+          return 5;
+      }
 
-        function getParents (d) {
-          if (d.parent)
-              {
-                if (d.parent.name != "Casamento")
-                  parents.push (d.parent);
-                getParents (d.parent);
-              }
-          else return 0;
+      function getParents (d) {
+        if (d.parent)
+            {
+              if (d.parent.name != "Casamento")
+                parents.push (d.parent);
+              getParents (d.parent);
+            }
+        else return 0;
+      }
+
+      function getDistanceSpouses (d) {
+        var mainRadius = getRadiusFromAge (d);
+        var spouseRadius = getRadiusFromAge (d.conjuge);
+        var position = {cx:0, cy:0};
+        if (mainRadius == spouseRadius)
+        {
+          position.cx = (mainRadius-5);
+          position.cy = (mainRadius-5);
+          return position;
         }
+        else if (mainRadius > spouseRadius)
+          {
+          position.cx = mainRadius;
+          position.cy = mainRadius;
+          return position;
+        }
+        else if (spouseRadius > mainRadius)
+        {
+          position.cx = mainRadius*0.9;
+          position.cy = mainRadius*0.9;
+          return position;
+        }
+      }
 
         d3.json("arvoreVersao2.json", function(error, pubs) {
           if (error) throw error;
@@ -120,13 +144,99 @@
 
               // Update the nodes…
               var node = svg.selectAll("svg")
-                  .data(nodes, function(d) { return d.id || (d.id = ++i); });
+                  .data(nodes, function(d) {return d.id || (d.id = ++i); });
 
               // Enter any new nodes at the parent's previous position.
               var nodeEnter = node.enter().append("g")
                   .attr("class", "node")
-                  .on("click", function (d) { return click (d)});
+                  .on("click", function (d) {return click (d)});
 
+              nodeEnter.filter (function (d,i) {return d.exConjuge != undefined})
+                .append ("circle")
+                  .attr ("class", "spouse")
+                  .attr ("cx", function (d) {
+                      var mainRadius = getRadiusFromAge (d);
+                      var spouseRadius = getRadiusFromAge (d.exConjuge);
+                      if (mainRadius == spouseRadius)
+                        return (mainRadius-11);
+                        
+                      else if (mainRadius > spouseRadius)
+                        return mainRadius*0.5;
+                        
+                      else if (spouseRadius > mainRadius)
+                        return mainRadius*0.9;
+                    })
+                  .attr ("cy", function (d) {
+                        var mainRadius = getRadiusFromAge (d);
+                        var spouseRadius = getRadiusFromAge (d.exConjuge);
+                        if (mainRadius == spouseRadius)
+                          return (mainRadius-30);
+
+                        else if (mainRadius > spouseRadius)
+                         return mainRadius*0.5;
+
+                        else if (spouseRadius > mainRadius)
+                          return mainRadius*0.9;
+                    })
+                  .attr ("r", function (d) {return getRadiusFromAge (d.exConjuge)})
+                    .style ("fill", function (d) {
+                      if (!d.exConjuge.morte && d.exConjuge.sexo == "feminino") return "#ff16cc";
+                      else if (!d.exConjuge.morte && d.exConjuge.sexo == "masculino") return "#3399ff";
+                      else if (d.exConjuge.morte && d.exConjuge.sexo == "feminino") return "#ffccff";
+                      else if (d.exConjuge.morte && d.exConjuge.sexo == "masculino") return "#b3e6ff";
+                    })
+                    .style ("stroke", function (d){
+                      if (d.morte)
+                        return "#fff";
+                      else 
+                        return "#000";
+                    })
+                .on("click", function (d) {console.log(d.sexo)});
+
+              //Spouses: circles near to nodes
+              nodeEnter.filter(function (d,i) {return d.conjuge != undefined;})
+                  .append("circle") 
+                    .attr ("class", "spouse")
+                    .attr ("cx", function (d) {
+                      //ANGLE
+                      var mainRadius = getRadiusFromAge (d);
+                      var spouseRadius = getRadiusFromAge (d.conjuge);
+                      if (mainRadius == spouseRadius)
+                        return (mainRadius-10);
+                        
+                      else if (spouseRadius < mainRadius)
+                        return mainRadius*0.5 - 4;
+                        
+                      else if (spouseRadius > mainRadius)
+                        return mainRadius - 7;
+                    })
+                    .attr ("cy", function (d) {
+                      //RADIUS
+                        var mainRadius = getRadiusFromAge (d);
+                        var spouseRadius = getRadiusFromAge (d.conjuge);
+                        if (mainRadius == spouseRadius)
+                          return (mainRadius*0.8-2);
+
+                        else if (spouseRadius < mainRadius)
+                         return mainRadius*0.9 - 2;
+
+                        else if (spouseRadius > mainRadius)
+                          return mainRadius*0.8;
+                    })
+                    .attr ("r", function (d) {return getRadiusFromAge (d.conjuge)})
+                    .style ("fill", function (d) {
+                      if (!d.conjuge.morte && d.conjuge.sexo == "feminino") return "#ff16cc";
+                      else if (!d.conjuge.morte && d.conjuge.sexo == "masculino") return "#3399ff";
+                      else if (d.conjuge.morte && d.conjuge.sexo == "feminino") return "#ffccff";
+                      else if (d.conjuge.morte && d.conjuge.sexo == "masculino") return "#b3e6ff";
+                    })
+                    .style ("stroke", function (d){
+                      if (d.morte)
+                        return "#fff";
+                      else 
+                        return "#000";
+                    })
+                .on("click", function (d) {console.log(d.sexo)});
 
               // Marriages: squares
               nodeEnter.filter (function (d,i) {return d.name == "Casamento"})
@@ -136,9 +246,10 @@
 
               // Nodes: circles
               nodeEnter.filter (function (d,i) {return d.name != "Casamento"})
+              .attr ("class", "node")
               .append("circle")
                   .attr("r", function (d) {
-                    getRadiusFromAge(d);
+                    return getRadiusFromAge(d);
                   })
                   .style("fill", function(d) {
                       if (d.name == "Casamento") return "#000000";
@@ -146,24 +257,31 @@
                       else if (!d.morte && d.sexo == "masculino") return "#3399ff";
                       else if (d.morte && d.sexo == "feminino") return "#ffccff";
                       else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
-                   });
+                   })
+                  .style ("stroke", function (d) {
+                    if (d.morte)
+                      return "#fff";
+                    else 
+                      return "#000";
+                  });
 
+              jewishNodesEnter = nodeEnter.filter (function (d) { return d.judeu == true;});
 
-               nodeEnter.append("svg:image")
-                .attr("x", function (d) { return d3.select(this).attr("r") - 5}) //return d3.select(this).attr("cx")
+              jewishNodesEnter.append("svg:image")
+                .attr("x", function (d) { return d3.select(this).attr("r") - 5})
                 .attr("y", function (d) { return d3.select(this).attr("r") - 5})
                 .attr("width", 10)
                 .attr("height", 10)
                 .attr("transform", function (d) { 
-                  theta = Math.atan2(d.y, d.x) != 0 ? Math.atan2(d.y, d.x) : 20
-                  if (theta > 0)
-                    return "rotate (" + theta + ")";
-                  theta = -theta;
-                  return "rotate (" + theta + ")";})
-                .attr("xlink:href", function (d) { 
-                  if(d.judeu == true)
-                    return "./starofdavid9.png";
-                });
+                  theta = d.x;
+                  if (d.name == "Maria (Maine) Feldman")
+                      return "rotate (20)"
+                  if ((theta > 180) && (theta < 270))
+                    return "rotate (" + (90 - (theta - 180)) + ")";
+                  if ((theta > 270) && (theta > 360))
+                    return "rotate (" + ((360 - theta) - 90) + ")";
+                  return "rotate (" + (90 - theta) + ")";})
+                .attr("xlink:href", "./starofdavid11.png");
 
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
@@ -177,32 +295,12 @@
                   }
                   return ("rotate(" + (d.x - 90) + ")translate(" + d.y + ")"); })
 
-              nodeUpdate.select("circle")
-                  .attr("r",  function (d) { 
-                      if (d.morte)
-                          var age = (d.morte) - (d.nascimento);
-                      else
-                          var age = 2016 - d.nascimento;
-                      if (age >= 0 && age <= 9)
-                          return 5;
-                      else if (age >= 10 && age <= 19)
-                          return 7.2;
-                      else if (age >= 20 && age <= 39)
-                          return 11.5;
-                      else if (age >= 40 && age <= 59)
-                          return 14;
-                      else if (age >= 60 && age <= 79)
-                          return 17;
-                      else if (age >= 80 && age <= 100)
-                          return 21;  
-                      else if (currentYear - d.nascimento == 116 && (d.children))
-                        return 7.2;
-                      else if (currentYear - d.nascimento == 116 && !(d.children))
-                        return 5;
-                  })
-                  .style("fill", function(d) {
+              nodeUpdate.filter (function (d) { d3.select(this).attr ("class") != "spouse"})
+                  .select("circle")
+                  .attr("r",  function (d) { return getRadiusFromAge (d);})
+                  .style("fill", function (d) {
                       if (d.name == "Casamento") return "#000000";
-                      if (!d.morte && d.sexo == "feminino") return "#ff66cc";
+                      if (!d.morte && d.sexo == "feminino") return "#ff16cc";
                       else if (!d.morte && d.sexo == "masculino") return "#3399ff";
                       else if (d.morte && d.sexo == "feminino") return "#ffccff";
                       else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
@@ -258,9 +356,6 @@
                 d.y0 = d.y;
               });
 
-             
-
-
               svg.selectAll("g").selectAll("circle")
                 .on("mouseover", function (d,i){
                     tooltip.html(function () {
@@ -288,38 +383,17 @@
                   links = subTree.links(nodes);
 
               var parentsCircles = svg.selectAll("circles")
-                .data(parents);
+                .data(parents); 
 
               parentsCircles
                 .enter()
                   .append ("circle")
-                  .attr("r", function (d) {
-                    if (d.morte)
-                        var age = (d.morte) - (d.nascimento);
-                    else
-                        var age = currentYear - d.nascimento;
-                    if (age >= 0 && age <= 9)
-                        return 4;
-                    else if (age >= 10 && age <= 19)
-                        return 6.2;
-                    else if (age >= 20 && age <= 39)
-                        return 10.5;
-                    else if (age >= 40 && age <= 59)
-                        return 13;
-                    else if (age >= 60 && age <= 79)
-                        return 16;
-                    else if (age >= 80 && age <= 100)
-                        return 20;  
-                    else if (currentYear - d.nascimento == 116 && (d.children))
-                      return 6.2;
-                    else if (currentYear - d.nascimento == 116 && !(d.children))
-                      return 4;
-                  })
+                  .attr("r", function (d) { return getRadiusFromAge (d);})
                   .attr ("cx", 0)
                   .attr("class", "parents")
                   .attr ("cy", function (d,i) { return (-100/(parents.length))*(i+1)})
                   .style("fill", function(d) {
-                      if (!d.morte && d.sexo == "feminino") return "#ff66cc";
+                      if (!d.morte && d.sexo == "feminino") return "#ff16cc";
                       else if (!d.morte && d.sexo == "masculino") return "#3399ff";
                       else if (d.morte && d.sexo == "feminino") return "#ffccff";
                       else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
@@ -349,6 +423,29 @@
                   .attr("class", "node")
                    .on("click", function (d) { return click (d)});
 
+             /* //Spouses: circles near to nodes
+              nodeEnter.filter(function (d,i) {return d.conjuge != undefined;})
+                .append ("g")
+                .attr ("class", "spouse")
+                  .append("circle") 
+                    .attr ("cx", function (d) {return d3.select(this).attr("r") - 3})
+                    .attr ("cy", function (d) {return d3.select(this).attr("r") - 5})
+                    .attr ("r", function (d) {return getRadiusFromAge (d.conjuge)})
+                    .style ("fill", function (d) {
+                      console.log ("entrei na cor part 2");
+                      if (!d.conjuge.morte && d.conjuge.sexo == "feminino") return "#ff16cc";
+                      else if (!d.conjuge.morte && d.conjuge.sexo == "masculino") return "#3399ff";
+                      else if (d.conjuge.morte && d.conjuge.sexo == "feminino") return "#ffccff";
+                      else if (d.conjuge.morte && d.conjuge.sexo == "masculino") return "#b3e6ff";
+                    })
+                    .style ("stroke", function (d){
+                      if (d.morte)
+                        return "#fff";
+                      else 
+                        return "#000";
+                    })
+                .on("click", function (d) {console.log(d.sexo)});*/
+
               nodeEnter.filter (function (d,i) {return d.name == "Casamento"})
                 .append ("path")
                   .attr("d", d3.svg.symbol().type("square"))
@@ -356,51 +453,15 @@
 
               nodeEnter.filter (function (d,i) {return d.name != "Casamento"})
               .append("circle")
-                  .attr("r", function (d) {
-                    if (d.morte)
-                        var age = (d.morte) - (d.nascimento);
-                    else
-                        var age = currentYear - d.nascimento;
-                    if (age >= 0 && age <= 9)
-                        return 4;
-                    else if (age >= 10 && age <= 19)
-                        return 6.2;
-                    else if (age >= 20 && age <= 39)
-                        return 10.5;
-                    else if (age >= 40 && age <= 59)
-                        return 13;
-                    else if (age >= 60 && age <= 79)
-                        return 16;
-                    else if (age >= 80 && age <= 100)
-                        return 20;  
-                    else if (currentYear - d.nascimento == 116 && (d.children))
-                      return 6.2;
-                    else if (currentYear - d.nascimento == 116 && !(d.children))
-                      return 4;
-                  })
+                  .attr("r", function (d) { return getRadiusFromAge (d);})
                   .style("fill", function(d) {
                     if (d.name == "Casamento") return "#000000";
-                    if (!d.morte && d.sexo == "feminino") return "#ff66cc";
+                    if (!d.morte && d.sexo == "feminino") return "#ff16cc";
                     else if (!d.morte && d.sexo == "masculino") return "#3399ff";
                     else if (d.morte && d.sexo == "feminino") return "#ffccff";
                     else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
                  });
-                  
-                nodeEnter.append("svg:image")
-                  .attr("x", function (d) { return d3.select(this).attr("r") - 5}) //return d3.select(this).attr("cx")
-                  .attr("y", function (d) { return d3.select(this).attr("r") - 5})
-                  .attr("width", 10)
-                  .attr("height", 10)
-                  .attr("transform", function (d) { 
-                    theta = Math.atan2(d.y, d.x) != 0 ? Math.atan2(d.y, d.x) : 20
-                    if (theta > 0)
-                      return "rotate (" + theta + ")";
-                    theta = -theta;
-                    return "rotate (" + theta + ")";})
-                  .attr("xlink:href", function (d) { 
-                    if(d.judeu == true)
-                      return "./starofdavid9.png";
-                  });
+
 
               // Transition nodes to their new position.
               var nodeUpdate = node.transition()
@@ -411,35 +472,28 @@
                       }
                       return ("rotate(" + (d.x - 360) + ")translate(" + d.y + ")"); })
 
-              nodeUpdate.select("circle")
-                  .attr("r",  function (d) {
-                     if (d.morte)
-                        var age = (d.morte) - (d.nascimento);
-                    else
-                        var age = currentYear - d.nascimento;
-                    if (age >= 0 && age <= 9)
-                        return 4;
-                    else if (age >= 10 && age <= 19)
-                        return 6.2;
-                    else if (age >= 20 && age <= 39)
-                        return 10.5;
-                    else if (age >= 40 && age <= 59)
-                        return 13;
-                    else if (age >= 60 && age <= 79)
-                        return 16;
-                    else if (age >= 80 && age <= 100)
-                        return 20;  
-                    else if (currentYear - d.nascimento == 116 && (d.children))
-                      return 6.2;
-                    else if (currentYear - d.nascimento == 116 && !(d.children))
-                      return 4;
-                  })
+              nodeUpdate.filter (function (d) { d3.select(this).attr ("class") != "spouse"})
+                  .select("circle")
+                  .attr("r",  function (d) { return getRadiusFromAge (d); })
                   .style("fill", function (d) {
-                      if (!d.morte && d.sexo == "feminino") return "#ff66cc";
+                      if (!d.morte && d.sexo == "feminino") return "#ff16cc";
                       else if (!d.morte && d.sexo == "masculino") return "#3399ff";
                       else if (d.morte && d.sexo == "feminino") return "#ffccff";
                       else if (d.morte && d.sexo == "masculino") return "#b3e6ff"; 
                    });
+              
+              //Rotating stars that need it to be in the correct position
+              jewishNodes = nodeUpdate.filter (function (d) { return d.judeu == true;});
+
+              jewishNodes.select("image")
+                .transition()
+                .duration (0)
+                .attr("transform", function (d) { 
+                  theta = d.x;
+                  if ((theta > 0) && (theta < 90))
+                    return "rotate (" + (-theta) + ")";
+                  if ((theta >= 90) && (theta < 180))
+                    return "rotate (" + (180 - theta) + ")";});
 
               // TODO: appropriate transform
               var nodeExit = node.exit().transition()
@@ -447,28 +501,7 @@
                   .remove();
 
               nodeExit.select("circle")
-                 .attr("r", function (d) {
-                    if (d.morte)
-                        var age = (d.morte) - (d.nascimento);
-                    else
-                        var age = currentYear - d.nascimento;
-                    if (age >= 0 && age <= 9)
-                        return 4;
-                    else if (age >= 10 && age <= 19)
-                        return 6.2;
-                    else if (age >= 20 && age <= 39)
-                        return 10.5;
-                    else if (age >= 40 && age <= 59)
-                        return 13;
-                    else if (age >= 60 && age <= 79)
-                        return 16;
-                    else if (age >= 80 && age <= 100)
-                        return 20;  
-                    else if (currentYear - d.nascimento == 116 && (d.children))
-                      return 6.2;
-                    else if (currentYear - d.nascimento == 116 && !(d.children))
-                      return 4;
-                 });
+                 .attr("r", function (d) { return getRadiusFromAge (d); });
 
               // Update the links…
               var link = svg.selectAll("path.link")
@@ -503,6 +536,8 @@
                 d.y0 = d.y;
               });
 
+             
+
               svg.selectAll("g").selectAll("circle")
                 .on("mouseover", function (d,i){
                     tooltip.html(function () {
@@ -517,12 +552,12 @@
                     return tooltip.style("top", (d3.event.pageY - 20)+"px").style("left",(d3.event.pageX  + 10)+"px");})
                 .on("mouseout", function (d,i) {
                     return tooltip.style("visibility", "hidden");});
+
            }
 
 
             // Toggle children on click.
             function click(d) {
-              console.log(d.target);
               nos = [];
               parents = [];
               getParents (d);
@@ -532,14 +567,21 @@
                   .separation(function(a, b) { return (a.parent == b.parent ? 7 : 10) / (a.depth*0.2); });
                 clickRootCounter += 1;
                 if (clickRootCounter != 0) {
-                  console.log("entrei");
                   d3.selectAll("circle")
                     .filter (function () {return d3.select(this).attr ("class") == "parents"})
                     .remove();
 
-                  d3.selectAll("g.node")
-                    .filter (function () {return d3.select(this).attr("class") == "node"})
-                    .attr("transform", "translate(1000,1000)");
+                  svg.selectAll(".node")
+                    .transition()
+                    .duration(0)
+                    .attr("transform", "translate(1000,1000)")
+                    .remove();
+
+                  svg.selectAll(".spouse")
+                    .transition()
+                    .duration(0)
+                    .attr("transform", "translate(1000,1000)")
+                    .remove();
 
                   d3.selectAll("path.link").remove();
                   d3.selectAll ("line").remove();
@@ -555,7 +597,7 @@
                 var radius = getRadiusFromAge (d);
                 var line = svg.append("line")
                     .attr("x1", 0)
-                    .attr("y1", function () { return (- radius)})
+                    .attr("y1", function () { return (- radius - 2)})
                     .attr("x2", 0)
                     .attr("y2", -204);
                 line
@@ -563,7 +605,6 @@
                   .attr ("stroke", "#ccc");
 
                 d3.selectAll("path.link").remove();
-               // d3.selectAll ("g.nodes").remove();
                 updateSecondPart (d, parents);
               }
             }
