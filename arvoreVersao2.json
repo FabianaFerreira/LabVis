@@ -139,7 +139,8 @@
 													{
 														"name": "Daniel Luise",
 														"sexo": "masculino",
-														"judeu": false
+														"judeu": false,
+														"nascimento": 1900
 													},
 													"children":
 													[
