@@ -230,7 +230,7 @@
                       else if (d.conjuge.morte && d.conjuge.sexo == "masculino") return maleDeadColor;
                     })
                     .style ("stroke", function (d) {
-                      if (d.morte)
+                      if (d.conjuge.morte)
                         return "#ffffff";
                       else if (!d.conjuge.morte)
                         return "#000000";
@@ -469,7 +469,7 @@
                       else if (d.conjuge.morte && d.conjuge.sexo == "masculino") return maleDeadColor;
                     })
                     .style ("stroke", function (d){
-                      if (d.morte)
+                      if (d.conjuge.morte)
                         return "#ffffff";
                       else 
                         return "#000000";
@@ -490,7 +490,13 @@
                     else if (!d.morte && d.sexo == "masculino") return maleAliveColor;
                     else if (d.morte && d.sexo == "feminino") return femaleDeadColor;
                     else if (d.morte && d.sexo == "masculino") return maleDeadColor; 
-                 });
+                 })
+                  .style ("stroke", function (d){
+                      if (d.morte)
+                        return "#ffffff";
+                      else 
+                        return "#000000";
+                    });
 
               jewishNodesEnter = nodeEnter.filter (function (d) { return d.judeu == true;});
 
