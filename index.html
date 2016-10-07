@@ -25,7 +25,10 @@
 
         var tree = d3.layout.tree()
             .size([360, diameter/20])
-            .separation(function(a, b) { return (a.parent == b.parent ? 12 : 13) / (a.depth*0.2); });
+            .separation(function(a, b) { 
+             /* if ((a.parent == b.parent) && (a.parent.name == "Maria (Maine) Feldman") && (b.parent.name == "Maria (Maine) Feldman"))
+                return 15/a.depth;*/
+              return (a.parent == b.parent ? 12 : 13) / (a.depth*0.2); });
 
         var diagonal = d3.svg.diagonal.radial()
             .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
@@ -72,15 +75,15 @@
         if (age >= 0 && age <= 9)
             return 5;
         else if (age >= 10 && age <= 19)
-            return 7.2;
+            return 8.2; //7.2
         else if (age >= 20 && age <= 39)
-            return 11.5;
+            return 12.5;//11.5
         else if (age >= 40 && age <= 59)
-            return 14;
+            return 14;//14
         else if (age >= 60 && age <= 79)
-            return 17;
+            return 16; //17
         else if (age >= 80 && age <= 100)
-            return 21;  
+            return 22; // 21  
         else if (currentYear - d.nascimento == 116 && (d.children))
           return 7.2;
         else if (currentYear - d.nascimento == 116 && !(d.children))
@@ -181,10 +184,9 @@
                     })
                   .attr ("r", function (d) {return getRadiusFromAge (d.exConjuge)})
                     .style ("fill", function (d) {
-                      if (!d.exConjuge.morte && d.exConjuge.sexo == "feminino") return femaleAliveColor;//"#ff16cc"
-                      else if (!d.exConjuge.morte && d.exConjuge.sexo == "masculino") return maleAliveColor;
-                      else if (d.exConjuge.morte && d.exConjuge.sexo == "feminino") return femaleDeadColor;
-                      else if (d.exConjuge.morte && d.exConjuge.sexo == "masculino") return maleDeadColor;
+                      if (d.exConjuge.sexo == "feminino") return femaleSpouseColor;//"#ff16cc"
+                      else if (d.exConjuge.sexo == "masculino") return maleSpouseColor;
+                      
                     })
                     .style ("stroke", function (d){
                       if (d.exConjuge.morte)
@@ -224,10 +226,8 @@
                     })
                     .attr ("r", function (d) {return getRadiusFromAge (d.conjuge)})
                     .style ("fill", function (d) {
-                      if (!d.conjuge.morte && d.conjuge.sexo == "feminino") return femaleAliveColor;//"#ff16cc"
-                      else if (!d.conjuge.morte && d.conjuge.sexo == "masculino") return maleAliveColor;
-                      else if (d.conjuge.morte && d.conjuge.sexo == "feminino") return femaleDeadColor;
-                      else if (d.conjuge.morte && d.conjuge.sexo == "masculino") return maleDeadColor;
+                      if (d.conjuge.sexo == "feminino") return femaleSpouseColor;//"#ff16cc"
+                      else if (d.conjuge.sexo == "masculino") return maleSpouseColor;
                     })
                     .style ("stroke", function (d) {
                       if (d.conjuge.morte)
@@ -252,10 +252,8 @@
                   })
                   .style("fill", function(d) {
                       if (d.name == "Casamento") return "#000000";
-                      if (!d.morte && d.sexo == "feminino") return femaleAliveColor;//ff16cc
-                      else if (!d.morte && d.sexo == "masculino") return maleAliveColor;
-                      else if (d.morte && d.sexo == "feminino") return femaleDeadColor;
-                      else if (d.morte && d.sexo == "masculino") return maleDeadColor; 
+                      if (d.sexo == "feminino") return femaleColor;//ff16cc
+                      else if (d.sexo == "masculino") return maleColor;
                    })
                   .style ("stroke", function (d) {
                     if (d.morte)
@@ -299,10 +297,8 @@
                   .attr("r",  function (d) { return getRadiusFromAge (d);})
                   .style("fill", function (d) {
                       if (d.name == "Casamento") return "#000000";
-                      if (!d.morte && d.sexo == "feminino") return femaleAliveColor;
-                      else if (!d.morte && d.sexo == "masculino") return maleAliveColor;
-                      else if (d.morte && d.sexo == "feminino") return femaleDeadColor;
-                      else if (d.morte && d.sexo == "masculino") return maleDeadColor; 
+                      if (d.sexo == "feminino") return femaleColor;
+                      else if (d.sexo == "masculino") return maleColor;
                    });
 
               // TODO: appropriate transform
@@ -400,10 +396,8 @@
                   .attr("class", "parents")
                   .attr ("cy", function (d,i) { return (-100/(parents.length))*(i+1)})
                   .style("fill", function(d) {
-                      if (!d.morte && d.sexo == "feminino") return femaleAliveColor;
-                      else if (!d.morte && d.sexo == "masculino") return maleAliveColor;
-                      else if (d.morte && d.sexo == "feminino") return femaleDeadColor;
-                      else if (d.morte && d.sexo == "masculino") return maleDeadColor; 
+                      if (d.sexo == "feminino") return femaleColor;
+                      else if (d.sexo == "masculino") return maleColor;
                    })
                   .on ("click", function (d) {return click (d)});
                 
@@ -463,10 +457,8 @@
                     .attr ("r", function (d) {return getRadiusFromAge (d.conjuge)})
                     .style ("fill", function (d) {
                       console.log ("entrei na cor part 2");
-                      if (!d.conjuge.morte && d.conjuge.sexo == "feminino") return femaleAliveColor;
-                      else if (!d.conjuge.morte && d.conjuge.sexo == "masculino") return maleAliveColor;
-                      else if (d.conjuge.morte && d.conjuge.sexo == "feminino") return femaleDeadColor;
-                      else if (d.conjuge.morte && d.conjuge.sexo == "masculino") return maleDeadColor;
+                      if (d.conjuge.sexo == "feminino") return femaleSpouseColor;
+                      else if (d.conjuge.sexo == "masculino") return maleSpouseColor;
                     })
                     .style ("stroke", function (d){
                       if (d.conjuge.morte)
@@ -486,10 +478,8 @@
                   .attr("r", function (d) { return getRadiusFromAge (d);})
                   .style("fill", function(d) {
                     if (d.name == "Casamento") return "#000000";
-                    if (!d.morte && d.sexo == "feminino") return femaleAliveColor;
-                    else if (!d.morte && d.sexo == "masculino") return maleAliveColor;
-                    else if (d.morte && d.sexo == "feminino") return femaleDeadColor;
-                    else if (d.morte && d.sexo == "masculino") return maleDeadColor; 
+                    if (d.sexo == "feminino") return femaleColor;
+                    else if (d.sexo == "masculino") return maleColor; 
                  })
                   .style ("stroke", function (d){
                       if (d.morte)
@@ -532,10 +522,8 @@
                   .select("circle")
                   .attr("r",  function (d) { return getRadiusFromAge (d); })
                   .style("fill", function (d) {
-                      if (!d.morte && d.sexo == "feminino") return femaleAliveColor;
-                      else if (!d.morte && d.sexo == "masculino") return maleAliveColor;
-                      else if (d.morte && d.sexo == "feminino") return femaleDeadColor;
-                      else if (d.morte && d.sexo == "masculino") return maleDeadColor; 
+                      if (d.sexo == "feminino") return femaleColor;
+                      else if (d.sexo == "masculino") return maleColor;
                    });
 
               nodeUpdate.filter (function (d) { d3.select(this).attr ("class") == "spouse"})
@@ -568,10 +556,8 @@
                           return mainRadius*0.8 + 5;
                     })
                   .style("fill", function (d) {
-                      if (!d.conjuge.morte && d.conjuge.sexo == "feminino") return femaleAliveColor;
-                      else if (!d.conjuge.morte && d.conjuge.sexo == "masculino") return maleAliveColor;
-                      else if (d.conjuge.morte && d.conjuge.sexo == "feminino") return femaleDeadColor;
-                      else if (d.conjuge.morte && d.conjuge.sexo == "masculino") return maleDeadColor; 
+                      if (d.conjuge.sexo == "feminino") return femaleSpouseColor;
+                      else if (d.conjuge.sexo == "masculino") return maleSpouseColor;
                    });
               
               //Rotating stars that need it to be in the correct position
