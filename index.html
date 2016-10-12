@@ -4,9 +4,6 @@
       <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <!-- <div class="tooltip">
-      <span class="tooltiptext"></span>
-    </div> -->
     <script type="text/javascript" src="d3.min.js"></script>
     <script type="text/javascript" src="FileSaver.js"></script>
     <script type="text/javascript" src="SaveImage.js"></script>
@@ -439,6 +436,7 @@
               svg.selectAll(".spouses")
                   .remove();
 
+
               var subTree = d3.layout.tree()
                 .size([180, diameter / 2 - 80])
                 .separation(function(a, b) { return (a.parent == b.parent ? 5 : 7) / Math.max(1, a.depth); });
@@ -694,12 +692,45 @@
                       .style("opacity", 0); 
               });
 
+              svg.selectAll(".parents")
+              .on("mouseover", function (d) {    
+                  div.transition()    
+                      .duration(200)    
+                      .style("opacity", .9);    
+                  div.html(function () {
+                    if (d.conjuge.morte)
+                      return ( " " +  d.conjuge.name + " " + "<br/>" 
+                                + " Nascimento: " + d.conjuge.nascimento + " <br/>" 
+                                + " Morte: " + d.conjuge.morte + " <br/>")
+                    return (" " + d.conjuge.name + " " + "<br/>" 
+                            + " Nascimento: " + d.conjuge.nascimento + " <br/>")  
+                  })
+                  .style("left", (d3.event.pageX + 10) + "px")   
+                  .style("top", (d3.event.pageY - 30) + "px")
+                  .style ("tooltip-height", function () {
+                    if (d.conjuge.morte)
+                      return 50 + 15;
+                    return 50;
+                  });  
+              })          
+              .on("mouseout", function (d) {   
+                  div.transition()    
+                      .duration(300)    
+                      .style("opacity", 0); 
+              });
+
+
 
            } /*function updateSecondPart*/
 
 
             // Toggle children on click.
             function click(d) {
+              div
+                .style("visibility", "hidden");
+
+              svg.on("mousemove", function () {return div.style("visibility", "visible")});
+
               nos = [];
               parents = [];
               getParents (d);
@@ -745,8 +776,8 @@
                     .attr("transform", "translate(1000,1000)")
                     .remove();
 
-                d3.selectAll("path.link").remove();
-
+                d3.selectAll("path.link").remove();   
+              
                 updateSecondPart (d, parents);
               }
             }
