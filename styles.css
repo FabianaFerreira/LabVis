@@ -27,11 +27,19 @@
       cursor: pointer;
     }
 
-    .tooltip {
-      position: relative;
-      display: inline;
-      font-size: 11pt;
-      font-family:sans-serif;
-      border: 0px;
-      border-radius: 8px;
-      }
+    div.tooltip { 
+      position: absolute;     
+      text-align: center;     
+    /* width: 130px;*/
+      outline:5px;
+      min-width: 90px;
+      max-width: 400px;          
+      min-height:30px;
+      max-height:50px;         
+      background: lightsteelblue; 
+      font: 12px sans-serif;
+      border: 0px;    
+      border-radius: 6px;     
+      pointer-events: none;  
+      white-space: pre;   
+    }
