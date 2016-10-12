@@ -4,6 +4,9 @@
       <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <!-- <div class="tooltip">
+      <span class="tooltiptext"></span>
+    </div> -->
     <script type="text/javascript" src="d3.min.js"></script>
     <script type="text/javascript" src="FileSaver.js"></script>
     <script type="text/javascript" src="SaveImage.js"></script>
@@ -22,6 +25,10 @@
         var i = 0,
             duration = 350,
             root;
+
+        var div = d3.select("body").append("div") 
+          .attr("class", "tooltip")       
+          .style("opacity", 0);
 
         var tree = d3.layout.tree()
             .size([360, diameter/20])
@@ -47,12 +54,7 @@
             .attr("transform", "translate(" + (diameter / 2 ) + "," + (diameter / 2 - 200) + ")")
             .attr ("align", "center");
 
-        var tooltip = d3.select("body")
-        .append("div")
-        .style("position", "absolute")
-        .style("z-index", "10")
-        .style("visibility", "hidden")
-        .attr("class" , ".tooltip");
+        
 
        
       function saveSvg(){
@@ -196,6 +198,14 @@
                     })
                 .on("click", function (d) {console.log(d.sexo)});
 
+
+              function getLine (d) {
+                line = d3.svg.line.radial()
+                .radius(function (d) { return getRadiusFromAge(d)})
+                .angle(function (d, i) { return Math.PI/4; });
+                return line;
+              }
+
               //Spouses: circles near to nodes
               nodeEnter.filter(function (d,i) {return d.conjuge != undefined;})
                   .append("circle") 
@@ -235,7 +245,25 @@
                       else if (!d.conjuge.morte)
                         return "#000000";
                     })
+                    .append ("g")
+                      .attr ("class", "death")
+                      .append ("path")
+                      .attr("d", function (d) {
+                        if (d.conjuge.morte) {
+                          return getLine(d.conjuge); 
+                      }})
+                      .style ("fill", "black")
                 .on("click", function (d) {console.log(d.sexo)});
+
+
+            /*  nodeEnter.filter(function (d,i) {return d.conjuge != undefined && d.conjuge.morte;})
+                .append("path")
+                .attr ("d", function (d) {
+                  var line = d3.svg.line.radial()
+                    .radius(function(d) { return r(getRadiusFromAge(d.conjuge)) })
+                    .angle(function(d) { return Math.PI / 4; });
+                });
+*/
 
               // Marriages: squares
               nodeEnter.filter (function (d,i) {return d.name == "Casamento"})
@@ -245,8 +273,8 @@
 
               // Nodes: circles
               nodeEnter.filter (function (d,i) {return d.name != "Casamento"})
-              .attr ("class", "node")
               .append("circle")
+                  .attr ("class", "nodes")
                   .attr("r", function (d) {
                     return getRadiusFromAge(d);
                   })
@@ -262,7 +290,7 @@
                       return "#000000";
                   });
 
-              jewishNodesEnter = nodeEnter.filter (function (d) { return d.judeu == true;});
+             /* jewishNodesEnter = nodeEnter.filter (function (d) { return d.judeu == true;});
 
               jewishNodesEnter.append("svg:image")
                 .attr("x", function (d) { return d3.select(this).attr("r") - 5})
@@ -278,7 +306,7 @@
                   if ((theta > 270) && (theta > 360))
                     return "rotate (" + ((360 - theta) - 90) + ")";
                   return "rotate (" + (90 - theta) + ")";})
-                .attr("xlink:href", "./starofdavid11.png");
+                .attr("xlink:href", "./starofdavid11.png");*/
 
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
@@ -351,31 +379,65 @@
                 d.y0 = d.y;
               });
 
-              svg.selectAll("g").selectAll("circle")
-                .on("mouseover", function (d,i){
-                    tooltip.html(function () {
-                        var tooltip = d.name;
-                        return tooltip;});
-                    return tooltip.style("visibility", "visible")})
+              svg.selectAll("g").selectAll(".nodes")
+                .on("mouseover", function (d) {    
+                    div.transition()    
+                        .duration(200)    
+                        .style("opacity", .9);    
+                    div.html(function () {
+                    if (d.morte)
+                      return (" " + d.name + " " + "<br/>" 
+                              + " Nascimento: " + d.nascimento + " <br/>" 
+                              + " Morte: " + d.morte + " <br/>")
+                    return (" " + d.name + " " + "<br/>" 
+                            + " Nascimento: " + d.nascimento + " <br/>")   
+                    })
+                    .style("left", (d3.event.pageX + 10) + "px")   
+                    .style("top", (d3.event.pageY - 30) + "px");  
+                })          
+                .on("mouseout", function(d) {   
+                    div.transition()    
+                        .duration(300)    
+                        .style("opacity", 0); 
+                });
 
-                .on("mousemove", function (d,i){
-                    tooltip.html(function () {
-                        var tooltip = d.name;
-                        return tooltip;});
-                    return tooltip.style("top", (d3.event.pageY - 20)+"px").style("left",(d3.event.pageX  + 10)+"px");})
-                .on("mouseout", function (d,i) {
-                    return tooltip.style("visibility", "hidden");});
-            }
+              svg.selectAll("g").selectAll(".spouse")
+              .on("mouseover", function (d) {    
+                  div.transition()    
+                      .duration(200)    
+                      .style("opacity", .9);    
+                  div.html(function () {
+                    if (d.conjuge.morte)
+                      return ( " " +  d.conjuge.name + " " + "<br/>" 
+                                + " Nascimento: " + d.conjuge.nascimento + " <br/>" 
+                                + " Morte: " + d.conjuge.morte + " <br/>")
+                    return (" " + d.conjuge.name + " " + "<br/>" 
+                            + " Nascimento: " + d.conjuge.nascimento + " <br/>")  
+                  })
+                  .style("left", (d3.event.pageX + 10) + "px")   
+                  .style("top", (d3.event.pageY - 30) + "px")
+                  .style ("tooltip-height", function () {
+                    if (d.conjuge.morte)
+                      return 50 + 15;
+                    return 50;
+                  });  
+              })          
+              .on("mouseout", function (d) {   
+                  div.transition()    
+                      .duration(300)    
+                      .style("opacity", 0); 
+              });
+
+            } /*function update*/
 
             function updateSecondPart(source, parents) {
 
-               d3.selectAll("circle")
-                    .filter (function () {return d3.select(this).attr ("class") == "spouses"})
-                    .remove();
-                d3.selectAll("circle")
-                    .filter (function () {return d3.select(this).attr ("class") == "node"})
-                    .remove();
-
+              svg.selectAll ("g")
+                  .remove();
+              svg.selectAll(".nodes")
+                  .remove();
+              svg.selectAll(".spouses")
+                  .remove();
 
               var subTree = d3.layout.tree()
                 .size([180, diameter / 2 - 80])
@@ -456,7 +518,6 @@
                     })
                     .attr ("r", function (d) {return getRadiusFromAge (d.conjuge)})
                     .style ("fill", function (d) {
-                      console.log ("entrei na cor part 2");
                       if (d.conjuge.sexo == "feminino") return femaleSpouseColor;
                       else if (d.conjuge.sexo == "masculino") return maleSpouseColor;
                     })
@@ -465,8 +526,7 @@
                         return "#ffffff";
                       else 
                         return "#000000";
-                    })
-                .on("click", function (d) {console.log(d.sexo)});
+                    });
 
               nodeEnter.filter (function (d,i) {return d.name == "Casamento"})
                 .append ("path")
@@ -474,8 +534,10 @@
                   .attr("fill", "#ccc");
 
               nodeEnter.filter (function (d,i) {return d.name != "Casamento"})
-              .append("circle")
-                  .attr("r", function (d) { return getRadiusFromAge (d);})
+                .append("circle")
+                  .attr ("class", "nodes")
+                  .attr("r", function (d) { 
+                    return getRadiusFromAge (d);})
                   .style("fill", function(d) {
                     if (d.name == "Casamento") return "#000000";
                     if (d.sexo == "feminino") return femaleColor;
@@ -488,25 +550,6 @@
                         return "#000000";
                     });
 
-              jewishNodesEnter = nodeEnter.filter (function (d) { return d.judeu == true;});
-
-              jewishNodesEnter.append("svg:image")
-                .attr("x", function (d) { return d3.select(this).attr("r") - 5})
-                .attr("y", function (d) { return d3.select(this).attr("r") - 5})
-                .attr("width", 10)
-                .attr("height", 10)
-                .attr("transform", function (d) { 
-                  theta = d.x;
-                  if (d.name == "Maria (Maine) Feldman")
-                      return "rotate (20)"
-                  if ((theta > 180) && (theta < 270))
-                    return "rotate (" + (90 - (theta - 180)) + ")";
-                  if ((theta > 270) && (theta > 360))
-                    return "rotate (" + ((360 - theta) - 90) + ")";
-                  return "rotate (" + (90 - theta) + ")";})
-                .attr("xlink:href", "./starofdavid11.png");
-
-
               // Transition nodes to their new position.
               var nodeUpdate = node.transition()
                   .duration(duration)
@@ -517,8 +560,7 @@
                       return ("rotate(" + (d.x - 360) + ")translate(" + d.y + ")"); })
 
 
-
-              nodeUpdate.filter (function (d) { d3.select(this).attr ("class") != "spouse"})
+              nodeUpdate.selectAll(".node")//.filter (function (d) { d3.select(this).attr ("class") == "node"})
                   .select("circle")
                   .attr("r",  function (d) { return getRadiusFromAge (d); })
                   .style("fill", function (d) {
@@ -526,7 +568,7 @@
                       else if (d.sexo == "masculino") return maleColor;
                    });
 
-              nodeUpdate.filter (function (d) { d3.select(this).attr ("class") == "spouse"})
+              nodeUpdate.selectAll(".spouse")//.filter (function (d) { d3.select(this).attr ("class") == "spouse"})
                   .select("circle")
                   .attr("r",  function (d) { return getRadiusFromAge (d); })
                   .attr ("cx", function (d) {
@@ -560,19 +602,6 @@
                       else if (d.conjuge.sexo == "masculino") return maleSpouseColor;
                    });
               
-              //Rotating stars that need it to be in the correct position
-              jewishNodesUpdate = nodeUpdate.filter (function (d) { return d.judeu == true;});
-
-              jewishNodesUpdate.select("image")
-                .transition()
-                .duration (0)
-                .attr("transform", function (d) { 
-                  theta = d.x;
-                  if ((theta > 0) && (theta < 90))
-                    return "rotate (" + (-theta) + ")";
-                  if ((theta >= 90) && (theta < 180))
-                    return "rotate (" + (180 - theta) + ")";});
-
               // TODO: appropriate transform
               var nodeExit = node.exit().transition()
                   .duration(duration)
@@ -616,22 +645,57 @@
 
              
 
-              svg.selectAll("g").selectAll("circle")
-                .on("mouseover", function (d,i){
-                    tooltip.html(function () {
-                        var tooltip = d.name;
-                        return tooltip;});
-                    return tooltip.style("visibility", "visible")})
+              svg.selectAll("g").selectAll(".nodes")
+                .on("mouseover", function (d) {    
+                    div.transition()    
+                        .duration(200)    
+                        .style("opacity", .9);    
+                    div.html(function () {
+                    if (d.morte)
+                      return (" " + d.name + " " + "<br/>" 
+                              + " Nascimento: " + d.nascimento + " <br/>" 
+                              + " Morte: " + d.morte + " <br/>")
+                    return (" " + d.name + " " + "<br/>" 
+                            + " Nascimento: " + d.nascimento + " <br/>")   
+                    })
+                    .style("left", (d3.event.pageX + 10) + "px")   
+                    .style("top", (d3.event.pageY - 30) + "px");  
+                })          
+                .on("mouseout", function(d) {   
+                    div.transition()    
+                        .duration(300)    
+                        .style("opacity", 0); 
+                });
 
-                .on("mousemove", function (d,i){
-                    tooltip.html(function () {
-                        var tooltip = d.name;
-                        return tooltip;});
-                    return tooltip.style("top", (d3.event.pageY - 20)+"px").style("left",(d3.event.pageX  + 10)+"px");})
-                .on("mouseout", function (d,i) {
-                    return tooltip.style("visibility", "hidden");});
+              svg.selectAll("g").selectAll(".spouse")
+              .on("mouseover", function (d) {    
+                  div.transition()    
+                      .duration(200)    
+                      .style("opacity", .9);    
+                  div.html(function () {
+                    if (d.conjuge.morte)
+                      return ( " " +  d.conjuge.name + " " + "<br/>" 
+                                + " Nascimento: " + d.conjuge.nascimento + " <br/>" 
+                                + " Morte: " + d.conjuge.morte + " <br/>")
+                    return (" " + d.conjuge.name + " " + "<br/>" 
+                            + " Nascimento: " + d.conjuge.nascimento + " <br/>")  
+                  })
+                  .style("left", (d3.event.pageX + 10) + "px")   
+                  .style("top", (d3.event.pageY - 30) + "px")
+                  .style ("tooltip-height", function () {
+                    if (d.conjuge.morte)
+                      return 50 + 15;
+                    return 50;
+                  });  
+              })          
+              .on("mouseout", function (d) {   
+                  div.transition()    
+                      .duration(300)    
+                      .style("opacity", 0); 
+              });
 
-           }
+
+           } /*function updateSecondPart*/
 
 
             // Toggle children on click.
