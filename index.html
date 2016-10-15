@@ -209,9 +209,8 @@
               //Spouses: circles near to nodes
               nodeEnter.filter(function (d,i) {return d.conjuge != undefined;})
                   .append("g")
-                  .attr("class", "teste")
+                  .attr("class", "spouse")
                   .append("circle") 
-                    .attr ("class", "spouse")
                     .attr ("cx", function (d) {
                       var mainRadius = getRadiusFromAge (d);
                       var spouseRadius = getRadiusFromAge (d.conjuge);
@@ -246,7 +245,67 @@
                         return "#ffffff";
                       else if (!d.conjuge.morte)
                         return "#000000";
-                    });                    
+                    });
+
+                  //Lines that define when a person has already died                 
+                  svg.selectAll(".spouse")
+                    .filter (function (d) {return (d.conjuge != undefined && d.conjuge.morte)})
+                    .append("g")
+                      .attr("class", "spouseDeath")
+                      .append ("path")
+                        .attr("d", function (d) { 
+                          return getLine(d.conjuge); })
+                        .style ("stroke", "black")
+                        .style("stroke-width", "0.5px");
+                
+                  svg.selectAll(".node")
+                    .selectAll(".spouseDeath")
+                    .attr("transform", function (d) { 
+                      var mainRadius = getRadiusFromAge (d);
+                      var spouseRadius = getRadiusFromAge (d.conjuge);
+                      var positionX;
+                      var positionY;
+                      var transform;
+
+                      //Getting cx
+                      if (mainRadius == spouseRadius)
+                        positionX =  (mainRadius-10);                           
+                      else if (spouseRadius < mainRadius)
+                        positionX =  mainRadius*0.5 - 4;
+                      else if (spouseRadius > mainRadius)
+                        positionX =  mainRadius - 8;
+
+                      //Getting cy
+                      if (mainRadius == spouseRadius)
+                        positionY = (mainRadius*0.8-2);
+                      else if (spouseRadius < mainRadius)
+                        positionY = mainRadius*0.9 - 2;
+                      else if (spouseRadius > mainRadius)
+                        positionY = mainRadius*0.8 + 5;
+
+                      theta = d.x;
+                      if (d.name == "Maria (Maine) Feldman")
+                          transform = "translate(" + positionX + "," + positionY + ")" + "rotate (10)";
+
+                      else if ((theta > 180) && (theta < 270))
+                          transform = "translate(" + (positionX) + "," + (positionY) + ")"
+                                      + "rotate (" + (90 - (theta - 180)) + ")";
+                                       
+
+                      else if ((theta > 270) && (theta < 360))
+                          transform = "translate(" + (positionX) + "," + (positionY) + ")"
+                                      + "rotate (" + ((360 - theta) - 90) + ")"; 
+                                     
+                             
+                      else  if ((theta > 0) && (theta < 180)) 
+                          transform = "translate(" + (positionX) + "," + (positionY) + ")"
+                                      + "rotate (" + (90 - theta) + ")";
+
+                     // transform = transform /*+ "translate(" + positionX + "," + positionY + ")";*/
+
+                      return transform;
+
+                    });          
 
             
              //
@@ -286,7 +345,7 @@
                   .attr("class", "death")
                   .append ("path")
                     .attr("d", function (d) { 
-                      console.log("entrei para desenhar a linha")
+                      //console.log("entrei para desenhar a linha")
                       return getLine(d); })
                     .style ("stroke", "black")
                     .style("stroke-width", "0.5px")
@@ -429,9 +488,15 @@
                   .remove();
               svg.selectAll(".nodes")
                   .remove();
-              svg.selectAll(".spouses")
+              svg.selectAll(".spouse")
+                  .remove();
+              svg.selectAll(".node")
                   .remove();
               svg.selectAll(".death")
+                  .remove();
+              svg.selectAll(".spouseDeath")
+                  .remove();
+              svg.selectAll("circle")
                   .remove();
 
 
@@ -499,10 +564,10 @@
 
               //Spouses: circles near to nodes
               nodeEnter.filter(function (d,i) {return d.conjuge != undefined;})
-                  .append("circle") 
+                  .append ("g")
                   .attr ("class", "spouse")
+                  .append("circle") 
                     .attr ("cx", function (d) {
-                      //ANGLE
                       var mainRadius = getRadiusFromAge (d);
                       var spouseRadius = getRadiusFromAge (d.conjuge);
                       if (mainRadius == spouseRadius)
@@ -515,7 +580,6 @@
                         return mainRadius - 8;
                     })
                     .attr ("cy", function (d) {
-                      //RADIUS
                         var mainRadius = getRadiusFromAge (d);
                         var spouseRadius = getRadiusFromAge (d.conjuge);
                         if (mainRadius == spouseRadius)
@@ -527,7 +591,10 @@
                         else if (spouseRadius > mainRadius)
                           return mainRadius*0.8 + 5;
                     })
-                    .attr ("r", function (d) {return getRadiusFromAge (d.conjuge)})
+                    .attr ("r", function (d) {
+                      if (d.conjuge.name == "Moisés Ferman")
+                        console.log (getRadiusFromAge (d.conjuge));
+                      return getRadiusFromAge (d.conjuge)})
                     .style ("fill", function (d) {
                       if (d.conjuge.sexo == "feminino") return femaleSpouseColor;
                       else if (d.conjuge.sexo == "masculino") return maleSpouseColor;
@@ -579,6 +646,70 @@
                           return "rotate (" + ((360 - theta) - 90) + ")";
                         return "rotate (" + (/*90 -*/- theta) + ")";
                     });
+
+              //
+              //          LINES
+              //
+
+              //Lines that define when a person has already died                 
+              svg.selectAll(".spouse")
+                .filter (function (d) {return (d.conjuge != undefined && d.conjuge.morte)})
+                .append("g")
+                  .attr("class", "spouseDeath")
+                  .append ("path")
+                    .attr("d", function (d) { 
+                      return getLine(d.conjuge); })
+                    .style ("stroke", "black")
+                    .style("stroke-width", "0.5px");
+            
+              svg.selectAll(".node")
+                .selectAll(".spouseDeath")
+                .attr("transform", function (d) { 
+                  var mainRadius = getRadiusFromAge (d);
+                  var spouseRadius = getRadiusFromAge (d.conjuge);
+                  var positionX;
+                  var positionY;
+                  var transform;
+
+                  //Getting cx
+                  if (mainRadius == spouseRadius)
+                    positionX =  (mainRadius-10);                           
+                  else if (spouseRadius < mainRadius)
+                    positionX =  mainRadius*0.5 - 4;
+                  else if (spouseRadius > mainRadius)
+                    positionX =  mainRadius - 8;
+
+                  //Getting cy
+                  if (mainRadius == spouseRadius)
+                    positionY = (mainRadius*0.8-2);
+                  else if (spouseRadius < mainRadius)
+                    positionY = mainRadius*0.9 - 2;
+                  else if (spouseRadius > mainRadius)
+                    positionY = mainRadius*0.8 + 5;
+
+                  theta = d.x;
+                  if (d.name == "Maria (Maine) Feldman")
+                      transform = "translate(" + positionX + "," + positionY + ")" + "rotate (10)";
+
+                  else if ((theta > 180) && (theta < 270))
+                      transform = "translate(" + (positionX) + "," + (positionY) + ")"
+                                  + "rotate (" + (/*90*/ - (theta - 180)) + ")";
+                                   
+
+                  else if ((theta > 270) && (theta < 360))
+                      transform = "translate(" + (positionX) + "," + (positionY) + ")"
+                                  + "rotate (" + ((360 - theta) - 90) + ")"; 
+                                 
+                         
+                  else  if ((theta > 0) && (theta < 180)) 
+                      transform = "translate(" + (positionX) + "," + (positionY) + ")"
+                                  + "rotate (" + (/*90*/ - theta) + ")";
+
+                 // transform = transform /*+ "translate(" + positionX + "," + positionY + ")";*/
+
+                  return transform;
+
+                });    
 
               // Transition nodes to their new position.
               var nodeUpdate = node.transition()
