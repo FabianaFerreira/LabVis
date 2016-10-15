@@ -227,9 +227,7 @@
                       .attr("class", "spouseDeath")
                       .append ("path")
                         .attr("d", function (d) { 
-                          return getLine(d.conjuge); })
-                        .style ("stroke", "black")
-                        .style("stroke-width", "0.5px");
+                          return getLine(d.conjuge); });
                 
                   svg.selectAll(".node")
                     .selectAll(".spouseDeath")
@@ -314,8 +312,6 @@
                   .append ("path")
                     .attr("d", function (d) { 
                       return getLine(d); })
-                    .style ("stroke", "black")
-                    .style("stroke-width", "0.5px")
                     .attr("transform", function (d) { 
                         theta = d.x;
                         if (d.name == "Maria (Maine) Feldman")
@@ -539,9 +535,7 @@
                 .attr("class", "spouseDeath")
                 .append ("path")
                   .attr("d", function (d) { 
-                    return getLine(d.conjuge); })
-                  .style ("stroke", "black")
-                  .style("stroke-width", "0.5px");
+                    return getLine(d.conjuge); });
           
             svg.selectAll(".spouseDeath")
              // .selectAll(".spouseDeath")
@@ -618,8 +612,6 @@
                   .attr("class", "death")
                   .append ("path")
                     .attr("d", function (d) { return getLine(d); })
-                    .style ("stroke", "black")
-                    .style("stroke-width", "0.5px")
                     .attr("transform", function (d) { 
                         theta = d.x;
                         if (d.name == "Maria (Maine) Feldman")
