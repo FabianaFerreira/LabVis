@@ -200,10 +200,11 @@
                         return "#000000";
                     })
                 .on("click", function (d) {console.log(d.sexo)});
+            
 
-
-
-              
+              //                 
+              //              SPOUSES
+              //               
 
               //Spouses: circles near to nodes
               nodeEnter.filter(function (d,i) {return d.conjuge != undefined;})
@@ -247,9 +248,10 @@
                         return "#000000";
                     });                    
 
-                    
-
-
+            
+             //
+             //       MARRIAGES
+             //       
 
               // Marriages: squares
               nodeEnter.filter (function (d,i) {return d.name == "Casamento"})
@@ -278,13 +280,26 @@
 
 
               //Lines that define when a person has already died                 
-              nodeEnter.filter(function (d,i) {return d != undefined && d.morte})
+              svg.selectAll(".node")
+                .filter (function (d) {return (d.morte && d != undefined)})
                 .append("g")
                   .attr("class", "death")
                   .append ("path")
-                    .attr("d", function (d) { return getLine(d); })
+                    .attr("d", function (d) { 
+                      console.log("entrei para desenhar a linha")
+                      return getLine(d); })
                     .style ("stroke", "black")
-                    .style("stroke-width", "0.5px");
+                    .style("stroke-width", "0.5px")
+                    .attr("transform", function (d) { 
+                        theta = d.x;
+                        if (d.name == "Maria (Maine) Feldman")
+                            return "rotate (10)"
+                        if ((theta > 180) && (theta < 270))
+                          return "rotate (" + (90 - (theta - 180)) + ")";
+                        if ((theta > 270) && (theta > 360))
+                          return "rotate (" + ((360 - theta) - 90) + ")";
+                        return "rotate (" + (90 - theta) + ")";
+                    });
 
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
@@ -431,11 +446,9 @@
               var parentsCircles = svg.selectAll("circles")
                 .data(parents); 
 
-              parentsCircles
-                .enter()
+              parentsCircles.enter()
                   .append ("circle")
-                                    .attr ("class", "parents")
-
+                  .attr ("class", "parents")
                   .attr("r", function (d) { return getRadiusFromAge (d);})
                   .attr ("cx", 0)
                   .attr ("cy", function (d,i) { return (-100/(parents.length))*(i+1)})
@@ -447,21 +460,18 @@
                 
                 //console.log(parentsCircles);
 
-                parentsCircles.filter (function (d) {d != undefined && d.morte})
+                /*parentsCircles
                   .append ("g")
                     .attr ("class", "death")
                     .append ("path")
                       .attr ("d", function (d) { 
-                        if (d.morte)
-                        {
                           var radius = getRadiusFromAge (d);
                           return d3.svg.line.radial()([[-radius,Math.PI/4],[radius,Math.PI/4]]);
-                        }
                       })
                         //return getLine (d); })
                     .style ("stroke", "black")
                     .style ("stroke-width", "1px");
-
+*/
                 parentsCircles
                   .transition ()
                     .duration(duration)
@@ -558,7 +568,17 @@
                   .append ("path")
                     .attr("d", function (d) { return getLine(d); })
                     .style ("stroke", "black")
-                    .style("stroke-width", "1px");
+                    .style("stroke-width", "1px")
+                    .attr("transform", function (d) { 
+                        theta = d.x;
+                        if (d.name == "Maria (Maine) Feldman")
+                            return "rotate (20)"
+                        if ((theta > 180) && (theta < 270))
+                          return "rotate (" + (90 - (theta - 180)) + ")";
+                        if ((theta > 270) && (theta > 360))
+                          return "rotate (" + ((360 - theta) - 90) + ")";
+                        return "rotate (" + (/*90 -*/- theta) + ")";
+                    });
 
               // Transition nodes to their new position.
               var nodeUpdate = node.transition()
