@@ -89,6 +89,12 @@
           return 5;
       }
 
+      function getLine (d) {
+          var radius = getRadiusFromAge (d);
+          line = d3.svg.line.radial()([[-radius,Math.PI/4],[radius,Math.PI/4]]);
+          return line;
+      }
+
       function getParents (d) {
         if (d.parent)
             {
@@ -196,15 +202,13 @@
                 .on("click", function (d) {console.log(d.sexo)});
 
 
-              function getLine (d) {
-                line = d3.svg.line.radial()
-                .radius(function (d) { return getRadiusFromAge(d)})
-                .angle(function (d, i) { return Math.PI/4; });
-                return line;
-              }
+
+              
 
               //Spouses: circles near to nodes
               nodeEnter.filter(function (d,i) {return d.conjuge != undefined;})
+                  .append("g")
+                  .attr("class", "teste")
                   .append("circle") 
                     .attr ("class", "spouse")
                     .attr ("cx", function (d) {
@@ -241,26 +245,11 @@
                         return "#ffffff";
                       else if (!d.conjuge.morte)
                         return "#000000";
-                    })
-                    .append ("g")
-                      .attr ("class", "death")
-                      .append ("path")
-                      .attr("d", function (d) {
-                        if (d.conjuge.morte) {
-                          return getLine(d.conjuge); 
-                      }})
-                      .style ("fill", "black")
-                .on("click", function (d) {console.log(d.sexo)});
+                    });                    
+
+                    
 
 
-            /*  nodeEnter.filter(function (d,i) {return d.conjuge != undefined && d.conjuge.morte;})
-                .append("path")
-                .attr ("d", function (d) {
-                  var line = d3.svg.line.radial()
-                    .radius(function(d) { return r(getRadiusFromAge(d.conjuge)) })
-                    .angle(function(d) { return Math.PI / 4; });
-                });
-*/
 
               // Marriages: squares
               nodeEnter.filter (function (d,i) {return d.name == "Casamento"})
@@ -287,23 +276,15 @@
                       return "#000000";
                   });
 
-             /* jewishNodesEnter = nodeEnter.filter (function (d) { return d.judeu == true;});
 
-              jewishNodesEnter.append("svg:image")
-                .attr("x", function (d) { return d3.select(this).attr("r") - 5})
-                .attr("y", function (d) { return d3.select(this).attr("r") - 5})
-                .attr("width", 10)
-                .attr("height", 10)
-                .attr("transform", function (d) { 
-                  theta = d.x;
-                  if (d.name == "Maria (Maine) Feldman")
-                      return "rotate (20)"
-                  if ((theta > 180) && (theta < 270))
-                    return "rotate (" + (90 - (theta - 180)) + ")";
-                  if ((theta > 270) && (theta > 360))
-                    return "rotate (" + ((360 - theta) - 90) + ")";
-                  return "rotate (" + (90 - theta) + ")";})
-                .attr("xlink:href", "./starofdavid11.png");*/
+              //Lines that define when a person has already died                 
+              nodeEnter.filter(function (d,i) {return d != undefined && d.morte})
+                .append("g")
+                  .attr("class", "death")
+                  .append ("path")
+                    .attr("d", function (d) { return getLine(d); })
+                    .style ("stroke", "black")
+                    .style("stroke-width", "0.5px");
 
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
@@ -435,6 +416,8 @@
                   .remove();
               svg.selectAll(".spouses")
                   .remove();
+              svg.selectAll(".death")
+                  .remove();
 
 
               var subTree = d3.layout.tree()
@@ -451,9 +434,10 @@
               parentsCircles
                 .enter()
                   .append ("circle")
+                                    .attr ("class", "parents")
+
                   .attr("r", function (d) { return getRadiusFromAge (d);})
                   .attr ("cx", 0)
-                  .attr("class", "parents")
                   .attr ("cy", function (d,i) { return (-100/(parents.length))*(i+1)})
                   .style("fill", function(d) {
                       if (d.sexo == "feminino") return femaleColor;
@@ -461,6 +445,23 @@
                    })
                   .on ("click", function (d) {return click (d)});
                 
+                //console.log(parentsCircles);
+
+                parentsCircles.filter (function (d) {d != undefined && d.morte})
+                  .append ("g")
+                    .attr ("class", "death")
+                    .append ("path")
+                      .attr ("d", function (d) { 
+                        if (d.morte)
+                        {
+                          var radius = getRadiusFromAge (d);
+                          return d3.svg.line.radial()([[-radius,Math.PI/4],[radius,Math.PI/4]]);
+                        }
+                      })
+                        //return getLine (d); })
+                    .style ("stroke", "black")
+                    .style ("stroke-width", "1px");
+
                 parentsCircles
                   .transition ()
                     .duration(duration)
@@ -471,6 +472,8 @@
                     .transition()
                     .duration(duration)
                     .remove();
+
+                
 
               // Normalize for fixed-depth.
               nodes.forEach(function(d) { d.y = d.depth * 80; });
@@ -547,6 +550,15 @@
                       else 
                         return "#000000";
                     });
+
+              //Lines that define when a person has already died                 
+              nodeEnter.filter(function (d,i) {return d != undefined && d.morte})
+                .append("g")
+                  .attr("class", "death")
+                  .append ("path")
+                    .attr("d", function (d) { return getLine(d); })
+                    .style ("stroke", "black")
+                    .style("stroke-width", "1px");
 
               // Transition nodes to their new position.
               var nodeUpdate = node.transition()
@@ -698,17 +710,17 @@
                       .duration(200)    
                       .style("opacity", .9);    
                   div.html(function () {
-                    if (d.conjuge.morte)
-                      return ( " " +  d.conjuge.name + " " + "<br/>" 
-                                + " Nascimento: " + d.conjuge.nascimento + " <br/>" 
-                                + " Morte: " + d.conjuge.morte + " <br/>")
-                    return (" " + d.conjuge.name + " " + "<br/>" 
-                            + " Nascimento: " + d.conjuge.nascimento + " <br/>")  
+                    if (d.morte)
+                      return ( " " +  d.name + " " + "<br/>" 
+                                + " Nascimento: " + d.nascimento + " <br/>" 
+                                + " Morte: " + d.morte + " <br/>")
+                    return (" " + d.name + " " + "<br/>" 
+                            + " Nascimento: " + d.nascimento + " <br/>")  
                   })
                   .style("left", (d3.event.pageX + 10) + "px")   
                   .style("top", (d3.event.pageY - 30) + "px")
                   .style ("tooltip-height", function () {
-                    if (d.conjuge.morte)
+                    if (d.morte)
                       return 50 + 15;
                     return 50;
                   });  
