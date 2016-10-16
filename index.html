@@ -847,10 +847,14 @@
             
             // Toggle children on click.
             function click(d) {
+              
               div
                 .style("visibility", "hidden");
+
               svg.on("mousemove", function () {return div.style("visibility", "visible")});
               
+              d3.selectAll ("line").remove();
+
               nos = [];
               parents = [];
               getParents (d);
@@ -872,7 +876,6 @@
                     .attr("transform", "translate(1000,1000)")
                     .remove();
                   d3.selectAll("path.link").remove();
-                  d3.selectAll ("line").remove();
                   clickRootCounter += 1;
                   update(d);
                 }
@@ -901,36 +904,35 @@
               
                 updateSecondPart (d, parents);
 
-                var deadParents = [];
+                //Waiting 0.2s to run this part of the code
+                setTimeout (function () {
+                    var deadParents = [];
+                    svg.selectAll(".parents")
+                      .filter(function (d) { return d != undefined && d.morte})
+                      .each (function (d,i) {
+                        svg
+                          .append("g")
+                          .attr("class", "parentsDeath")
 
-                svg.selectAll(".parents")
-                  .filter(function (d) { return d != undefined && d.morte})
-                  .each (function (d,i) {
-                    svg
-                      .append("g")
-                      .attr("class", "parentsDeath")
-                      .append("path")
-                      .attr("d", function () { 
-                        if (d.morte)
-                          deadParents.push(i);
-                          return getLine(d); 
-                      })
-                    svg.selectAll(".parentsDeath")
-                      .each(function (d,i) {
-                        console.log(deadParents);
-                        d3.select(this)
-                          .transition()
-                          .duration(0)
-                          .delay(250)
-                          .attr("transform", function () {
-                            //var = eachValue = 
-                            var positionY = (-100/(parents.length))*(1 + parents.length - (deadParents.length - deadParents[i]));
-                            console.log(positionY);
-                            return ("translate(0," + positionY*2 + ")")
+                          .append("path")
+                          .attr("d", function () { 
+                            if (d.morte)
+                              deadParents.push(i);
+                              return getLine(d); 
                           })
+                        svg.selectAll(".parentsDeath")
+                          .each(function (d,i) {
+                            d3.select(this)
+                              .attr("transform", function () {
+                                var positionY = (-100/(parents.length))*(1 + parents.length - (deadParents.length - deadParents[i]));
+                                return ("translate(0," + positionY*2 + ")")
+                              })
 
-                        })                      
-                    }); 
+                            })                      
+                        }); 
+                }, 200);
+
+                
 
               } /*else*/
             }
