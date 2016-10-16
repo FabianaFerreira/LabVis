@@ -42,6 +42,7 @@
             .attr("height", height )
             .attr ("align", "center")
           .append("g")
+            .attr("class", "vis")
             .attr("transform", "translate(" + (diameter / 2 ) + "," + (diameter / 2 - 200) + ")")
             .attr ("align", "center");
         
@@ -456,8 +457,10 @@
                 .data(parents); 
 
               parentsCircles.enter()
+                 // .append("g")
+                 // .attr("class", "parents")
                   .append ("circle")
-                  .attr ("class", "parents")
+                  .attr("class", "parents")
                   .attr("r", function (d) { return getRadiusFromAge (d);})
                   .attr ("cx", 0)
                   .attr ("cy", function (d,i) { return (-100/(parents.length))*(i+1)})
@@ -466,17 +469,23 @@
                       else if (d.sexo == "masculino") return maleColor;
                    })
                   .on ("click", function (d) {return click (d)});
+
+             /* parentsCircles.filter(function (d) { return d != undefined && d.morte})
+                  .append("path")
+                  .attr("class", "parentsDeath")
+                  .attr("d", function (d) { return getLine (d); })*/
+
                 
-                parentsCircles
-                  .transition ()
-                    .duration(duration)
-                    .attr("transform", function (d,i) { return "translate(" + 0 + "," + (- 100/(parents.length))*(i+1) +")"; });
-                
-                parentsCircles
-                  .exit()
-                    .transition()
-                    .duration(duration)
-                    .remove();
+              parentsCircles
+                .transition ()
+                  .duration(duration)
+                  .attr("transform", function (d,i) { return "translate(" + 0 + "," + (- 100/(parents.length))*(i+1) +")"; });
+              
+              parentsCircles
+                .exit()
+                  .transition()
+                  .duration(duration)
+                  .remove();
                 
               // Normalize for fixed-depth.
               nodes.forEach(function(d) { d.y = d.depth * 80; });
@@ -841,9 +850,11 @@
               div
                 .style("visibility", "hidden");
               svg.on("mousemove", function () {return div.style("visibility", "visible")});
+              
               nos = [];
               parents = [];
               getParents (d);
+              
               if (d.name == "Maria (Maine) Feldman") {
                 clickRootCounter += 1;
                 if (clickRootCounter != 0) {
@@ -851,6 +862,11 @@
                     .filter (function () {return d3.select(this).attr ("class") == "parents"})
                     .remove();
                   svg.selectAll(".node")
+                    .transition()
+                    .duration(0)
+                    .attr("transform", "translate(1000,1000)")
+                    .remove();
+                  svg.selectAll(".parentsDeath")
                     .transition()
                     .duration(0)
                     .attr("transform", "translate(1000,1000)")
@@ -874,15 +890,45 @@
                 line
                   .attr ("stroke-width", 1.5)
                   .attr ("stroke", "#ccc");
+                
                 svg.selectAll(".node")
                     .transition()
                     .duration(0)
                     .attr("transform", "translate(1000,1000)")
                     .remove();
+                
                 d3.selectAll("path.link").remove();   
               
                 updateSecondPart (d, parents);
-              }
+
+                svg.selectAll(".parents")
+                  .filter(function (d) { return d != undefined && d.morte})
+                  .each (function (d,i) {
+                    svg
+                      .append("g")
+                      .attr("class", "parentsDeath")
+                      .append("path")
+                      .attr("d", function () { 
+                        console.log(d);
+                        if (d.morte)
+                          return getLine(d); 
+                      })
+                    svg.selectAll(".parentsDeath")
+                      .each(function (d,i) {
+                        d3.select(this)
+                          .transition()
+                          .duration(0)
+                          .delay(250)
+                          .attr("transform", function () {
+                            var positionY = (-100/(parents.length))*((i+1)*2);
+                            console.log(positionY);
+                            return ("translate(0," + positionY + ")")
+                          })
+
+                        })                      
+                    }); 
+
+              } /*else*/
             }
             // Collapse nodes
             function collapse(d) {
