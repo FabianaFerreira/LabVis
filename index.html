@@ -901,6 +901,8 @@
               
                 updateSecondPart (d, parents);
 
+                var deadParents = [];
+
                 svg.selectAll(".parents")
                   .filter(function (d) { return d != undefined && d.morte})
                   .each (function (d,i) {
@@ -909,20 +911,22 @@
                       .attr("class", "parentsDeath")
                       .append("path")
                       .attr("d", function () { 
-                        console.log(d);
                         if (d.morte)
+                          deadParents.push(i);
                           return getLine(d); 
                       })
                     svg.selectAll(".parentsDeath")
                       .each(function (d,i) {
+                        console.log(deadParents);
                         d3.select(this)
                           .transition()
                           .duration(0)
                           .delay(250)
                           .attr("transform", function () {
-                            var positionY = (-100/(parents.length))*((i+1)*2);
+                            //var = eachValue = 
+                            var positionY = (-100/(parents.length))*(1 + parents.length - (deadParents.length - deadParents[i]));
                             console.log(positionY);
-                            return ("translate(0," + positionY + ")")
+                            return ("translate(0," + positionY*2 + ")")
                           })
 
                         })                      
