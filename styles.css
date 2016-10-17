@@ -28,31 +28,30 @@
     }
 
     .death {
-      stroke: black;
-      stroke-width: 0.5px;
+      stroke: #757474;
+      stroke-width: 1px;
     }
 
     .spouseDeath {
-      stroke: black;
-      stroke-width: 0.5px;
+      stroke: #757474;
+      stroke-width: 1px;
     }
 
     .parentsDeath {
-      stroke: black;
-      stroke-width: 0.5px;
+      stroke: #757474;
+      stroke-width: 1px;
     }
 
     div.tooltip { 
       position: absolute;     
       text-align: center;     
-    /* width: 130px;*/
       outline:5px;
       min-width: 90px;
       max-width: 400px;          
       min-height:30px;
       max-height:50px;         
-      background: lightsteelblue; 
-      font: 12px sans-serif;
+      background: #dbdbdb; 
+      font: 13px sans-serif;
       border: 0px;    
       border-radius: 6px;     
       pointer-events: none;  
