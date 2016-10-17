@@ -29,17 +29,17 @@
 
     .death {
       stroke: #757474;
-      stroke-width: 1px;
+      stroke-width: 1.5px;
     }
 
     .spouseDeath {
       stroke: #757474;
-      stroke-width: 1px;
+      stroke-width: 1.5px;
     }
 
     .parentsDeath {
       stroke: #757474;
-      stroke-width: 1px;
+      stroke-width: 1.5px;
     }
 
     div.tooltip { 
