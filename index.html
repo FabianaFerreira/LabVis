@@ -28,9 +28,11 @@
           .style("opacity", 0);
 
         var tree = d3.layout.tree()
-            .size([360, diameter/20])
+            .size([360, diameter])
             .separation(function(a, b) { 
-              return (a.parent == b.parent ? 12 : 13) / (a.depth*0.2); });
+              if (a.parent == b.parent && a.parent == root && b.parent == root)
+                  return 7.5;
+              return (a.parent == b.parent ? 5 : 7) / (a.depth); });
 
         var diagonal = d3.svg.diagonal.radial()
             .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
@@ -69,15 +71,15 @@
         if (age >= 0 && age <= 9)
             return 5;
         else if (age >= 10 && age <= 19)
-            return 8.2; //7.2
+            return 7.2; //7.2
         else if (age >= 20 && age <= 39)
-            return 12.5;//11.5
+            return 11.5;//11.5
         else if (age >= 40 && age <= 59)
-            return 14;//14
+            return 15;//14
         else if (age >= 60 && age <= 79)
-            return 16; //17
+            return 17; //17
         else if (age >= 80 && age <= 100)
-            return 22; // 21  
+            return 25; // 21  
         else if (currentYear - d.nascimento == 116 && (d.children))
           return 7.2;
         else if (currentYear - d.nascimento == 116 && !(d.children))
