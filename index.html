@@ -22,17 +22,19 @@
         var i = 0,
             duration = 350,
             root;
+
         var div = d3.select("body").append("div") 
           .attr("class", "tooltip")       
           .style("opacity", 0);
+
         var tree = d3.layout.tree()
             .size([360, diameter/20])
             .separation(function(a, b) { 
-             /* if ((a.parent == b.parent) && (a.parent.name == "Maria (Maine) Feldman") && (b.parent.name == "Maria (Maine) Feldman"))
-                return 15/a.depth;*/
               return (a.parent == b.parent ? 12 : 13) / (a.depth*0.2); });
+
         var diagonal = d3.svg.diagonal.radial()
             .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
+
          d3.select("body").append("button")
           .text ("download as svg")
           .on("click", saveSvg);
@@ -195,10 +197,10 @@
                         return (mainRadius-10);
                         
                       else if (spouseRadius < mainRadius)
-                        return mainRadius*0.5 - 4;
+                        return mainRadius*0.5 - 2;
                         
                       else if (spouseRadius > mainRadius)
-                        return mainRadius - 8;
+                        return mainRadius - 5; //-8
                     })
                     .attr ("cy", function (d) {
                         var mainRadius = getRadiusFromAge (d);
@@ -208,7 +210,7 @@
                         else if (spouseRadius < mainRadius)
                          return mainRadius*0.9 - 2;
                         else if (spouseRadius > mainRadius)
-                          return mainRadius*0.8 + 5;
+                          return mainRadius*0.8 + 3; //5
                     })
                     .attr ("r", function (d) {return getRadiusFromAge (d.conjuge)})
                     .style ("fill", function (d) {
@@ -245,9 +247,9 @@
                       if (mainRadius == spouseRadius)
                         positionX =  (mainRadius-10);                           
                       else if (spouseRadius < mainRadius)
-                        positionX =  mainRadius*0.5 - 4;
+                        positionX =  mainRadius*0.5 - 2;
                       else if (spouseRadius > mainRadius)
-                        positionX =  mainRadius - 8;
+                        positionX =  mainRadius - 5;
 
                       //Getting cy
                       if (mainRadius == spouseRadius)
@@ -255,7 +257,7 @@
                       else if (spouseRadius < mainRadius)
                         positionY = mainRadius*0.9 - 2;
                       else if (spouseRadius > mainRadius)
-                        positionY = mainRadius*0.8 + 5;
+                        positionY = mainRadius*0.8 + 3;
 
                       theta = d.x;
                       if (d.name == "Maria (Maine) Feldman")
@@ -394,11 +396,10 @@
                         .style("opacity", .9);    
                     div.html(function () {
                     if (d.morte)
-                      return (" " + d.name + " " + "<br/>" 
-                              + " Nascimento: " + d.nascimento + " <br/>" 
-                              + " Morte: " + d.morte + " <br/>")
-                    return (" " + d.name + " " + "<br/>" 
-                            + " Nascimento: " + d.nascimento + " <br/>")   
+                      return (" " + d.name + " <br/>" 
+                              + " " + d.nascimento + " - " + d.morte + " <br/>")
+                    return (" " + d.name + " <br/>" 
+                            + " " + d.nascimento + " <br/>")   
                     })
                     .style("left", (d3.event.pageX + 10) + "px")   
                     .style("top", (d3.event.pageY - 30) + "px");  
@@ -415,11 +416,10 @@
                       .style("opacity", .9);    
                   div.html(function () {
                     if (d.conjuge.morte)
-                      return ( " " +  d.conjuge.name + " " + "<br/>" 
-                                + " Nascimento: " + d.conjuge.nascimento + " <br/>" 
-                                + " Morte: " + d.conjuge.morte + " <br/>")
-                    return (" " + d.conjuge.name + " " + "<br/>" 
-                            + " Nascimento: " + d.conjuge.nascimento + " <br/>")  
+                      return ( " " +  d.conjuge.name + " <br/>" 
+                                + " " + d.conjuge.nascimento + " - " + d.conjuge.morte + " <br/>")
+                    return (" " + d.conjuge.name + " <br/>" 
+                            + " " + d.conjuge.nascimento + " <br/>")  
                   })
                   .style("left", (d3.event.pageX + 10) + "px")   
                   .style("top", (d3.event.pageY - 30) + "px")
@@ -471,12 +471,6 @@
                       else if (d.sexo == "masculino") return maleColor;
                    })
                   .on ("click", function (d) {return click (d)});
-
-             /* parentsCircles.filter(function (d) { return d != undefined && d.morte})
-                  .append("path")
-                  .attr("class", "parentsDeath")
-                  .attr("d", function (d) { return getLine (d); })*/
-
                 
               parentsCircles
                 .transition ()
@@ -513,7 +507,7 @@
                         return mainRadius*0.5 - 4;
                         
                       else if (spouseRadius > mainRadius)
-                        return mainRadius - 8;
+                        return mainRadius - 5;
                     })
                     .attr ("cy", function (d) {
                         var mainRadius = getRadiusFromAge (d);
@@ -523,7 +517,7 @@
                         else if (spouseRadius < mainRadius)
                          return mainRadius*0.9 - 2;
                         else if (spouseRadius > mainRadius)
-                          return mainRadius*0.8 + 5;
+                          return mainRadius*0.8 + 3;
                     })
                     .attr ("r", function (d) { return getRadiusFromAge (d.conjuge)})
                     .style ("fill", function (d) {
@@ -563,7 +557,7 @@
                 else if (spouseRadius < mainRadius)
                   positionX =  mainRadius*0.5 - 4;
                 else if (spouseRadius > mainRadius)
-                  positionX =  mainRadius - 8;
+                  positionX =  mainRadius - 5;
 
                 //Getting cy
                 if (mainRadius == spouseRadius)
@@ -571,7 +565,7 @@
                 else if (spouseRadius < mainRadius)
                   positionY = mainRadius*0.9 - 2;
                 else if (spouseRadius > mainRadius)
-                  positionY = mainRadius*0.8 + 5;
+                  positionY = mainRadius*0.8 + 3;
 
                 theta = d.x;
                 if (d.name == "Maria (Maine) Feldman")
@@ -723,11 +717,10 @@
                         .style("opacity", .9);    
                     div.html(function () {
                     if (d.morte)
-                      return (" " + d.name + " " + "<br/>" 
-                              + " Nascimento: " + d.nascimento + " <br/>" 
-                              + " Morte: " + d.morte + " <br/>")
-                    return (" " + d.name + " " + "<br/>" 
-                            + " Nascimento: " + d.nascimento + " <br/>")   
+                      return (" " + d.name + " <br/>" 
+                              + " " + d.nascimento + " - " + d.morte + " <br/>")
+                    return (" " + d.name + " <br/>" 
+                            + " "+ d.nascimento + " <br/>")   
                     })
                     .style("left", (d3.event.pageX + 10) + "px")   
                     .style("top", (d3.event.pageY - 30) + "px");  
@@ -745,11 +738,10 @@
                       .style("opacity", .9);    
                   div.html(function () {
                     if (d.conjuge.morte)
-                      return ( " " +  d.conjuge.name + " " + "<br/>" 
-                                + " Nascimento: " + d.conjuge.nascimento + " <br/>" 
-                                + " Morte: " + d.conjuge.morte + " <br/>")
-                    return (" " + d.conjuge.name + " " + "<br/>" 
-                            + " Nascimento: " + d.conjuge.nascimento + " <br/>")  
+                      return ( " " +  d.conjuge.name + " <br/>" 
+                                + " " + d.conjuge.nascimento + " - " + d.conjuge.morte + " <br/>")
+                    return (" " + d.conjuge.name + " <br/>" 
+                            + " " + d.conjuge.nascimento + " <br/>")  
                   })
                   .style("left", (d3.event.pageX + 10) + "px")   
                   .style("top", (d3.event.pageY - 30) + "px")
@@ -771,11 +763,10 @@
                       .style("opacity", .9);    
                   div.html(function () {
                     if (d.morte)
-                      return ( " " +  d.name + " " + "<br/>" 
-                                + " Nascimento: " + d.nascimento + " <br/>" 
-                                + " Morte: " + d.morte + " <br/>")
+                      return ( " " +  d.name + " <br/>" 
+                                + " " + d.nascimento + " - " + d.morte + " <br/>")
                     return (" " + d.name + " " + "<br/>" 
-                            + " Nascimento: " + d.nascimento + " <br/>")  
+                            + " " +  d.nascimento + " <br/>")  
                   })
                   .style("left", (d3.event.pageX + 10) + "px")   
                   .style("top", (d3.event.pageY - 30) + "px")
@@ -799,11 +790,10 @@
                       .style("opacity", .9);    
                   div.html(function () {
                     if (d.conjuge.morte)
-                      return ( " " +  d.conjuge.name + " " + "<br/>" 
-                                + " Nascimento: " + d.conjuge.nascimento + " <br/>" 
-                                + " Morte: " + d.conjuge.morte + " <br/>")
-                    return (" " + d.conjuge.name + " " + "<br/>" 
-                            + " Nascimento: " + d.conjuge.nascimento + " <br/>")  
+                      return ( " " +  d.conjuge.name + " <br/>" 
+                                + " " + d.conjuge.nascimento + " - " + d.conjuge.morte + " <br/>")
+                    return (" " + d.conjuge.name + " <br/>" 
+                            + " " + d.conjuge.nascimento + " <br/>")  
                   })
                   .style("left", (d3.event.pageX + 10) + "px")   
                   .style("top", (d3.event.pageY - 30) + "px")
@@ -826,10 +816,9 @@
                   div.html(function () {
                     if (d.morte)
                       return ( " " +  d.name + " " + "<br/>" 
-                                + " Nascimento: " + d.nascimento + " <br/>" 
-                                + " Morte: " + d.morte + " <br/>")
-                    return (" " + d.name + " " + "<br/>" 
-                            + " Nascimento: " + d.nascimento + " <br/>")  
+                                + " " + d.nascimento + " - " + d.morte + " <br/>")
+                    return (" " + d.name + " <br/>" 
+                            + " " + d.nascimento + " <br/>")  
                   })
                   .style("left", (d3.event.pageX + 10) + "px")   
                   .style("top", (d3.event.pageY - 30) + "px")
@@ -887,6 +876,7 @@
                     .filter (function () {return d3.select(this).attr ("class") == "parents"})
                     .remove();
                 var radius = getRadiusFromAge (d);
+
                 var line = svg.append("line")
                     .attr("x1", 0)
                     .attr("y1", function () { return (- radius)})
@@ -906,7 +896,7 @@
               
                 updateSecondPart (d, parents);
 
-                //Waiting 0.2s to run this part of the code
+                //Waiting 0.28s to run this part of the code
                 setTimeout (function () {
                     var deadParents = [];
                     svg.selectAll(".parents")
