@@ -32,7 +32,7 @@
             .separation(function(a, b) { 
               if (a.parent == b.parent && a.parent == root && b.parent == root)
                   return 7.5;
-              return (a.parent == b.parent ? 5 : 7) / (a.depth); });
+              return (a.parent == b.parent ? 6 : 6) / (a.depth); });
 
         var diagonal = d3.svg.diagonal.radial()
             .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
