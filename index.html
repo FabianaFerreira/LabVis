@@ -17,7 +17,8 @@
         var clickRootCounter = 0;
         var margin = {top: 50, right: 120, bottom: 20, left: 120},
             width = diameter,
-            height = diameter;
+            height = diameter,
+            depth = 0;
             
         var i = 0,
             duration = 350,
@@ -28,8 +29,8 @@
           .style("opacity", 0);
 
         var tree = d3.layout.tree()
-            .size([360, diameter/2])
-            .separation(function(a, b, c) { 
+            .size([360, diameter/8])
+            .separation(function(a, b) { 
               
               return (a.parent == b.parent ? 20 : 22) / (a.depth); });
 
@@ -48,7 +49,7 @@
             .attr ("align", "center")
           .append("g")
             .attr("class", "vis")
-            .attr("transform", "translate(" + (diameter / 2 ) + "," + (diameter / 2 - 200) + ")")
+            .attr("transform", "translate(" + (diameter / 2 ) + "," + (diameter / 2 - 100) + ")")
             .attr ("align", "center");
         
        
@@ -70,17 +71,17 @@
         else
             var age = 2016 - d.nascimento;
         if (age >= 0 && age <= 9)
-            return 5;
+            return 7;
         else if (age >= 10 && age <= 19)
-            return 7.2; //7.2
+            return 10; //7.2
         else if (age >= 20 && age <= 39)
-            return 11.5;//11.5
+            return 15;//11.5
         else if (age >= 40 && age <= 59)
-            return 15;//14
+            return 20;//14
         else if (age >= 60 && age <= 79)
-            return 17; //17
+            return 25; //17
         else if (age >= 80 && age <= 100)
-            return 25; // 21  
+            return 45; // 21  
         else if (currentYear - d.nascimento == 116 && (d.children))
           return 7.2;
         else if (currentYear - d.nascimento == 116 && !(d.children))
@@ -93,6 +94,7 @@
           line = d3.svg.line.radial()([[-radius,Math.PI/4],[radius,Math.PI/4]]);
           return line;
       }
+
       function getParents (d) {
         if (d.parent)
             {
@@ -102,6 +104,7 @@
             }
         else return 0;
       }
+
       function getDistanceSpouses (d) {
         var mainRadius = getRadiusFromAge (d);
         var spouseRadius = getRadiusFromAge (d.conjuge);
@@ -149,9 +152,12 @@
               var nodes = tree.nodes(root),
                   links = tree.links(nodes);
               
-              // Normalize for fixed-depth.
-              nodes.forEach(function(d) { d.y = d.depth * 80; });
-              
+              nodes.forEach(function (d) { 
+                if (d.depth != 0)
+                  d.y = (d.parent.y + 250/(d.depth));
+                else d.y = 0 ;//- 60*(d.depth); 
+              });
+
               // Update the nodes…
               var node = svg.selectAll("svg")
                   .data(nodes, function(d) {return d.id || (d.id = ++i); });
@@ -162,15 +168,36 @@
               var link = svg.selectAll("path.link")
                   .data(links, function (d) { return d.target.id; });
               // Enter any new links at the parent's previous position.
+              console.log(link);
               link.enter().insert("path", "g")
-                  .attr("class", "link")
-                  .attr("d", function (d) {
-                    var o = {x: source.x0, y: source.y0};
-                    var diagonal = d3.svg.diagonal.radial()
-                      .projection(function (d) { return [d.y, d.x / 180 * Math.PI]; });
-                    return diagonal({source: o, target: o});
-                  });
+                    .attr("class", "link")
+                    .attr("d", function (d) {
+                      //console.log(d);
+                      if (d.source == root)
+                      {
+                        //console.log("entrei no root");
+                        console.log("entrei");
+                        svg.insert("path", ".vis")
+                          .attr("class", "Linelink")
+                          .attr("d", function () {
+                            var line = d3.svg.line.radial()([[d.source.y, d.source.x / 180*Math.PI], [d.source.y, d.source.x / 180*Math.PI]]);
+                              return line;
 
+                          })
+                      }
+                      else if (d.target != root)
+                      {
+                        console.log("entrei no else");
+                          var o = {x: source.x0, y: source.y0};
+                          var diagonal = d3.svg.diagonal.radial()
+                            .projection(function () { return [d.y, d.x / 180 * Math.PI]; });
+                          return diagonal({source: o, target: o});
+                      }
+                      
+                    });
+
+
+              
               // Transition links to their new position.
               link.transition()
                   .duration(duration)
@@ -200,13 +227,11 @@
                 .append ("circle")
                 .attr("class", "whiteCircle")
                 .attr ("cx",  -1)
-                .attr("cy", 0)
+                .attr("cy", 10)
                 .attr("r", function () {
                   var spouseRadius = getRadiusFromAge(root.conjuge);
                   var rootRadius = getRadiusFromAge(root);
-                  if (spouseRadius > rootRadius)
-                      return spouseRadius + 4;
-                  return rootRadius + 4;
+                  return spouseRadius + rootRadius;
                 })
 
 
@@ -223,8 +248,6 @@
                 .append ("circle")
                   .attr ("cx", function (d) {
                       var theta = d.x;
-                      //console.log(theta);
-                      //console.log (d.name);
                       var mainRadius = getRadiusFromAge (d);
                       var spouseRadius = getRadiusFromAge (d.exConjuge);
                       if (theta > 90 && theta < 270) 
@@ -351,7 +374,7 @@
                     }
 
                     if (d == root)
-                        transform = "translate(" + (positionX - 8) + "," + (positionY - 22) + ")" + "rotate (10)";
+                        transform = "translate(" + (positionX + 8) + "," + (positionY - 12) + ")" + "rotate (10)";
 
                     else if ((theta > 180) && (theta < 270))
                         transform = "translate(" + (positionX) + "," + (positionY) + ")"
@@ -413,7 +436,7 @@
                     //Translating the position of root's spouse due to the white circle behind them
                     .attr("transform", function (d) {
                       if (d == root)
-                        return "translate(-8,-22)";
+                        return "translate(2.3,-14)";//(positionX + 8) + "," + (positionY - 12)
                     });                  
             
               //
@@ -461,7 +484,7 @@
                   }
 
                   if (d == root)
-                      transform = "translate(" + (positionX - 8) + "," + (positionY - 22) + ")" + "rotate (10)";
+                      transform = "translate(" + (positionX + 2.3) + "," + (positionY -14) + ")" + "rotate (10)";
 
                   else if ((theta > 180) && (theta < 270))
                       transform = "translate(" + (positionX) + "," + (positionY) + ")"
@@ -514,7 +537,7 @@
                   })
                   .attr("transform", function (d) {
                     if (d == root)
-                      return "translate(-10,-20)";
+                      return "translate(-47.4,-8)";
                   });
               //Lines that define when a person has already died                 
               svg.selectAll(".node")
@@ -527,7 +550,7 @@
                     .attr("transform", function (d) { 
                         theta = d.x;
                         if (d == root)
-                            return "translate(-10,-20)rotate (10)"
+                            return "translate(-47.4,-8)rotate (10)"
                         if ((theta > 180) && (theta < 270))
                           return "rotate (" + (90 - (theta - 180)) + ")";
                         if ((theta > 270) && (theta > 360))
@@ -667,6 +690,12 @@
               var parentsCircles = svg.selectAll("circles")
                 .data(parents); 
 
+              nodes.forEach(function (d) { 
+                if (d.depth != 0)
+                  d.y = (d.parent.y + 250/(d.depth));
+                else d.y = 0 ;//- 60*(d.depth); 
+              });
+
               parentsCircles.enter()
                  // .append("g")
                  // .attr("class", "parents")
@@ -684,7 +713,7 @@
               parentsCircles
                 .transition ()
                   .duration(duration)
-                  .attr("transform", function (d,i) { return "translate(" + 0 + "," + (- 100/(parents.length))*(i+1) +")"; });
+                  .attr("transform", function (d,i) { return "translate(" + 0 + "," + (- 200/(parents.length))*(i+1) +")"; });
               
               parentsCircles
                 .exit()
@@ -777,7 +806,7 @@
                   positionY = mainRadius*0.8 + 3;
 
                 theta = d.x;
-                if (d.name == "Maria (Maine) Feldman")
+                if (d == root)
                     transform = "translate(" + positionX + "," + positionY + ")" + "rotate (10)";
 
                 else if ((theta > 180) && (theta < 270))
@@ -1090,7 +1119,7 @@
                     .attr("x1", 0)
                     .attr("y1", function () { return (- radius)})
                     .attr("x2", 0)
-                    .attr("y2", -204);
+                    .attr("y2", -304);
                 line
                   .attr ("stroke-width", 1.5)
                   .attr ("stroke", "#ccc");
@@ -1125,8 +1154,8 @@
                           .each(function (d,i) {
                             d3.select(this)
                               .attr("transform", function () {
-                                var positionY = (-100/(parents.length))*(1 + parents.length - (deadParents.length - deadParents[i]));
-                                return ("translate(0," + positionY*2 + ")")
+                                var positionY = (-200/(parents.length))*(1 + parents.length - (deadParents.length - deadParents[i]));
+                                return ("translate(0," + positionY*1.5 + ")")
                               })
 
                             })                      
