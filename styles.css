@@ -1,21 +1,17 @@
     .node {
       cursor: pointer;
-      }
+    }
 
     .node circle {
       fill: #fff;
       stroke-width: 0.2px;
-      }
-
-    .node text {
-      font: 10px sans-serif;
-      }
+    }
 
     .link {
       fill: none;
       stroke: #ccc;
       stroke-width: 1.5px;
-      }
+    }
 
     .parentsLink {
       fill: none;
@@ -29,17 +25,28 @@
 
     .death {
       stroke: #757474;
-      stroke-width: 1.5px;
+      stroke-width: 1px;
     }
 
     .spouseDeath {
       stroke: #757474;
-      stroke-width: 1.5px;
+      stroke-width: 1px;
+    }
+
+    .exSpouseDeath {
+      stroke: #757474;
+      stroke-width: 1px;
     }
 
     .parentsDeath {
       stroke: #757474;
-      stroke-width: 1.5px;
+      stroke-width: 1px;
+    }
+
+    .whiteCircle {
+      fill: #ffffff;
+      stroke: #ccc;
+      stroke-width: 0.5px;
     }
 
     div.tooltip { 
