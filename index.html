@@ -9,7 +9,7 @@
     <script type="text/javascript" src="SaveImage.js"></script>
     <script type="text/javascript" src="design_variables.js"></script>
     <script>
-        var diameter = 1600;
+        var diameter = 1300;
         var currentYear = new Date().getFullYear();
         
         var timeout = 270;
@@ -29,7 +29,7 @@
           .style("opacity", 0);
 
         var tree = d3.layout.tree()
-            .size([360, diameter/8])
+            .size([360, diameter/10])
             .separation(function(a, b) { 
               
               return (a.parent == b.parent ? 20 : 22) / (a.depth); });
