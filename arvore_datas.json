@@ -1,15 +1,15 @@
 {
 	"name": "Maria (Maine) Feldman",
 	"sexo": "feminino",
-	"nascimento": 1900,
-	"morte": 1950,
+	"nascimento": 1895,
+	"morte": 1953,
 	"conjuge": 
 	{
 		"name": "Leon Volfzon",
 		"judeu": true,
 		"sexo": "masculino",
-		"nascimento": 1900,
-		"morte": 1950
+		"nascimento": 1887,
+		"morte": 1967
 	},
 	"judeu": true,
 	"children": 
@@ -43,7 +43,7 @@
 									"exConjuge": 
 									{
 										"name": "Narciso Kalili",
-										"nascimento": 1936,
+										"nascimento": 1937,
 										"morte": 1992,
 										"judeu": true,
 										"sexo": "masculino"
@@ -237,21 +237,7 @@
 						}
 					]
 				},
-				{
-					"name": "Dorita",
-					"nascimento": 1919,
-					"morte": 1944,
-					"sexo": "feminino",
-					"judeu": false,
-					"conjuge": 
-					{
-						"name": "André Azoubel",
-						"nascimento": 1915,
-						"morte": 1974,
-						"sexo": "masculino",
-						"judeu": false
-					}
-				},
+				
 
 				{
 					"name": "Luiz Noya Volfzon",
@@ -756,21 +742,23 @@
 						}
 					]
 				},
+
 				{
-						"oi": 0,
-						"name": "Abrahão Kosminsky",
-						"nascimento": 1914,
+					"name": "Dorita",
+					"nascimento": 1919,
+					"morte": 1944,
+					"sexo": "feminino",
+					"judeu": false,
+					"conjuge": 
+					{
+						"name": "André Azoubel",
+						"nascimento": 1915,
+						"morte": 1974,
 						"sexo": "masculino",
-						"morte": 1971,
-						"judeu": true,
-						"conjuge": {
-							"name": "Anita Volfzon Kosminsky",
-							"judeu": true,
-							"nascimento": 1918,
-							"morte": 2013,
-							"sexo": "feminino"
-						}
+						"judeu": false
+					}
 				},
+				
 				{
 					"name": "Rosita Ferman",
 					"sexo": "feminino",
@@ -881,8 +869,8 @@
 													"conjuge":
 													{
 														"name": "Manoel Andrade",
-														"nascimento": 1900,
-														"morte": 1900,
+														"nascimento": 1959,
+														"morte": 1999,
 														"sexo": "masculino",
 														"judeu": false
 													}
@@ -1253,5 +1241,6 @@
 						}
 					]
 				}
+				
 			]
 }
