@@ -49,7 +49,7 @@
             .attr ("align", "center")
           .append("g")
             .attr("class", "vis")
-            .attr("transform", "translate(" + (diameter / 2 ) + "," + (diameter / 2 - 100) + ")")
+            .attr("transform", "translate(" + (diameter / 2 - 100) + "," + (diameter / 2 - 140) + ")")
             .attr ("align", "center");
         
        
@@ -154,7 +154,7 @@
               
               nodes.forEach(function (d) { 
                 if (d.depth != 0)
-                  d.y = (d.parent.y + 150/(d.depth));
+                  d.y = (d.parent.y + 200/(d.depth));
                 else d.y = 0 ;//- 60*(d.depth); 
               });
 
