@@ -9,7 +9,7 @@
     <script type="text/javascript" src="SaveImage.js"></script>
     <script type="text/javascript" src="design_variables.js"></script>
     <script>
-        var diameter = 1300;
+        var diameter = 1600;
         var currentYear = new Date().getFullYear();
         
         var timeout = 270;
@@ -154,7 +154,7 @@
               
               nodes.forEach(function (d) { 
                 if (d.depth != 0)
-                  d.y = (d.parent.y + 250/(d.depth));
+                  d.y = (d.parent.y + 200/(d.depth));
                 else d.y = 0 ;//- 60*(d.depth); 
               });
 
