@@ -253,7 +253,7 @@
                       if (theta > 90 && theta < 270) 
                       {
                         if (mainRadius == spouseRadius)
-                          return (mainRadius-11);
+                          return (mainRadius-10);
                           
                         else if (mainRadius > spouseRadius)
                           return mainRadius*0.6;
@@ -281,7 +281,7 @@
                         if (theta > 90 && theta < 270) 
                         {
                           if (mainRadius == spouseRadius)
-                            return (mainRadius-30);
+                            return (mainRadius-40);
                           else if (mainRadius > spouseRadius)
                            return mainRadius*0.5;
                           else if (spouseRadius > mainRadius)
@@ -292,7 +292,7 @@
                           if (mainRadius == spouseRadius)
                             return (mainRadius-30);
                           else if (mainRadius > spouseRadius)
-                           return mainRadius*0.5 -20;
+                           return mainRadius*0.5 -25;
                           else if (spouseRadius > mainRadius)
                             return mainRadius*0.9;
                         }
@@ -363,7 +363,7 @@
                       else if (mainRadius > spouseRadius)
                       { 
                         positionX = mainRadius - 9;
-                        positionY = mainRadius*0.5 -20;
+                        positionY = mainRadius*0.5 -25;
                       }
                         
                       else if (spouseRadius > mainRadius)
@@ -404,23 +404,37 @@
                       var mainRadius = getRadiusFromAge (d);
                       var spouseRadius = getRadiusFromAge (d.conjuge);
                       if (mainRadius == spouseRadius)
-                        return (mainRadius-12);
+                        {
+                            if (d.conjuge.name == "Stephen Weinstein")
+                              return (mainRadius-15);
+
+                            return (mainRadius-12);
+                        }
                         
                       else if (spouseRadius < mainRadius)
                         return mainRadius*0.5 - 2;
                         
                       else if (spouseRadius > mainRadius)
-                        return mainRadius - 6; //-8
+                          return mainRadius - 6; //-8
                     })
                     .attr ("cy", function (d) {
                         var mainRadius = getRadiusFromAge (d);
                         var spouseRadius = getRadiusFromAge (d.conjuge);
                         if (mainRadius == spouseRadius)
-                          return (mainRadius*0.8 + 2);
+                        {
+                            if (d.conjuge.name == "Stephen Weinstein")
+                                return (mainRadius*0.8 + 5);
+                            return (mainRadius*0.8 + 2);
+                        }
                         else if (spouseRadius < mainRadius)
                          return mainRadius*0.9 - 2;
                         else if (spouseRadius > mainRadius)
+                        {
+                          if (d.conjuge.name == "Sarah (Sarita) Averbuch Vainer")
+                              return mainRadius*0.8 + 30;
                           return mainRadius*0.8 + 2; //5
+
+                        }
                     })
                     .attr ("r", function (d) {return getRadiusFromAge (d.conjuge)})
                     .style ("fill", function (d) {
@@ -479,8 +493,12 @@
                     
                   else if (spouseRadius > mainRadius)
                   {
+                    if (d.conjuge.name == "Sarah (Sarita) Averbuch Vainer")
+                      positionY =  mainRadius*0.8 + 30;
+                    else
+                      positionY = (mainRadius*0.8 + 2);
                     positionX = (mainRadius - 6);
-                    positionY = (mainRadius*0.8 + 2);
+                    
                   }
 
                   if (d == root)
