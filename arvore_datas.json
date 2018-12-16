@@ -1,0 +1,1246 @@
+{
+	"name": "Maria (Maine) Feldman",
+	"sex": "feminino",
+	"born": 1895,
+	"death": 1953,
+	"spouse":
+	{
+		"name": "Leon Volfzon",
+		"jewish": true,
+		"sex": "masculino",
+		"born": 1887,
+		"death": 1967
+	},
+	"jewish": true,
+	"children":
+
+			[
+
+				{
+					"name": "Anita Volfzon Kosminsky",
+					"jewish": true,
+					"born": 1918,
+					"death": 2013,
+					"sex": "feminino",
+					"spouse":
+					{
+						"name": "Abrahão Kosminsky",
+						"born": 1914,
+						"sex": "masculino",
+						"death": 1971,
+						"jewish": true
+					},
+					"children":
+					[
+						{
+							"name": "Casamento",
+							"children":
+							[
+								{
+									"name": "Ethel Volfzon Kosminsky",
+									"born": 1946,
+									"sex": "feminino",
+									"exspouse":
+									{
+										"name": "Narciso Kalili",
+										"born": 1937,
+										"death": 1992,
+										"jewish": true,
+										"sex": "masculino"
+									},
+									"spouse":
+									{
+										"name": "Stephen Weinstein",
+										"born": 1951,
+										"jewish": true,
+										"sex": "masculino"
+
+									},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Claudia Kalili Ortiz",
+													"born": 1968,
+													"jewish": false,
+													"sex": "feminino",
+													"spouse":
+																{
+																	"name": "Stephen Andrew (André) Ortiz",
+																	"born": 1970,
+																	"jewish": false,
+																	"sex": "masculino"
+																},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Nicolas Kalili Ortiz",
+																	"born": 2002,
+																	"jewish": false,
+																	"sex": "masculino"
+																},
+																{
+																	"name": "Stella Rachel Ortiz",
+																	"born": 2005,
+																	"jewish": false,
+																	"sex": "feminino"
+																}
+															]
+														}
+													]
+												},
+												{
+													"name": "Sérgio Kalili",
+													"born": 1969,
+													"jewish": false,
+													"sex": "masculino",
+													"spouse":
+													{
+														"name": "Tamara Moreira Vaz de Melo",
+														"born": 1983,
+														"sex": "feminino",
+														"jewish": false
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Daniel Vaz de Melo Kalili",
+																	"born": 2011,
+																	"sex": "masculino",
+																	"jewish": false
+																}
+															]
+														}
+													]
+												},
+												{
+													"name": "Marilia Kalili",
+													"born": 1970,
+													"sex": "feminino",
+													"jewish": false
+												},
+												{
+													"name": "Ana Kalili Luise",
+													"born": 1972,
+													"sex": "feminino",
+													"jewish": false,
+													"spouse":
+													{
+														"name": "Daniel Luise",
+														"sex": "masculino",
+														"jewish": false,
+														"born": 1970
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Mariana",
+																	"sex": "feminino",
+																	"jewish": false,
+																	"born": 2005
+																},
+																{
+																	"name": "Pedro",
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2010
+
+																},
+																{
+																	"name": "André",
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2011
+
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Nilton Jorge Kosminsky",
+								 	"born": 1950,
+								 	"jewish": false,
+							  	 	"sex": "masculino",
+									"spouse":
+									{
+										"name": "Diana Isabel Shrewsbury",
+										"jewish": false,
+										"sex": "feminino",
+										"born": 1945
+									},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Diego Shrewsbury Kosminsky",
+													"born": 1980,
+													"sex": "masculino",
+													"jewish": false,
+													"spouse": {
+														"name":"Tais Kosminsky",
+														"born": 1975,
+														"sex": "feminino",
+														"jewish": false
+														},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Bernardo",
+																	"jewish": false,
+																	"sex": "masculino",
+																	"born": 2011
+																}
+															]
+														}
+													]
+
+
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Doris Kosminsky",
+									"born": 1960,
+									"jewish": true,
+									"sex": "feminino"
+								}
+							]
+						}
+					]
+				},
+
+
+				{
+					"name": "Luiz Noya Volfzon",
+					"sex": "masculino",
+					"born": 1921,
+					"death": 2005,
+					"jewish": false,
+					"spouse":
+					{
+						"name": "Esther Volfzon",
+						"sex": "feminino",
+						"born": 1933,
+						"jewish": false
+					},
+					"children":
+					[
+						{
+							"name": "Casamento",
+							"children":
+							[
+								{
+									"name": "Mário Volfzon",
+									"sex": "masculino",
+									"born": 1966,
+									"jewish": false
+								},
+								{
+									"name": "Dayse Volfzon",
+									"sex": "feminino",
+									"jewish": true,
+									"born": 1956,
+									"spouse":
+									{
+										"name": "Paolo Mordente",
+										"born": 1952,
+										"jewish": false,
+										"sex": "masculino"
+									},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Guiliana Volfzon Mordente",
+													"sex": "feminino",
+													"born": 1992,
+													"jewish": true
+												},
+												{
+													"name": "Mariana Volfzon Mordente",
+													"sex": "feminino",
+													"born": 1988,
+													"jewish": true
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Jackson Isi Volfzon",
+									"sex": "masculino",
+									"jewish": true,
+									"born": 1953,
+									"spouse":
+									{
+										"name": "Laura Carolina Borges Volfzon",
+										"born": 1954,
+										"jewish": false,
+										"sex": "feminino"
+									},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Gabriel Borges Volfzon",
+													"sex": "masculino",
+													"born": 1989,
+													"jewish": true
+												},
+												{
+													"name": "Ana Borges Volfzon",
+													"sex": "feminino",
+													"born": 1989,
+													"jewish": true,
+													"spouse":
+													{
+														"name": "Eduardo?",
+														"sex": "masculino",
+														"jewish": false,
+														"born": 1985
+													}
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Sarita Stambovsky",
+					"sex": "feminino",
+					"born": 1920,
+					"death": 2000,
+					"jewish": false,
+					"spouse":
+					{
+						"name": "Maurício Stambovsky",
+						"sex": "masculino",
+						"born": 1925,
+						"death": 1998,
+						"jewish": false
+					},
+					"children":
+					[
+						{
+							"name": "Casamento",
+							"children":
+							[
+								{
+									"name": "Ethel Rejane Stambovsky Spichler",
+									"sex": "feminino",
+									"born": 1953,
+									"jewish": false,
+									"spouse":
+									{
+										"name": "David Spichler",
+										"sex": "masculino",
+										"born": 1947,
+										"jewish": false
+									},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Anne Spichler",
+													"sex": "feminino",
+													"born": 1983,
+													"jewish": false,
+													"spouse":
+																{
+																	"name": "Meir Moffarrah",
+																	"sex": "masculino",
+																	"born": 1980,
+																	"jewish": false
+																},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Sopphie",
+																	"born": 2016,
+																	"jewish": false,
+																	"sex": "feminino"
+																}
+															]
+														}
+													]
+												},
+												{
+													"name": "Ilana Spichler",
+													"sex": "feminino",
+													"born": 1983,
+													"jewish": false,
+													"spouse":
+													{
+														"name": "Leo Schiklapler",
+														"sex": "masculino",
+														"born": 1983,
+														"jewish": "false"
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Yuri",
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2014
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Dorita Stambovsky Guimarães",
+									"sex": "feminino",
+									"born": 1953,
+									"jewish": false,
+									"spouse":
+									{
+										"name": "Roberto Guimarães",
+										"sex": "masculino",
+										"jewish": false,
+										"born": 1955
+									},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Patrícia Stambovsky Guimarães",
+													"sex": "feminino",
+													"born": 1994,
+													"jewish": false
+												},
+
+												{
+													"name": "Leonardo Stambovsky Guimarães",
+													"sex": "masculino",
+													"born": 1991,
+													"jewish": false
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Neide Stambovsky Vieira",
+									"sex": "feminino",
+									"jewish": false,
+									"born": 1953,
+									"spouse":
+									{
+										"name": "Newton Sérgio Alves Vieira",
+										"jewish": false,
+										"sex": "masculino",
+										"born": 1950
+									},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Mayra Stambovsky",
+													"sex": "feminino",
+													"jewish": false,
+													"born": 1983,
+													"spouse":
+													{
+														"name": "Márcio Oliveira",
+														"sex": "masculino",
+														"born": 1960,
+														"jewish": false
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Maurício",
+																	"sex": "masculino",
+																	"born": 2015
+																}
+															]
+														}
+													]
+												},
+												{
+													"name": "Erika Stambovsky",
+													"sex": "feminino",
+													"jewish": false,
+													"born": 1986,
+													"spouse":
+													{
+														"name": "Marcos Roberto Munaretto",
+														"sex": "masculino",
+														"born": 1974,
+														"jewish": false
+													}
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+
+				{
+					"name": "Eugênia Volfzon Vieira (Genita)",
+					"sex": "feminino",
+					"born": 1922,
+					"death": 2014,
+					"jewish": false,
+					"spouse":
+					{
+						"name": "José Alves Vieira Neto",
+						"sex": "masculino",
+						"born": 1916,
+						"death": 1998,
+						"jewish": false
+					},
+					"children":
+					[
+						{
+							"name": "Casamento",
+							"children":
+							[
+								{
+									"name": "Newton Sérgio Alves Vieira",
+									"sex": "masculino",
+									"born": 1950,
+									"jewish": false,
+									"spouse":
+									{
+										"name": "Neide Stambovsky Vieira",
+										"jewish": false,
+										"born": 1953,
+										"sex": "feminino"
+									},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Mayra Stambovsky",
+													"sex": "feminino",
+													"jewish": false,
+													"born": 1983,
+													"spouse":
+													{
+														"name": "Márcio Oliveira",
+														"sex": "masculino",
+														"born": 1960,
+														"jewish": false
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Maurício",
+																	"sex": "masculino",
+																	"born": 2015
+																}
+															]
+														}
+													]
+												},
+												{
+													"name": "Erika Stambovsky",
+													"sex": "feminino",
+													"jewish": false,
+													"born": 1983,
+													"spouse":
+													{
+														"name": "Marcos Roberto Munaretto",
+														"sex": "masculino",
+														"born": 1974,
+														"jewish": false
+													}
+												}
+											]
+										}
+									]
+								},
+								{
+
+									"name": "Roberto Luís Alves Vieira",
+									"sex": "masculino",
+									"born": 1954,
+									"jewish": false,
+									"exspouse":
+									{
+										"name": "Vera Dreicon",
+										"born": 1950,
+										"jewish": false,
+										"sex": "feminino"
+									},
+									"spouse":
+									{
+										"name": "Lucia",
+										"born": 1950,
+										"sex": "feminino",
+										"jewish": false
+									},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "André Dreicon",
+													"born": 1972,
+													"jewish": false,
+													"sex": "masculino",
+													"spouse":
+													{
+														"name": "Rebeca Dreicon",
+														"sex": "feminino",
+														"born": 1978,
+														"jewish": false
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Sofia",
+																	"born": 2008,
+																	"sex": "feminino",
+																	"jewish": false
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Alessandra Vieira",
+													"sex": "feminino",
+													"born": 1980,
+													"jewish": false,
+													"spouse":
+													{
+														"name": "Eduardo??",
+														"sex": "masculino",
+														"jewish": false,
+														"born": 1970
+													}
+												}
+											]
+										}
+									]
+									},
+								{
+									"name": "Elza Regina Vieira Solon",
+									"sex": "feminino",
+									"jewish": false,
+									"born": 1954,
+									"spouse":
+									{
+										"name": "David Solon",
+										"sex": "masculino",
+										"born": 1952,
+										"jewish": false
+									},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Daniela Solon",
+													"sex": "feminino",
+													"jewish": false,
+													"born": 1981
+
+												},
+
+												{
+													"name": "Bernardo Solon",
+													"sex": "masculino",
+													"jewish": false,
+													"born": 1985
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+
+				{
+					"name": "Dorita",
+					"born": 1919,
+					"death": 1944,
+					"sex": "feminino",
+					"jewish": false,
+					"spouse":
+					{
+						"name": "André Azoubel",
+						"born": 1915,
+						"death": 1974,
+						"sex": "masculino",
+						"jewish": false
+					}
+				},
+
+				{
+					"name": "Rosita Ferman",
+					"sex": "feminino",
+					"born": 1915,
+					"death": 2005,
+					"jewish": false,
+					"spouse":
+					{
+						"name": "Moisés Ferman",
+						"sex": "masculino",
+						"born": 1912,
+						"death": 1970,
+						"jewish": false
+					},
+					"children":
+					[
+						{
+							"name": "Casamento",
+							"children":
+							[
+								{
+									"name": "Beassy Schachnik",
+									"born": 1936,
+									"sex": "feminino",
+									"jewish": false,
+									"spouse":
+												{
+													"name": "Isaac Schachnik",
+													"sex": "masculino",
+													"born": 1924,
+													"death": 2003,
+													"jewish": false
+												},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Guido Schachnik",
+													"sex": "masculino",
+													"born": 1957,
+													"jewish": true,
+													"spouse":
+													{
+														"name": "Monica Cunha Azevedo",
+														"sex": "feminino",
+														"jewish": false,
+														"born": 1962
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Daniel Schachnik",
+																	"sex": "masculino",
+																	"born": 2001,
+																	"jewish": false
+																}
+															]
+														}
+													]
+												},
+												{
+													"name": "Suzana Schachnik de Andrade",
+													"born": 1959,
+													"sex": "feminino",
+													"jewish": true,
+													"spouse":
+													{
+														"name": "Rogério Moreira Valença",
+														"born": 1959,
+														"sex": "masculino",
+														"jewish": false
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Debora Schachnik Valença",
+																	"sex": "feminino",
+																	"born": 1988,
+																	"jewish": true
+																},
+
+																{
+																	"name": "Eduardo Schachnik Valença",
+																	"born": 1989,
+																	"jewish": true,
+																	"sex": "masculino"
+																}
+															]
+														}
+													]
+												},
+												{
+													"name": "Dalia Schachnik de Andrade",
+													"born": 1961,
+													"jewish": true,
+													"sex": "feminino",
+													"spouse":
+													{
+														"name": "Manoel Andrade",
+														"born": 1959,
+														"death": 1999,
+														"sex": "masculino",
+														"jewish": false
+													}
+												},
+												{
+													"name": "Flávia Schachnik",
+													"sex": "feminino",
+													"born": 1963,
+													"jewish": true,
+													"spouse":
+													{
+														"name": "Edmond B. Grinberg Davidson",
+														"sex": "masculino",
+														"jewish": false,
+														"born": 1962
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Karen Schachnik Davidson",
+																	"sex": "feminino",
+																	"jewish": true,
+																	"born": 2005
+																},
+
+																{
+																	"name": "Gabriel Schachnik Davidson",
+																	"sex": "masculino",
+																	"jewish": true,
+																	"born": 2006
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Beila Bouqvar",
+									"sex": "feminino",
+									"jewish": false,
+									"born": 1940,
+									"spouse":
+									{
+										"name": "Maurício (Meira) Bouqvar",
+										"born": 1935,
+										"death": 1999,
+										"sex": "masculino",
+										"jewish": false
+									},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Sérgio Bouqvar",
+													"sex": "masculino",
+													"jewish": false,
+													"born": 1960,
+													"spouse":
+													{
+														"name": "Sandra Munimis Bouqvar",
+														"sex": "feminino",
+														"jewish": false,
+														"born": 1962
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Gabriel Bouqvar",
+																	"sex": "masculino",
+																	"born": 2005,
+																	"jewish": false
+																},
+																{
+																	"name": "Nina Bouqvar",
+																	"sex": "feminino",
+																	"jewish": false,
+																	"born": 2004
+																}
+															]
+														}
+													]
+												},
+												{
+													"name": "Reveca Bouqvar",
+													"born": 1960,
+													"jewish": false,
+													"sex": "feminino",
+													"spouse":
+													{
+														"name": "Wellington Dantas",
+														"sex": "masculino",
+														"born": 1950,
+														"jewish": false
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Mauricio",
+																	"born": 2005,
+																	"sex": "masculino",
+																	"jewish": false
+																},
+																{
+																	"name": "Barbara",
+																	"born": 2005,
+																	"sex": "feminino",
+																	"jewish": false
+																}
+															]
+														}
+													]
+												},
+												{
+													"name": "Ana Teresa Bouqvar",
+													"born": 1968,
+													"sex": "feminino",
+													"jewish": false,
+													"spouse":
+																{
+																	"name": "Frank Wiggers",
+																	"born": 1965,
+																	"sex": "masculino",
+																	"jewish": false
+																},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Meir",
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2008
+																}
+															]
+														}
+													]
+												},
+												{
+													"name": "Monica Bouqvar",
+													"sex": "feminino",
+													"born": 1968,
+													"jewish": false,
+													"spouse":
+													{
+														"name": "Fabrício Maia",
+														"sex": "masculino",
+														"jewish": false,
+														"born": 1965
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "David",
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2008
+																},
+																{
+																	"name": "Ilan",
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2007
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Dorio Ferman",
+									"born": 1941,
+									"jewish": false,
+									"sex": "masculino",
+									"spouse":
+									{
+										"name": "Sima Esther Ferman",
+										"sex": "feminino",
+										"born": 1948,
+										"jewish": false
+									},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Marcelo Ferman",
+													"sex": "masculino",
+													"jewish": false,
+													"born": 1979,
+													"spouse":
+													{
+														"name": "Sandra????",
+														"sex": "feminino",
+														"born": 1982,
+														"jewish": false
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Frederico",
+																	"sex": "masculino",
+																	"born": 2012,
+																	"jewish": false
+																},
+																{
+																	"name": "Fernando????",
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2014
+																}
+															]
+														}
+													]
+
+												},
+												{
+													"name": "Bruno Ferman",
+													"sex": "masculino",
+													"jewish": false,
+													"born": 1982,
+													"spouse":
+													{
+														"name": "Marianna Schleder Ferman",
+														"sex": "feminino",
+														"jewish": false,
+														"born": 1988
+													},
+													"children":
+													[
+														{
+															"name": "Casamento",
+															"children":
+															[
+																{
+																	"name": "Fernando???",
+																	"born": 2014,
+																	"jewish": false,
+																	"sex": "masculino"
+																},
+																{
+																	"name": "Eduardo???",
+																	"born": 2015,
+																	"jewish": false,
+																	"sex": "masculino"
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Mário Ferman",
+									"sex": "masculino",
+									"born": 1943,
+									"jewish": false,
+									"death": 2016,
+									"spouse":
+									{
+										"name": "Bertha",
+										"sex": "feminino",
+										"jewish": false,
+										"born": 1948
+									},
+									"children":
+									[
+										{
+											"name": "Casamento",
+											"children":
+											[
+												{
+													"name": "Cynthia Ferman",
+													"sex": "feminino",
+													"jewish": false,
+													"born": 1982
+												},
+												{
+													"name": "Mauro Ferman",
+													"sex": "masculino",
+													"jewish": false,
+													"born": 1980,
+													"spouse":
+													{
+														"name": "Camila Marforio Ferman",
+														"sex": "feminino",
+														"born": 1986,
+														"jewish": false
+													}
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Jacob Volfzon",
+					"born": 1918,
+					"death": 1951,
+					"sex": "masculino",
+					"jewish": false,
+					"spouse":
+					{
+						"name": "Sarah (Sarita) Averbuch Vainer",
+						"sex": "feminino",
+						"born": 1927,
+						"death": 2015,
+						"jewish": false
+					},
+					"children":
+					[
+						{
+							"name": "Casamento",
+							"children":
+							[
+								{
+									"name": "Jacob Volfzon Filho",
+									"sex": "masculino",
+									"jewish": false,
+									"born": 1951,
+									"spouse":
+									{
+										"name": "Yara Batista Pereira Serra Lima",
+										"sex": "feminino",
+										"born": 1954,
+										"jewish": false
+									}
+								}
+							]
+						}
+					]
+				}
+
+			]
+}

@@ -1,20 +1,17 @@
-.node {
+    .node {
       cursor: pointer;
-      }
+    }
 
     .node circle {
       fill: #fff;
-      }
-
-    .node text {
-      font: 10px sans-serif;
-      }
+      stroke-width: 0.2px;
+    }
 
     .link {
       fill: none;
       stroke: #ccc;
       stroke-width: 1.5px;
-      }
+    }
 
     .parentsLink {
       fill: none;
@@ -26,11 +23,44 @@
       cursor: pointer;
     }
 
-    .tooltip {
-      position: relative;
-      display: inline;
-      font-size: 11pt;
-      font-family:sans-serif;
-      border: 0px;
-      border-radius: 8px;
-      }
+    .death {
+      stroke: #757474;
+      stroke-width: 1px;
+    }
+
+    .spouseDeath {
+      stroke: #757474;
+      stroke-width: 1px;
+    }
+
+    .exSpouseDeath {
+      stroke: #757474;
+      stroke-width: 1px;
+    }
+
+    .parentsDeath {
+      stroke: #757474;
+      stroke-width: 1px;
+    }
+
+    .whiteCircle {
+      fill: #ffffff;
+      stroke: #ccc;
+      stroke-width: 0.5px;
+    }
+
+    div.tooltip { 
+      position: absolute;     
+      text-align: center;     
+      outline:5px;
+      min-width: 90px;
+      max-width: 400px;          
+      min-height:30px;
+      max-height:50px;         
+      background: #dbdbdb; 
+      font: 13px sans-serif;
+      border: 0px;    
+      border-radius: 6px;     
+      pointer-events: none;  
+      white-space: pre;   
+    }
