@@ -1,95 +1,95 @@
 {
 	"name": "Maria (Maine) Feldman",
-	"sexo": "feminino",
-	"nascimento": 1900,
-	"morte": 1950,
-	"conjuge": 
+	"sex": "feminino",
+	"born": 1900,
+	"death": 1950,
+	"spouse":
 	{
 		"name": "Leon Volfzon",
-		"judeu": true,
-		"sexo": "masculino",
-		"nascimento": 1900,
-		"morte": 1950
+		"jewish": true,
+		"sex": "masculino",
+		"born": 1900,
+		"death": 1950
 	},
-	"judeu": true,
-	"children": 
-	
+	"jewish": true,
+	"children":
+
 			[
 				{
 					"name": "Anita Volfzon Kosminsky",
-					"judeu": true,
-					"nascimento": 1918,
-					"morte": 2013,
-					"sexo": "feminino",
-					"conjuge":
+					"jewish": true,
+					"born": 1918,
+					"death": 2013,
+					"sex": "feminino",
+					"spouse":
 					{
 						"name": "Abrahão Kosminsky",
-						"nascimento": 1914,
-						"sexo": "masculino",
-						"morte": 1971,
-						"judeu": true
+						"born": 1914,
+						"sex": "masculino",
+						"death": 1971,
+						"jewish": true
 					},
-					"children": 
+					"children":
 					[
 						{
 							"name": "Casamento",
-							"children": 
+							"children":
 							[
 								{
 									"name": "Ethel Volfzon Kosminsky",
-									"nascimento": 1946,
-									"sexo": "feminino",
-									"exConjuge": 
+									"born": 1946,
+									"sex": "feminino",
+									"exspouse":
 									{
 										"name": "Narciso Kalili",
-										"nascimento": 1936,
-										"morte": 1992,
-										"judeu": true,
-										"sexo": "masculino"
+										"born": 1936,
+										"death": 1992,
+										"jewish": true,
+										"sex": "masculino"
 									},
-									"conjuge":
+									"spouse":
 									{
 										"name": "Stephen Weinstein",
-										"nascimento": 1951,
-										"judeu": true,
-										"sexo": "masculino"
+										"born": 1951,
+										"jewish": true,
+										"sex": "masculino"
 
 									},
 									"children":
 									[
 										{
 											"name": "Casamento",
-											"children": 
+											"children":
 											[
 												{
 													"name": "Claudia Kalili Ortiz",
-													"nascimento": 1968,
-													"judeu": false,
-													"sexo": "feminino",
-													"conjuge": 
+													"born": 1968,
+													"jewish": false,
+													"sex": "feminino",
+													"spouse":
 																{
 																	"name": "Stephen Andrew (André) Ortiz",
-																	"nascimento": 1970,
-																	"judeu": false,
-																	"sexo": "masculino"
+																	"born": 1970,
+																	"jewish": false,
+																	"sex": "masculino"
 																},
 													"children":
 													[
 														{
 															"name": "Casamento",
-															"children": 
+															"children":
 															[
 																{
 																	"name": "Nicolas Kalili Ortiz",
-																	"nascimento": 2002,
-																	"judeu": false,
-																	"sexo": "masculino"
+																	"born": 2002,
+																	"jewish": false,
+																	"sex": "masculino"
 																},
 																{
 																	"name": "Stella Rachel Ortiz",
-																	"nascimento": 2005,
-																	"judeu": false,
-																	"sexo": "feminino"
+																	"born": 2005,
+																	"jewish": false,
+																	"sex": "feminino"
 																}
 															]
 														}
@@ -97,15 +97,15 @@
 												},
 												{
 													"name": "Sérgio Kalili",
-													"nascimento": 1969,
-													"judeu": false,
-													"sexo": "masculino",
-													"conjuge": 
+													"born": 1969,
+													"jewish": false,
+													"sex": "masculino",
+													"spouse":
 													{
 														"name": "Tamara Moreira Vaz de Melo",
-														"nascimento": 1983,
-														"sexo": "feminino",
-														"judeu": false
+														"born": 1983,
+														"sex": "feminino",
+														"jewish": false
 													},
 													"children":
 													[
@@ -115,9 +115,9 @@
 															[
 																{
 																	"name": "Daniel Vaz de Melo Kalili",
-																	"nascimento": 2011,
-																	"sexo": "masculino",
-																	"judeu": false
+																	"born": 2011,
+																	"sex": "masculino",
+																	"jewish": false
 																}
 															]
 														}
@@ -125,20 +125,20 @@
 												},
 												{
 													"name": "Marilia Kalili",
-													"nascimento": 1970,
-													"sexo": "feminino",
-													"judeu": false
+													"born": 1970,
+													"sex": "feminino",
+													"jewish": false
 												},
 												{
 													"name": "Ana Kalili Luise",
-													"nascimento": 1972,
-													"sexo": "feminino",
-													"judeu": false,
-													"conjuge": 
+													"born": 1972,
+													"sex": "feminino",
+													"jewish": false,
+													"spouse":
 													{
 														"name": "Daniel Luise",
-														"sexo": "masculino",
-														"judeu": false
+														"sex": "masculino",
+														"jewish": false
 													},
 													"children":
 													[
@@ -148,23 +148,23 @@
 															[
 																{
 																	"name": "Mariana",
-																	"sexo": "feminino",
-																	"judeu": false,
-																	"nascimento": 2005
+																	"sex": "feminino",
+																	"jewish": false,
+																	"born": 2005
 																},
 																{
 																	"name": "Pedro",
-																	"sexo": "masculino",
-																	"judeu": false,
-																	"nascimento": 2008
-																	
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2008
+
 																},
 																{
 																	"name": "André",
-																	"sexo": "masculino",
-																	"judeu": false,
-																	"nascimento": 2008
-																	
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2008
+
 																}
 															]
 														}
@@ -176,14 +176,14 @@
 								},
 								{
 									"name": "Nilton Jorge Kosminsky",
-								 	"nascimento": 1950,
-								 	"judeu": false,
-							  	 	"sexo": "masculino",
-									"conjuge": 
+								 	"born": 1950,
+								 	"jewish": false,
+							  	 	"sex": "masculino",
+									"spouse":
 									{
 										"name": "Diana Isabel Shrewsbury",
-										"judeu": false,
-										"sexo": "feminino"
+										"jewish": false,
+										"sex": "feminino"
 									},
 									"children":
 									[
@@ -193,17 +193,17 @@
 											[
 												{
 													"name": "Diego Shrewsbury Kosminsky",
-													"nascimento": 1980,
-													"sexo": "masculino",
-													"judeu": false,
-													"conjuge": "Tais Kosminsky",
-													"children": 
+													"born": 1980,
+													"sex": "masculino",
+													"jewish": false,
+													"spouse": "Tais Kosminsky",
+													"children":
 													[
 														{
 															"name": "Bernardo",
-															"judeu": false,
-															"sexo": "masculino",
-															"nascimento": 1900
+															"jewish": false,
+															"sex": "masculino",
+															"born": 1900
 														}
 													]
 												}
@@ -213,39 +213,39 @@
 								},
 								{
 									"name": "Doris Kosminsky",
-									"nascimento": 1960,
-									"judeu": true,
-									"sexo": "feminino"
+									"born": 1960,
+									"jewish": true,
+									"sex": "feminino"
 								}
-							]		
+							]
 						}
 					]
 				},
 				{
 					"name": "Dorita",
-					"nascimento": 1919,
-					"morte": 1944,
-					"sexo": "feminino",
-					"judeu": false,
-					"conjuge": 
+					"born": 1919,
+					"death": 1944,
+					"sex": "feminino",
+					"jewish": false,
+					"spouse":
 					{
 						"name": "André Azoubel",
-						"sexo": "masculino",
-						"judeu": false
+						"sex": "masculino",
+						"jewish": false
 					}
 				},
 				{
 					"name": "Luiz Noya Volfzon",
-					"sexo": "masculino",
-					"nascimento": 1921,
-					"morte": 2005,
-					"judeu": false,
-					"conjuge": 
+					"sex": "masculino",
+					"born": 1921,
+					"death": 2005,
+					"jewish": false,
+					"spouse":
 					{
 						"name": "Esther Volfzon",
-						"sexo": "feminino",
-						"nascimento": 1933,
-						"judeu": false
+						"sex": "feminino",
+						"born": 1933,
+						"jewish": false
 					},
 					"children":
 					[
@@ -255,21 +255,21 @@
 							[
 								{
 									"name": "Mário Volfzon",
-									"sexo": "masculino",
-									"nascimento": 1966,
-									"judeu": false
+									"sex": "masculino",
+									"born": 1966,
+									"jewish": false
 								},
 								{
 									"name": "Dayse Volfzon",
-									"sexo": "feminino",
-									"judeu": true,
-									"nascimento": 1956,
-									"conjuge": 
+									"sex": "feminino",
+									"jewish": true,
+									"born": 1956,
+									"spouse":
 									{
 										"name": "Paolo Mordente",
-										"nascimento": 1952,
-										"judeu": false,
-										"sexo": "masculino"
+										"born": 1952,
+										"jewish": false,
+										"sex": "masculino"
 									},
 									"children":
 									[
@@ -279,15 +279,15 @@
 											[
 												{
 													"name": "Guiliana Volfzon Mordente",
-													"sexo": "feminino",
-													"nascimento": 1992,
-													"judeu": true
+													"sex": "feminino",
+													"born": 1992,
+													"jewish": true
 												},
 												{
 													"name": "Mariana Volfzon Mordente",
-													"sexo": "feminino",
-													"nascimento": 1988,
-													"judeu": true
+													"sex": "feminino",
+													"born": 1988,
+													"jewish": true
 												}
 											]
 										}
@@ -295,15 +295,15 @@
 								},
 								{
 									"name": "Jackson Isi Volfzon",
-									"sexo": "masculino",
-									"judeu": true,
-									"nascimento": 1953,
-									"conjuge": 
+									"sex": "masculino",
+									"jewish": true,
+									"born": 1953,
+									"spouse":
 									{
 										"name": "Laura Carolina Borges Volfzon",
-										"nascimento": 1954,
-										"judeu": false,
-										"sexo": "feminino"
+										"born": 1954,
+										"jewish": false,
+										"sex": "feminino"
 									},
 									"children":
 									[
@@ -313,21 +313,21 @@
 											[
 												{
 													"name": "Gabriel Borges Volfzon",
-													"sexo": "masculino",
-													"nascimento": 1989,
-													"judeu": true
+													"sex": "masculino",
+													"born": 1989,
+													"jewish": true
 												},
 												{
 													"name": "Ana Borges Volfzon",
-													"sexo": "feminino",
-													"nascimento": 1989,
-													"judeu": true,
-													"conjuge":
+													"sex": "feminino",
+													"born": 1989,
+													"jewish": true,
+													"spouse":
 													{
 														"nome": "",
-														"sexo": "masculino",
-														"judeu": false,
-														"nascimento": 1900
+														"sex": "masculino",
+														"jewish": false,
+														"born": 1900
 													}
 												}
 											]
@@ -340,17 +340,17 @@
 				},
 				{
 					"name": "Sarita Stambovsky",
-					"sexo": "feminino",
-					"nascimento": 1920,
-					"morte": 2000,
-					"judeu": false,
-					"conjuge": 
+					"sex": "feminino",
+					"born": 1920,
+					"death": 2000,
+					"jewish": false,
+					"spouse":
 					{
 						"name": "Maurício Stambovsky",
-						"sexo": "masculino",
-						"nascimento": 1900,
-						"morte": 1900,
-						"judeu": false
+						"sex": "masculino",
+						"born": 1900,
+						"death": 1900,
+						"jewish": false
 					},
 					"children":
 					[
@@ -360,15 +360,15 @@
 							[
 								{
 									"name": "Ethel Rejane Stambovsky Spichler",
-									"sexo": "feminino",
-									"nascimento": 1953,
-									"judeu": false,
-									"conjuge":
+									"sex": "feminino",
+									"born": 1953,
+									"jewish": false,
+									"spouse":
 									{
 										"name": "David Spichler",
-										"sexo": "masculino",
-										"nascimento": 1900,
-										"judeu": false
+										"sex": "masculino",
+										"born": 1900,
+										"jewish": false
 									},
 									"children":
 									[
@@ -378,15 +378,15 @@
 											[
 												{
 													"name": "Anne Spichler",
-													"sexo": "feminino",
-													"nascimento": 1983,
-													"judeu": false,
-													"conjuge": 
+													"sex": "feminino",
+													"born": 1983,
+													"jewish": false,
+													"spouse":
 																{
 																	"name": "Meir Moffarrah",
-																	"sexo": "masculino",
-																	"nascimento": 1900, 
-																	"judeu": false
+																	"sex": "masculino",
+																	"born": 1900,
+																	"jewish": false
 																},
 													"children":
 													[
@@ -396,9 +396,9 @@
 															[
 																{
 																	"name": "Sopphie",
-																	"nascimento": 2016,
-																	"judeu": false,
-																	"sexo": "feminino"
+																	"born": 2016,
+																	"jewish": false,
+																	"sex": "feminino"
 																}
 															]
 														}
@@ -406,15 +406,15 @@
 												},
 												{
 													"name": "Ilana Spichler",
-													"sexo": "feminino",
-													"nascimento": 1983,
-													"judeu": false,
-													"conjuge": 
+													"sex": "feminino",
+													"born": 1983,
+													"jewish": false,
+													"spouse":
 													{
 														"name": "Leo Schiklapler",
-														"sexo": "masculino",
-														"nascimento": 1900,
-														"judeu": "false"
+														"sex": "masculino",
+														"born": 1900,
+														"jewish": "false"
 													},
 													"children":
 													[
@@ -424,9 +424,9 @@
 															[
 																{
 																	"name": "Yuri",
-																	"sexo": "masculino",
-																	"judeu": false,
-																	"nascimento": 2014
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2014
 																}
 															]
 														}
@@ -438,15 +438,15 @@
 								},
 								{
 									"name": "Dorita Stambovsky Guimarães",
-									"sexo": "feminino",
-									"nascimento": 1953,
-									"judeu": false,
-									"conjuge":
+									"sex": "feminino",
+									"born": 1953,
+									"jewish": false,
+									"spouse":
 									{
 										"name": "Roberto Guimarães",
-										"sexo": "masculino",
-										"judeu": false,
-										"nascimento": 1900
+										"sex": "masculino",
+										"jewish": false,
+										"born": 1900
 									},
 									"children":
 									[
@@ -456,16 +456,16 @@
 											[
 												{
 													"name": "Patrícia Stambovsky Guimarães",
-													"sexo": "feminino",
-													"nascimento": 1994,
-													"judeu": false
+													"sex": "feminino",
+													"born": 1994,
+													"jewish": false
 												},
 
 												{
 													"name": "Leonardo Stambovsky Guimarães",
-													"sexo": "masculino",
-													"nascimento": 1991,
-													"judeu": false
+													"sex": "masculino",
+													"born": 1991,
+													"jewish": false
 												}
 											]
 										}
@@ -473,15 +473,15 @@
 								},
 								{
 									"name": "Neide Stambovsky Vieira",
-									"sexo": "feminino",
-									"judeu": false,
-									"nascimento": 1953,
-									"conjuge":
+									"sex": "feminino",
+									"jewish": false,
+									"born": 1953,
+									"spouse":
 									{
 										"name": "Newton Sérgio Alves Vieira",
-										"judeu": false,
-										"sexo": "masculino",
-										"nascimento": 1950
+										"jewish": false,
+										"sex": "masculino",
+										"born": 1950
 									},
 									"children":
 									[
@@ -491,15 +491,15 @@
 											[
 												{
 													"name": "Mayra Stambovsky",
-													"sexo": "feminino",
-													"judeu": false,
-													"nascimento": 1983,
-													"conjuge": 
+													"sex": "feminino",
+													"jewish": false,
+													"born": 1983,
+													"spouse":
 													{
 														"name": "Márcio Oliveira",
-														"sexo": "masculino",
-														"nascimento": 1900,
-														"judeu": false
+														"sex": "masculino",
+														"born": 1900,
+														"jewish": false
 													},
 													"children":
 													[
@@ -509,8 +509,8 @@
 															[
 																{
 																	"name": "Maurício",
-																	"sexo": "masculino",
-																	"nascimento": 2015
+																	"sex": "masculino",
+																	"born": 2015
 																}
 															]
 														}
@@ -518,15 +518,15 @@
 												},
 												{
 													"name": "Erika Stambovsky",
-													"sexo": "feminino",
-													"judeu": false,
-													"nascimento": 1983,
-													"conjuge": 
+													"sex": "feminino",
+													"jewish": false,
+													"born": 1983,
+													"spouse":
 													{
 														"name": "Marcos Roberto Munaretto",
-														"sexo": "masculino",
-														"nascimento": 1974,
-														"judeu": false
+														"sex": "masculino",
+														"born": 1974,
+														"jewish": false
 													}
 												}
 											]
@@ -539,17 +539,17 @@
 				},
 				{
 					"name": "Eugênia Volfzon Vieira (Genita)",
-					"sexo": "feminino",
-					"nascimento": 1922,
-					"morte": 2014,
-					"judeu": false,
-					"conjuge": 
+					"sex": "feminino",
+					"born": 1922,
+					"death": 2014,
+					"jewish": false,
+					"spouse":
 					{
 						"name": "José Alves Vieira Neto",
-						"sexo": "masculino",
-						"nascimento": 1900,
-						"morte": 1900,
-						"judeu": false
+						"sex": "masculino",
+						"born": 1900,
+						"death": 1900,
+						"jewish": false
 					},
 					"children":
 					[
@@ -559,15 +559,15 @@
 							[
 								{
 									"name": "Newton Sérgio Alves Vieira",
-									"sexo": "masculino",
-									"nascimento": 1950,
-									"judeu": false,
-									"conjuge": 
+									"sex": "masculino",
+									"born": 1950,
+									"jewish": false,
+									"spouse":
 									{
 										"name": "Neide Stambovsky Vieira",
-										"judeu": false,
-										"nascimento": 1953,
-										"sexo": "feminino"
+										"jewish": false,
+										"born": 1953,
+										"sex": "feminino"
 									},
 									"children":
 									[
@@ -577,15 +577,15 @@
 											[
 												{
 													"name": "Mayra Stambovsky",
-													"sexo": "feminino",
-													"judeu": false,
-													"nascimento": 1983,
-													"conjuge": 
+													"sex": "feminino",
+													"jewish": false,
+													"born": 1983,
+													"spouse":
 													{
 														"name": "Márcio Oliveira",
-														"sexo": "masculino",
-														"nascimento": 1900,
-														"judeu": false
+														"sex": "masculino",
+														"born": 1900,
+														"jewish": false
 													},
 													"children":
 													[
@@ -595,8 +595,8 @@
 															[
 																{
 																	"name": "Maurício",
-																	"sexo": "masculino",
-																	"nascimento": 2015
+																	"sex": "masculino",
+																	"born": 2015
 																}
 															]
 														}
@@ -604,15 +604,15 @@
 												},
 												{
 													"name": "Erika Stambovsky",
-													"sexo": "feminino",
-													"judeu": false,
-													"nascimento": 1983,
-													"conjuge": 
+													"sex": "feminino",
+													"jewish": false,
+													"born": 1983,
+													"spouse":
 													{
 														"name": "Marcos Roberto Munaretto",
-														"sexo": "masculino",
-														"nascimento": 1974,
-														"judeu": false
+														"sex": "masculino",
+														"born": 1974,
+														"jewish": false
 													}
 												}
 											]
@@ -622,22 +622,22 @@
 								{
 
 									"name": "Roberto Luís Alves Vieira",
-									"sexo": "masculino",
-									"nascimento": 1954,
-									"judeu": false,
-									"exConjuge": 
+									"sex": "masculino",
+									"born": 1954,
+									"jewish": false,
+									"exspouse":
 									{
 										"name": "Vera Dreicon",
-										"nascimento": 1950,
-										"judeu": false,
-										"sexo": "feminino"
+										"born": 1950,
+										"jewish": false,
+										"sex": "feminino"
 									},
-									"conjuge": 
+									"spouse":
 									{
 										"name": "Lucia",
-										"nascimento": 1900,
-										"sexo": "feminino",
-										"judeu": false
+										"born": 1900,
+										"sex": "feminino",
+										"jewish": false
 									},
 									"children":
 									[
@@ -647,15 +647,15 @@
 											[
 												{
 													"name": "André Dreicon",
-													"nascimento": 1972,
-													"judeu": false,
-													"sexo": "masculino",
-													"conjuge": 
+													"born": 1972,
+													"jewish": false,
+													"sex": "masculino",
+													"spouse":
 													{
 														"name": "Rebeca Dreicon",
-														"sexo": "feminino",
-														"nascimento": 1900,
-														"judeu": false
+														"sex": "feminino",
+														"born": 1900,
+														"jewish": false
 													},
 													"children":
 													[
@@ -665,9 +665,9 @@
 															[
 																{
 																	"name": "Sofia",
-																	"nascimento": 2008,
-																	"sexo": "feminino",
-																	"judeu": false
+																	"born": 2008,
+																	"sex": "feminino",
+																	"jewish": false
 																}
 															]
 														}
@@ -681,15 +681,15 @@
 											[
 												{
 													"name": "Alessandra Vieira",
-													"sexo": "feminino",
-													"nascimento": 1980,
-													"judeu": false,
-													"conjuge": 
+													"sex": "feminino",
+													"born": 1980,
+													"jewish": false,
+													"spouse":
 													{
 														"name": "",
-														"sexo": "masculino",
-														"judeu": false,
-														"nascimento": 1900
+														"sex": "masculino",
+														"jewish": false,
+														"born": 1900
 													}
 												}
 											]
@@ -698,15 +698,15 @@
 								},
 								{
 									"name": "Elza Regina Vieira Solon",
-									"sexo": "feminino",
-									"judeu": false,
-									"nascimento": 1954,
-									"conjuge": 
+									"sex": "feminino",
+									"jewish": false,
+									"born": 1954,
+									"spouse":
 									{
 										"name": "David Solon",
-										"sexo": "masculino",
-										"nascimento": 1952,
-										"judeu": false
+										"sex": "masculino",
+										"born": 1952,
+										"jewish": false
 									},
 									"children":
 									[
@@ -716,17 +716,17 @@
 											[
 												{
 													"name": "Daniela Solon",
-													"sexo": "feminino",
-													"judeu": false,
-													"nascimento": 1981
+													"sex": "feminino",
+													"jewish": false,
+													"born": 1981
 
 												},
 
 												{
 													"name": "Bernardo Solon",
-													"sexo": "masculino",
-													"judeu": false,
-													"nascimento": 1985
+													"sex": "masculino",
+													"jewish": false,
+													"born": 1985
 												}
 											]
 										}
@@ -738,17 +738,17 @@
 				},
 				{
 					"name": "Rosita Ferman",
-					"sexo": "feminino",
-					"nascimento": 1915,
-					"morte": 2005,
-					"judeu": false,
-					"conjuge": 
+					"sex": "feminino",
+					"born": 1915,
+					"death": 2005,
+					"jewish": false,
+					"spouse":
 					{
 						"name": "Moisés Ferman",
-						"sexo": "masculino",
-						"nascimento": 1912,
-						"morte": 1970,
-						"judeu": false
+						"sex": "masculino",
+						"born": 1912,
+						"death": 1970,
+						"jewish": false
 					},
 					"children":
 					[
@@ -758,16 +758,16 @@
 							[
 								{
 									"name": "Beassy Schachnik",
-									"nascimento": 1936,
-									"sexo": "feminino",
-									"judeu": false,
-									"conjuge": 
+									"born": 1936,
+									"sex": "feminino",
+									"jewish": false,
+									"spouse":
 												{
 													"name": "Isaac Schachnik",
-													"sexo": "masculino",
-													"nascimento": 1924,
-													"morte": 2003,
-													"judeu": false
+													"sex": "masculino",
+													"born": 1924,
+													"death": 2003,
+													"jewish": false
 												},
 									"children":
 									[
@@ -777,15 +777,15 @@
 											[
 												{
 													"name": "Guido Schachnik",
-													"sexo": "masculino",
-													"nascimento": 1957,
-													"judeu": true,
-													"conjuge": 
+													"sex": "masculino",
+													"born": 1957,
+													"jewish": true,
+													"spouse":
 													{
 														"name": "Monica Cunha Azevedo",
-														"sexo": "feminino",
-														"judeu": false,
-														"nascimento": 1962
+														"sex": "feminino",
+														"jewish": false,
+														"born": 1962
 													},
 													"children":
 													[
@@ -795,9 +795,9 @@
 															[
 																{
 																	"name": "Daniel Schachnik",
-																	"sexo": "masculino",
-																	"nascimento": 2001,
-																	"judeu": false
+																	"sex": "masculino",
+																	"born": 2001,
+																	"jewish": false
 																}
 															]
 														}
@@ -805,15 +805,15 @@
 												},
 												{
 													"name": "Suzana Schachnik de Andrade",
-													"nascimento": 1959,
-													"sexo": "feminino",
-													"judeu": true,
-													"conjuge": 
+													"born": 1959,
+													"sex": "feminino",
+													"jewish": true,
+													"spouse":
 													{
 														"name": "Rogério Moreira Valença",
-														"nascimento": 1959,
-														"sexo": "masculino",
-														"judeu": false
+														"born": 1959,
+														"sex": "masculino",
+														"jewish": false
 													},
 													"children":
 													[
@@ -823,16 +823,16 @@
 															[
 																{
 																	"name": "Debora Schachnik Valença",
-																	"sexo": "feminino",
-																	"nascimento": 1988,
-																	"judeu": true																					
+																	"sex": "feminino",
+																	"born": 1988,
+																	"jewish": true
 																},
 
 																{
 																	"name": "Eduardo Schachnik Valença",
-																	"nascimento": 1989,
-																	"judeu": true,
-																	"sexo": "masculino"
+																	"born": 1989,
+																	"jewish": true,
+																	"sex": "masculino"
 																}
 															]
 														}
@@ -840,29 +840,29 @@
 												},
 												{
 													"name": "Dalia Schachnik de Andrade",
-													"nascimento": 1961,
-													"judeu": true,
-													"sexo": "feminino",
-													"conjuge":
+													"born": 1961,
+													"jewish": true,
+													"sex": "feminino",
+													"spouse":
 													{
 														"name": "Manoel Andrade",
-														"nascimento": 1900,
-														"morte": 1900,
-														"sexo": "masculino",
-														"judeu": false
+														"born": 1900,
+														"death": 1900,
+														"sex": "masculino",
+														"jewish": false
 													}
 												},
 												{
 													"name": "Flávia Schachnik",
-													"sexo": "feminino",
-													"nascimento": 1963,
-													"judeu": true,
-													"conjuge": 
+													"sex": "feminino",
+													"born": 1963,
+													"jewish": true,
+													"spouse":
 													{
 														"name": "Edmond B. Grinberg Davidson",
-														"sexo": "masculino",
-														"judeu": false,
-														"nascimento": 1962
+														"sex": "masculino",
+														"jewish": false,
+														"born": 1962
 													},
 													"children":
 													[
@@ -872,16 +872,16 @@
 															[
 																{
 																	"name": "Karen Schachnik Davidson",
-																	"sexo": "feminino",
-																	"judeu": true,
-																	"nascimento": 2005
+																	"sex": "feminino",
+																	"jewish": true,
+																	"born": 2005
 																},
 
 																{
 																	"name": "Gabriel Schachnik Davidson",
-																	"sexo": "masculino",
-																	"judeu": true,
-																	"nascimento": 2005
+																	"sex": "masculino",
+																	"jewish": true,
+																	"born": 2005
 																}
 															]
 														}
@@ -893,34 +893,34 @@
 								},
 								{
 									"name": "Beila Bouqvar",
-									"sexo": "feminino",
-									"judeu": false,
-									"nascimento": 1940,
-									"conjuge": 
+									"sex": "feminino",
+									"jewish": false,
+									"born": 1940,
+									"spouse":
 									{
 										"name": "Maurício (Meira) Bouqvar",
-										"nascimento": 1900,
-										"morte": 1900,
-										"sexo": "masculino",
-										"judeu": false
+										"born": 1900,
+										"death": 1900,
+										"sex": "masculino",
+										"jewish": false
 									},
 									"children":
 									[
 										{
 											"name": "Casamento",
-											"children": 
+											"children":
 											[
 												{
 													"name": "Sérgio Bouqvar",
-													"sexo": "masculino",
-													"judeu": false,
-													"nascimento": 1960,
-													"conjuge": 
+													"sex": "masculino",
+													"jewish": false,
+													"born": 1960,
+													"spouse":
 													{
 														"name": "Sandra Munimis Bouqvar",
-														"sexo": "feminino",
-														"judeu": false,
-														"nascimento": 1958
+														"sex": "feminino",
+														"jewish": false,
+														"born": 1958
 													},
 													"children":
 													[
@@ -930,15 +930,15 @@
 															[
 																{
 																	"name": "Gabriel Bouqvar",
-																	"sexo": "masculino",
-																	"nascimento": 2005,
-																	"judeu": false
+																	"sex": "masculino",
+																	"born": 2005,
+																	"jewish": false
 																},
 																{
 																	"name": "Nina Bouqvar",
-																	"sexo": "feminino",
-																	"judeu": false,
-																	"nascimento": 2005
+																	"sex": "feminino",
+																	"jewish": false,
+																	"born": 2005
 																}
 															]
 														}
@@ -946,15 +946,15 @@
 												},
 												{
 													"name": "Reveca Bouqvar",
-													"nascimento": 1960,
-													"judeu": false,
-													"sexo": "feminino",
-													"conjuge": 
+													"born": 1960,
+													"jewish": false,
+													"sex": "feminino",
+													"spouse":
 													{
 														"name": "Wellington Dantas",
-														"sexo": "masculino",
-														"nascimento": 1900,
-														"judeu": false
+														"sex": "masculino",
+														"born": 1900,
+														"jewish": false
 													},
 													"children":
 													[
@@ -964,15 +964,15 @@
 															[
 																{
 																	"name": "Mauricio",
-																	"nascimento": 2005,
-																	"sexo": "masculino",
-																	"judeu": false
+																	"born": 2005,
+																	"sex": "masculino",
+																	"jewish": false
 																},
 																{
 																	"name": "Barbara",
-																	"nascimento": 2005,
-																	"sexo": "feminino",
-																	"judeu": false
+																	"born": 2005,
+																	"sex": "feminino",
+																	"jewish": false
 																}
 															]
 														}
@@ -980,15 +980,15 @@
 												},
 												{
 													"name": "Ana Teresa Bouqvar",
-													"nascimento": 1968,
-													"sexo": "feminino",
-													"judeu": false,
-													"conjuge": 
+													"born": 1968,
+													"sex": "feminino",
+													"jewish": false,
+													"spouse":
 																{
 																	"name": "Frank Wiggers",
-																	"nascimento": 1900,
-																	"sexo": "masculino",
-																	"judeu": false
+																	"born": 1900,
+																	"sex": "masculino",
+																	"jewish": false
 																},
 													"children":
 													[
@@ -998,9 +998,9 @@
 															[
 																{
 																	"name": "Meir",
-																	"sexo": "masculino",
-																	"judeu": false,
-																	"nascimento": 2008
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2008
 																}
 															]
 														}
@@ -1008,15 +1008,15 @@
 												},
 												{
 													"name": "Monica Bouqvar",
-													"sexo": "feminino",
-													"nascimento": 1968,
-													"judeu": false,
-													"conjuge":
+													"sex": "feminino",
+													"born": 1968,
+													"jewish": false,
+													"spouse":
 													{
 														"name": "Fabrício Maia",
-														"sexo": "masculino",
-														"judeu": false,
-														"nascimento": 1900
+														"sex": "masculino",
+														"jewish": false,
+														"born": 1900
 													},
 													"children":
 													[
@@ -1026,15 +1026,15 @@
 															[
 																{
 																	"name": "David",
-																	"sexo": "masculino",
-																	"judeu": false,
-																	"nascimento": 2008
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2008
 																},
 																{
 																	"name": "Ilan",
-																	"sexo": "masculino",
-																	"judeu": false,
-																	"nascimento": 2008
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2008
 																}
 															]
 														}
@@ -1046,15 +1046,15 @@
 								},
 								{
 									"name": "Dorio Ferman",
-									"nascimento": 1941,
-									"judeu": false,
-									"sexo": "masculino",
-									"conjuge":
+									"born": 1941,
+									"jewish": false,
+									"sex": "masculino",
+									"spouse":
 									{
 										"name": "Sima Esther Ferman",
-										"sexo": "feminino",
-										"nascimento": 1900,
-										"judeu": false
+										"sex": "feminino",
+										"born": 1900,
+										"jewish": false
 									},
 									"children":
 									[
@@ -1064,15 +1064,15 @@
 											[
 												{
 													"name": "Marcelo Ferman",
-													"sexo": "masculino",
-													"judeu": false,
-													"nascimento": 1979,
-													"conjuge": 
+													"sex": "masculino",
+													"jewish": false,
+													"born": 1979,
+													"spouse":
 													{
 														"name": "",
-														"sexo": "feminino",
-														"nascimento": 1900,
-														"judeu": false
+														"sex": "feminino",
+														"born": 1900,
+														"jewish": false
 													},
 													"children":
 													[
@@ -1082,15 +1082,15 @@
 															[
 																{
 																	"name": "Frederico",
-																	"sexo": "masculino",
-																	"nascimento": 2008,
-																	"judeu": false
+																	"sex": "masculino",
+																	"born": 2008,
+																	"jewish": false
 																},
 																{
 																	"name": "",
-																	"sexo": "masculino",
-																	"judeu": false,
-																	"nascimento": 2008
+																	"sex": "masculino",
+																	"jewish": false,
+																	"born": 2008
 																}
 															]
 														}
@@ -1099,15 +1099,15 @@
 												},
 												{
 													"name": "Bruno Ferman",
-													"sexo": "masculino",
-													"judeu": false,
-													"nascimento": 1982,
-													"conjuge":
+													"sex": "masculino",
+													"jewish": false,
+													"born": 1982,
+													"spouse":
 													{
 														"name": "Marianna Schleder Ferman",
-														"sexo": "feminino",
-														"judeu": false,
-														"nascimento": 1900
+														"sex": "feminino",
+														"jewish": false,
+														"born": 1900
 													},
 													"children":
 													[
@@ -1117,15 +1117,15 @@
 															[
 																{
 																	"name": "",
-																	"nascimento": 2008,
-																	"judeu": false,
-																	"sexo": "masculino"
+																	"born": 2008,
+																	"jewish": false,
+																	"sex": "masculino"
 																},
 																{
 																	"name": "",
-																	"nascimento": 2008,
-																	"judeu": false,
-																	"sexo": "masculino"
+																	"born": 2008,
+																	"jewish": false,
+																	"sex": "masculino"
 																}
 															]
 														}
@@ -1137,15 +1137,15 @@
 								},
 								{
 									"name": "Mário Ferman",
-									"sexo": "masculino",
-									"nascimento": 1943,
-									"judeu": false,
-									"conjuge":
+									"sex": "masculino",
+									"born": 1943,
+									"jewish": false,
+									"spouse":
 									{
 										"name": "Bertha",
-										"sexo": "feminino",
-										"judeu": false,
-										"nascimento": 1900
+										"sex": "feminino",
+										"jewish": false,
+										"born": 1900
 									},
 									"children":
 									[
@@ -1155,21 +1155,21 @@
 											[
 												{
 													"name": "Cynthia Ferman",
-													"sexo": "feminino",
-													"judeu": false,
-													"nascimento": 1982
+													"sex": "feminino",
+													"jewish": false,
+													"born": 1982
 												},
 												{
 													"name": "Mauro Ferman",
-													"sexo": "masculino",
-													"judeu": false,
-													"nascimento": 1980,
-													"conjuge":
+													"sex": "masculino",
+													"jewish": false,
+													"born": 1980,
+													"spouse":
 													{
 														"name": "Camila Marforio Ferman",
-														"sexo": "feminino",
-														"nascimento": 1900,
-														"judeu": false
+														"sex": "feminino",
+														"born": 1900,
+														"jewish": false
 													}
 												}
 											]
@@ -1182,17 +1182,17 @@
 				},
 				{
 					"name": "Jacob Volfzon",
-					"nascimento": 1918,
-					"morte": 1951,
-					"sexo": "masculino",
-					"judeu": false,
-					"conjuge": 
+					"born": 1918,
+					"death": 1951,
+					"sex": "masculino",
+					"jewish": false,
+					"spouse":
 					{
 						"name": "Sarah (Sarita) Averbuch Vainer",
-						"sexo": "feminino",
-						"nascimento": 1927,
-						"morte": 2015,
-						"judeu": false
+						"sex": "feminino",
+						"born": 1927,
+						"death": 2015,
+						"jewish": false
 					},
 					"children":
 					[
@@ -1202,15 +1202,15 @@
 							[
 								{
 									"name": "Jacob Volfzon Filho",
-									"sexo": "masculino",
-									"judeu": false,
-									"nascimento": 1951,
-									"conjuge": 
+									"sex": "masculino",
+									"jewish": false,
+									"born": 1951,
+									"spouse":
 									{
 										"name": "Yara Batista Pereira Serra Lima",
-										"sexo": "feminino",
-										"nascimento": 1954,
-										"judeu": false
+										"sex": "feminino",
+										"born": 1954,
+										"jewish": false
 									}
 								}
 							]
