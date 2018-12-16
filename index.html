@@ -8,7 +8,7 @@
     <script type="text/javascript" src="design_variables.js"></script>
     <script>
         var diameter = 1600;
-        var currentYear = new Date().getFullYear();
+        var currentYear = (new Date()).getFullYear();
 
         var timeout = 270;
 
@@ -29,8 +29,8 @@
         var tree = d3.layout.tree()
             .size([360, diameter/8])
             .separation(function(a, b) {
-
-              return (a.parent == b.parent ? 20 : 22) / (a.depth); });
+              return (a.parent == b.parent ? 20 : 22) / (a.depth);
+            });
 
         var diagonal = d3.svg.diagonal.radial()
             .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
@@ -46,24 +46,12 @@
             .attr("transform", "translate(" + (diameter / 2 - 100) + "," + (diameter / 2 - 120) + ")")
             .attr ("align", "center");
 
-
-      function saveSvg(){
-        try {
-            var isFileSaverSupported = !!new Blob();
-        } catch (e) {
-            alert("blob not supported");
-        }
-        var html = svgBuffer(d3.select("svg"));
-        var blob = new Blob([html], {type: "image/svg+xml"});
-        saveAs(blob, "treeLayout.svg");
-      };
-
       //Calculates the radius, based on values that have been chosen by the designer
       function getRadiusFromAge (d) {
         if (d.death)
           var age = (d.death) - (d.born);
         else
-            var age = 2016 - d.born;
+          var age = currentYear - d.born;
         if (age >= 0 && age <= 9)
             return 7;
         else if (age >= 10 && age <= 19)
@@ -162,15 +150,11 @@
               var link = svg.selectAll("path.link")
                   .data(links, function (d) { return d.target.id; });
               // Enter any new links at the parent's previous position.
-              console.log(link);
               link.enter().insert("path", "g")
                     .attr("class", "link")
                     .attr("d", function (d) {
-                      //console.log(d);
                       if (d.source == root)
                       {
-                        //console.log("entrei no root");
-                        console.log("entrei");
                         svg.insert("path", ".vis")
                           .attr("class", "Linelink")
                           .attr("d", function () {
@@ -181,7 +165,6 @@
                       }
                       else if (d.target != root)
                       {
-                        console.log("entrei no else");
                           var o = {x: source.x0, y: source.y0};
                           var diagonal = d3.svg.diagonal.radial()
                             .projection(function () { return [d.y, d.x / 180 * Math.PI]; });
@@ -189,8 +172,6 @@
                       }
 
                     });
-
-
 
               // Transition links to their new position.
               link.transition()
